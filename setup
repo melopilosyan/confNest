@@ -1,6 +1,6 @@
 #!/bin/bash
 
-symlink_file() {
+symlink() {
   local source=$1
   local destination=$2
 
@@ -13,10 +13,10 @@ symlink_file() {
   fi
 }
 
-symlink_file gitconfig ~/.gitconfig
-symlink_file git-prompt.sh ~/.git-prompt.sh
-symlink_file gitignore_global ~/.gitignore_global
+symlink gitconfig ~/.gitconfig
+symlink git-prompt.sh ~/.git-prompt.sh
+symlink gitignore_global ~/.gitignore_global
 
-symlink_file bash_aliases ~/.bash_aliases
+symlink bash_aliases ~/.bash_aliases
 
-symlink_file terminator ~/.config/terminator
+symlink terminator ~/.config/terminator
