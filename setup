@@ -1,9 +1,17 @@
 #!/bin/bash
 
-echo -n "Symlink gitconfig ... "
-if [ ! -e ~/.gitconfig ]; then
-  ln -s "$(pwd)/gitconfig" ~/.gitconfig
-  echo "Done"
-else
-  echo "Already linked"
-fi
+symlink_file() {
+  local source=$1
+  local destination=$2
+
+  echo -n "Symlink ${source} ... "
+  if [[ -e $destination ]]; then
+    echo "Already exists"
+  else
+    ln -s "$(pwd)/${source}" $destination
+    echo "Done"
+  fi
+}
+
+symlink_file gitconfig ~/.gitconfig
+symlink_file gitignore_global ~/.gitignore_global

@@ -1,0 +1,14 @@
+.idea
+
+.env.local
+.ruby-gemset
+
+private-notes.txt
+
+config/database.yml.sample
+
+config/initializers/per_developer.rb
+
+MyGemfile
+
+curl-requests
