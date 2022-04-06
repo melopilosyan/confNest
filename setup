@@ -14,5 +14,7 @@ symlink_file() {
 }
 
 symlink_file gitconfig ~/.gitconfig
+symlink_file git-prompt.sh ~/.git-prompt.sh
 symlink_file gitignore_global ~/.gitignore_global
+
 symlink_file bash_aliases ~/.bash_aliases
