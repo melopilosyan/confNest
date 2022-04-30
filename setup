@@ -13,6 +13,17 @@ symlink() {
   fi
 }
 
+install_jet_brains_mono() {
+  local jbm_fonts_installed=~/.local/share/fonts/JetBrains_Mono_is_installed.txt
+
+  if [[ -e $jbm_fonts_installed ]]; then
+    echo "JetBrains Mono Nerd Fonts are already installed"
+  else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+    touch $jbm_fonts_installed
+  fi
+}
+
 symlink gitconfig ~/.gitconfig
 symlink git-prompt.sh ~/.git-prompt.sh
 symlink gitignore_global ~/.gitignore_global
@@ -20,3 +31,5 @@ symlink gitignore_global ~/.gitignore_global
 symlink bash_aliases ~/.bash_aliases
 
 symlink terminator ~/.config/terminator
+
+install_jet_brains_mono
