@@ -32,4 +32,5 @@ symlink bash_aliases ~/.bash_aliases
 
 symlink terminator ~/.config/terminator
 
+symlink nvim ~/.config/nvim
 install_jet_brains_mono
