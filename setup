@@ -24,6 +24,17 @@ install_jet_brains_mono() {
   fi
 }
 
+symlink_lvim_config() {
+  local link=~/.config/lvim/config.lua
+
+  if [[ -e $link ]]; then
+    rm -rf $link
+    symlink lvim_config.lua $link
+  else
+    echo "Lvim is not installed"
+  fi
+}
+
 symlink gitconfig ~/.gitconfig
 symlink git-prompt.sh ~/.git-prompt.sh
 symlink gitignore_global ~/.gitignore_global
@@ -33,4 +44,6 @@ symlink bash_aliases ~/.bash_aliases
 symlink terminator ~/.config/terminator
 
 symlink nvim ~/.config/nvim
+symlink_lvim_config
+
 install_jet_brains_mono
