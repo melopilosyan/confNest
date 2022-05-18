@@ -25,6 +25,7 @@ alias rvm-delete-gemset='rvm gemset delete'
 
 #### Rails
 alias r='bin/rails'
+alias rk='bin/rake'
 
 alias rprod.start='RAILS_ENV=production SECRET_KEY_BASE=14a6f5534d10be1a3fabdd1af0bd60b372bbf36be50ea8f5849099b6da3cc6a8cc68b1ce4ce0d6c6c1d19b94e7e91b9109b596001c8d652970f31e2057bbc303 RAILS_SERVE_STATIC_FILES=true r s'
 alias rprod='RAILS_ENV=production'
