@@ -46,8 +46,10 @@ augroup remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup end
 
-autocmd FocusLost * :wa
+autocmd FocusLost * :w<cr><esc>
+
 ]]
+
 
 vim.g.rubycomplete_buffer_loading = 1
 vim.g.rubycomplete_classes_in_global = 1
