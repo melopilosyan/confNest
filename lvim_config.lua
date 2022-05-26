@@ -83,13 +83,13 @@ vim.opt.updatetime = 300
 
 vim.opt.backspace = "indent,eol,start"  -- Fix backspace indent
 
-vim.opt.background = "dark"
 vim.opt.termguicolors = true
+vim.opt.background = "dark"
 
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "onedark"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -99,6 +99,10 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
+
+lvim.keys.normal_mode["<F5>"] = "<cmd>UndotreeToggle<cr>"
+lvim.keys.normal_mode["<F4>"] = "<cmd>Twilight<cr>"
+lvim.keys.normal_mode["<F8>"] = "<cmd>ZenMode<cr>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -169,10 +173,10 @@ lvim.builtin.treesitter.ensure_installed = {
   "css",
   "yaml",
 }
-
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
+lvim.builtin.lualine.options.theme = "onedark"
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
@@ -235,13 +239,69 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
+lvim.plugins = {
 --     {"folke/tokyonight.nvim"},
 --     {
 --       "folke/trouble.nvim",
 --       cmd = "TroubleToggle",
 --     },
--- }
+
+  {
+    "navarasu/onedark.nvim",
+    config = function ()
+      local onedark = require("onedark")
+
+      onedark.setup {
+        style = "cool",
+        toggle_style_key = "<leader>ts",
+        code_style = {
+          variables = "italic"
+        },
+        diagnostics = {
+          background = false,    -- use background color for virtual text
+        },
+      }
+
+      onedark.load()
+    end
+  },
+  {
+    "RRethy/nvim-treesitter-endwise",
+    after = "nvim-treesitter",
+    ft = { "ruby", "lua", "bash" },
+    config = function ()
+      require("nvim-treesitter.configs").setup { endwise = { enable = true } }
+    end,
+  },
+  {
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+    setup = function ()
+      vim.g.undotree_SetFocusWhenToggle = 1
+      vim.g.undotree_WindowLayout = 2
+    end
+  },
+  -- { "RRethy/nvim-treesitter-textsubjects" },
+  -- { "danymat/neogen", },
+  {
+    "folke/twilight.nvim",
+    cmd = "Twilight",
+    config = function()
+      require("twilight").setup {
+        -- refer to the configuration https://github.com/folke/twilight.nvim#%EF%B8%8F-configuration
+      }
+    end
+  },
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    config = function()
+      require("zen-mode").setup {
+        -- refer to the configuration https://github.com/folke/zen-mode.nvim#%EF%B8%8F-configuration
+      }
+    end
+  }
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
