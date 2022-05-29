@@ -21,8 +21,6 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-vnoremap p "_dP
-
 " Enable custom syntax highlight
 augroup ruby-rules
   autocmd!
@@ -96,6 +94,9 @@ lvim.colorscheme = "onedark"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
+lvim.keys.insert_mode["jk"] = false
+lvim.keys.insert_mode["kj"] = false
+
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
@@ -103,6 +104,8 @@ lvim.keys.normal_mode["N"] = "Nzzzv"
 lvim.keys.normal_mode["<F5>"] = "<cmd>UndotreeToggle<cr>"
 lvim.keys.normal_mode["<F4>"] = "<cmd>Twilight<cr>"
 lvim.keys.normal_mode["<F8>"] = "<cmd>ZenMode<cr>"
+
+lvim.keys.visual_mode["p"] = [["_dP]]
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -125,9 +128,12 @@ lvim.builtin.telescope.defaults.mappings = {
     ["<C-k>"] = actions.move_selection_previous,
   },
 }
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  ".git/*",
+  "node_modules/*",
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
-
 lvim.builtin.which_key.mappings["x"] = { ":wq<cr>", "Save & exit" }
 lvim.builtin.which_key.mappings["h"] = nil
 lvim.builtin.which_key.mappings["f"] = {
@@ -177,6 +183,8 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.builtin.lualine.options.theme = "onedark"
+lvim.builtin.terminal.open_mapping = [[<c-\>]]
+
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
@@ -240,11 +248,41 @@ lvim.builtin.lualine.options.theme = "onedark"
 
 -- Additional Plugins
 lvim.plugins = {
---     {"folke/tokyonight.nvim"},
 --     {
 --       "folke/trouble.nvim",
 --       cmd = "TroubleToggle",
 --     },
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
+  },
+
+  {
+    "tpope/vim-projectionist",
+    ft = { "ruby" }
+  },
+
+  {
+    "tpope/vim-dispatch",
+    ft = { "ruby" },
+  },
+
+  {
+    "tpope/vim-bundler",
+    ft = { "ruby" },
+  },
+
+  {
+    "tpope/vim-rake",
+    ft = { "ruby" }
+  },
+
+  {
+    "tpope/vim-rails",
+    ft = { "ruby" },
+  },
+
+  -- { "ecomba/vim-ruby-refactoring" },
 
   {
     "navarasu/onedark.nvim",
@@ -265,6 +303,7 @@ lvim.plugins = {
       onedark.load()
     end
   },
+
   {
     "RRethy/nvim-treesitter-endwise",
     after = "nvim-treesitter",
@@ -273,6 +312,7 @@ lvim.plugins = {
       require("nvim-treesitter.configs").setup { endwise = { enable = true } }
     end,
   },
+
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
@@ -292,6 +332,7 @@ lvim.plugins = {
       }
     end
   },
+
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
