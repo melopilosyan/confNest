@@ -36,7 +36,6 @@ symlink_lvim_config() {
 }
 
 symlink gitconfig ~/.gitconfig
-symlink git-prompt.sh ~/.git-prompt.sh
 symlink gitignore_global ~/.gitignore_global
 
 symlink bash_aliases ~/.bash_aliases
