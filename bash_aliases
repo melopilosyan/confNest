@@ -53,6 +53,7 @@ alias show.hidden.startapps="sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /e
 alias listening='sudo netstat -ntlp'
 alias find.files.containing='grep --exclude="*.log" -rnw ./ -e'
 alias find.files.by.name='find . -name'
+alias open=xdg-open
 
 alias prettyjson="ruby -e 'require \"json\"; puts JSON.pretty_generate(JSON.parse(gets))'"
 
@@ -60,9 +61,8 @@ prettyjson_s() {
   echo "$1" | prettyjson
 }
 
-open-dir() {
-  nautilus --browser $1 &
-}
+# Put workspace customs in this file
+[ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
 
 # xterm 256 color chart
@@ -105,8 +105,3 @@ GIT_INFO='"${inactive}on \[\e[38;5;129m\](%s\[\e[38;5;129m\])\\n$lbc"'
 FLAG_ARROWS='"\[\e[38;5;196m\]>\[\e[38;5;26m\]>\[\e[38;5;172m\]>\[\e[0m\] "'
 
 PROMPT_COMMAND="__git_ps1 $SYSTEM_INFO $FLAG_ARROWS $GIT_INFO"
-
-# Put workspace customs in this file
-if [ -f ~/.bash_aliases_endemic ]; then
-  . ~/.bash_aliases_endemic
-fi
