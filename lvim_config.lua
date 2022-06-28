@@ -25,6 +25,7 @@ cnoreabbrev Qall qall
 augroup ruby-rules
   autocmd!
   autocmd BufNewFile,BufRead *.rbw,*.gemspec,Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru setlocal filetype=ruby
+  autocmd FileType ruby setlocal iskeyword+=!,?
 augroup end
 
 augroup remove-trailing-whitespaces
