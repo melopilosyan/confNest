@@ -1,3 +1,5 @@
+export VISUAL=$(which lvim)
+
 alias supdate='sudo apt update'
 alias supgrade='sudo apt update && sudo apt -y upgrade'
 
