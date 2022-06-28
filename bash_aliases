@@ -61,6 +61,10 @@ prettyjson_s() {
   echo "$1" | prettyjson
 }
 
+slvim() {
+  lvim $1 && source $1
+}
+
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
