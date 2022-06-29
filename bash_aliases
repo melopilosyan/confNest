@@ -17,9 +17,14 @@ alias elastic-start='sudo systemctl start elasticsearch.service'
 
 #### Git
 alias gs='git status'
+alias gl='git log'
 alias gd='git diff'
 alias gb='git branch'
 alias ga='git add'
+alias gaa='git add --all'
+gcmm() {
+  git commit -m "$1"
+}
 
 #### RVM
 alias rubies='rvm list rubies'
@@ -52,7 +57,7 @@ alias unistart='unicorn -p 3000'
 
 
 # Other stuff
-alias laliases='less ~/.bash_aliases'
+alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
 alias cd.configs='cd ~/Projects/configs'
 
