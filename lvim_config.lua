@@ -10,6 +10,8 @@ an executable
 vim.cmd[[
 set viminfo^=% " Remember info about open buffers on close
 
+vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
+
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -259,17 +261,17 @@ lvim.plugins = {
 
   {
     "tpope/vim-projectionist",
-    ft = { "ruby" }
+    ft = { "ruby", "eruby" }
   },
 
   {
     "tpope/vim-dispatch",
-    ft = { "ruby" },
+    ft = { "ruby", "eruby" },
   },
 
   {
     "tpope/vim-bundler",
-    ft = { "ruby" },
+    ft = { "ruby", "eruby" },
   },
 
   {
@@ -279,7 +281,7 @@ lvim.plugins = {
 
   {
     "tpope/vim-rails",
-    ft = { "ruby" },
+    ft = { "ruby", "eruby" },
   },
 
   -- { "ecomba/vim-ruby-refactoring" },
