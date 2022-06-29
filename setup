@@ -4,7 +4,7 @@ symlink() {
   local source=$1
   local destination=$2
 
-  echo -n "Symlink ${source} ... "
+  echo -n "Symlink ${source}... "
   if [[ -e $destination ]]; then
     echo "Already exists"
   else
@@ -13,14 +13,21 @@ symlink() {
   fi
 }
 
-install_jet_brains_mono() {
-  local jbm_fonts_installed=~/.local/share/fonts/JetBrains_Mono_is_installed.txt
+install_jetbrains_mono_nerd_font() {
+  local font_url="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
 
-  if [[ -e $jbm_fonts_installed ]]; then
-    echo "JetBrains Mono Nerd Fonts are already installed"
+  local font_dir=~/.local/share/fonts
+  local font_file="$font_dir/JetBrains_Mono_Regular_Nerd_Font_Complete_Mono.ttf"
+
+  echo -n "Installing JetBrains Mono Regular Nerd Font... "
+
+  if [ -f "$font_file" ] && [ -z $RELOAD_FONT ]; then
+    echo "Already installed"
   else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
-    touch $jbm_fonts_installed
+    mkdir -p $font_dir
+    curl -s -o "$font_file" "$font_url"
+    fc-cache -f || die "Unable to build fonts cache"
+    echo "Done"
   fi
 }
 
@@ -45,4 +52,4 @@ symlink terminator ~/.config/terminator
 symlink nvim ~/.config/nvim
 symlink_lvim_config
 
-install_jet_brains_mono
+install_jetbrains_mono_nerd_font

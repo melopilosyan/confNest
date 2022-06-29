@@ -13,7 +13,7 @@
     background_type = transparent
     cursor_shape = underline
     cursor_color = "#aaaaaa"
-    font = JetBrains Mono 15
+    font = JetBrainsMono Nerd Font Mono 15
     foreground_color = "#00ff00"
     scrollbar_position = hidden
     scrollback_lines = 999999
