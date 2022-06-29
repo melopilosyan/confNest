@@ -1,3 +1,5 @@
+# vi:ft=sh:
+
 export VISUAL=$(which lvim)
 
 alias supdate='sudo apt update'
@@ -50,6 +52,8 @@ alias unistart='unicorn -p 3000'
 
 # Other stuff
 alias laliases='less ~/.bash_aliases'
+alias cd.configs='cd ~/Projects/configs'
+
 alias public_ip='curl icanhazip.com'
 alias show.hidden.startapps="sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop"
 alias listening='sudo netstat -ntlp'
