@@ -42,6 +42,7 @@ alias db.migrate='rake db:migrate'
 alias db.create='rake db:create'
 alias db.rebuild='rake db:drop db:create db:migrate'
 
+alias tdev.log='tail -f log/development.log'
 alias foreman.dev='foreman start -f Procfile.dev'
 alias unistart='unicorn -p 3000'
 
