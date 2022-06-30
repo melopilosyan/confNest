@@ -169,8 +169,14 @@ lvim.builtin.which_key.mappings["f"] = {
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
+
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.open_mapping = [[<c-\>]]
+
 lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.staged = "✔"
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.unstaged = "✘"
+lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.untracked = "★"
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -188,7 +194,6 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.builtin.lualine.options.theme = "onedark"
-lvim.builtin.terminal.open_mapping = [[<c-\>]]
 
 -- generic LSP settings
 
