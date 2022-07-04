@@ -8,7 +8,6 @@
   prev_tab = <Primary><Shift>Tab
 [profiles]
   [[default]]
-    audible_bell = False
     background_darkness = 0.9
     background_type = transparent
     cursor_shape = underline
@@ -18,7 +17,7 @@
     scrollbar_position = hidden
     scrollback_lines = 999999
     palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
-    word_chars = "-./?#:_"
+    word_chars = "-./?#:_@"
     login_shell = True
     use_system_font = False
     copy_on_selection = True
