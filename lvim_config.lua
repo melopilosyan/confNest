@@ -194,7 +194,14 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
 }
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.incremental_selection = {
+  enable = true,
+  keymaps = {
+    init_selection = "<cr>",
+    node_incremental = "<cr>",
+    node_decremental = ",",
+  },
+}
 
 lvim.builtin.lualine.options.theme = "onedark"
 
@@ -334,7 +341,6 @@ lvim.plugins = {
       vim.g.undotree_WindowLayout = 2
     end
   },
-  -- { "RRethy/nvim-treesitter-textsubjects" },
   -- { "danymat/neogen", },
   {
     "folke/twilight.nvim",
