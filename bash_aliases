@@ -1,5 +1,7 @@
 # vi:ft=sh:
 
+bind 'set completion-ignore-case on'
+
 export VISUAL=$(which lvim)
 
 alias supdate='sudo apt update'
