@@ -103,6 +103,9 @@ lvim.leader = "space"
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
 
+lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<CR>"
+
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
