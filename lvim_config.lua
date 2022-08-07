@@ -7,7 +7,7 @@ a global executable or a path to
 an executable
 ]]
 
-vim.cmd[[
+vim.cmd [[
 set viminfo^=% " Remember info about open buffers on close
 
 vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
@@ -85,7 +85,7 @@ vim.opt.lazyredraw = true
 
 vim.opt.updatetime = 300
 
-vim.opt.backspace = "indent,eol,start"  -- Fix backspace indent
+vim.opt.backspace = "indent,eol,start" -- Fix backspace indent
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
@@ -331,7 +331,7 @@ lvim.plugins = {
 
   {
     "navarasu/onedark.nvim",
-    config = function ()
+    config = function()
       local onedark = require("onedark")
 
       onedark.setup {
@@ -341,7 +341,7 @@ lvim.plugins = {
           variables = "italic"
         },
         diagnostics = {
-          background = false,    -- use background color for virtual text
+          background = false, -- use background color for virtual text
         },
       }
 
@@ -353,7 +353,7 @@ lvim.plugins = {
     "RRethy/nvim-treesitter-endwise",
     after = "nvim-treesitter",
     ft = { "ruby", "lua", "bash" },
-    config = function ()
+    config = function()
       require("nvim-treesitter.configs").setup { endwise = { enable = true } }
     end,
   },
@@ -361,7 +361,7 @@ lvim.plugins = {
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    setup = function ()
+    setup = function()
       vim.g.undotree_SetFocusWhenToggle = 1
       vim.g.undotree_WindowLayout = 2
     end
