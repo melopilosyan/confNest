@@ -149,15 +149,37 @@ lvim.builtin.which_key.mappings.g.B = { "<cmd>Git blame<cr>", "Blame" }
 lvim.builtin.which_key.mappings.g.l[2] = "Line blame"
 lvim.builtin.which_key.mappings.g.o[2] = "Open changed files"
 lvim.builtin.which_key.mappings["f"] = {
-  name = "Find File",
-  f = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer=false,hidden=true})<cr>",
-    "Dropdown"
-  },
-  p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "With preview" },
+  name = "Finders",
+  f = { "<cmd>lua Finders.find_files_no_preview()<cr>", "Files no preview" },
+  p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
   g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Grep" },
   w = { "<cmd>lua require('telescope.builtin').grep_string({word_match='-w',initial_mode='normal'})<cr>", "Word" },
+
+  c = { "<cmd>lua Finders.lsp_workspace_symbols('class')<cr>", "Classes" },
+  m = { "<cmd>lua Finders.lsp_workspace_symbols('module')<cr>", "Modules" },
+  M = { "<cmd>lua Finders.lsp_workspace_symbols('method')<cr>", "Methods" },
 }
+
+_G.Finders = (function()
+  local no_preview_dropdown = function()
+    return require('telescope.themes').get_dropdown({ previewer = false, hidden = true })
+  end
+
+  return {
+    lsp_workspace_symbols = function(symbol)
+      local opts = no_preview_dropdown()
+      opts.symbols = symbol
+      opts.prompt_title = "LSP Dynamic Workspace Symbols / " .. symbol
+
+      require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
+    end,
+
+    find_files_no_preview = function()
+      require('telescope.builtin').find_files(no_preview_dropdown())
+    end,
+  }
+end)()
+
 
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
