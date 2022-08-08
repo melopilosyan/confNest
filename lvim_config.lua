@@ -150,6 +150,7 @@ lvim.builtin.which_key.mappings["f"] = {
   f = { "<cmd>lua Finders.find_files_no_preview()<cr>", "Files no preview" },
   p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
   g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Grep" },
+  G = { "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>", "Grep open files" },
   w = { "<cmd>lua require('telescope.builtin').grep_string({word_match='-w',initial_mode='normal'})<cr>", "Word" },
 
   c = { "<cmd>lua Finders.lsp_workspace_symbols('class')<cr>", "Classes" },
