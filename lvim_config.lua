@@ -163,6 +163,7 @@ lvim.builtin.which_key.mappings["t"] = {
     "<cmd>silent !ctags -R --languages=ruby --exclude=.git --exclude=log<cr>",
     "Ctags create Ruby"
   },
+  n = { "<cmd>tag<cr>", "Jump to next tag" },
 }
 
 _G.Finders = (function()
