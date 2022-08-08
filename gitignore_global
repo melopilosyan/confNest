@@ -14,3 +14,7 @@ config/initializers/per_developer.rb
 MyGemfile
 
 curl-requests
+
+Session.vim
+
+tags
