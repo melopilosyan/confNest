@@ -63,6 +63,7 @@ alias solargraph.rails.link='ln -s ~/Projects/configs/rails.rb ./rails.rb'
 # Other stuff
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
+alias lvims='lvim -S Session.vim'
 alias cd.configs='cd ~/Projects/configs'
 
 alias public_ip='curl icanhazip.com'
