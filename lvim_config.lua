@@ -7,7 +7,7 @@ a global executable or a path to
 an executable
 ]]
 
-vim.cmd[[
+vim.cmd [[
 set viminfo^=% " Remember info about open buffers on close
 
 vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
@@ -53,10 +53,6 @@ augroup end
 autocmd FocusLost * :wa
 ]]
 
-vim.g.rubycomplete_buffer_loading = 1
-vim.g.rubycomplete_classes_in_global = 1
-vim.g.rubycomplete_rails = 1
-
 vim.opt.mouse = ""
 
 vim.opt.colorcolumn = "100"
@@ -85,7 +81,7 @@ vim.opt.lazyredraw = true
 
 vim.opt.updatetime = 300
 
-vim.opt.backspace = "indent,eol,start"  -- Fix backspace indent
+vim.opt.backspace = "indent,eol,start" -- Fix backspace indent
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
@@ -102,6 +98,9 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
+
+lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<CR>"
 
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["n"] = "nzzzv"
@@ -146,15 +145,37 @@ lvim.builtin.which_key.mappings.g.B = { "<cmd>Git blame<cr>", "Blame" }
 lvim.builtin.which_key.mappings.g.l[2] = "Line blame"
 lvim.builtin.which_key.mappings.g.o[2] = "Open changed files"
 lvim.builtin.which_key.mappings["f"] = {
-  name = "Find File",
-  f = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer=false,hidden=true})<cr>",
-    "Dropdown"
-  },
-  p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "With preview" },
+  name = "Finders",
+  f = { "<cmd>lua Finders.find_files_no_preview()<cr>", "Files no preview" },
+  p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
   g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Grep" },
   w = { "<cmd>lua require('telescope.builtin').grep_string({word_match='-w',initial_mode='normal'})<cr>", "Word" },
+
+  c = { "<cmd>lua Finders.lsp_workspace_symbols('class')<cr>", "Classes" },
+  m = { "<cmd>lua Finders.lsp_workspace_symbols('module')<cr>", "Modules" },
+  M = { "<cmd>lua Finders.lsp_workspace_symbols('method')<cr>", "Methods" },
 }
+
+_G.Finders = (function()
+  local no_preview_dropdown = function()
+    return require('telescope.themes').get_dropdown({ previewer = false, hidden = true })
+  end
+
+  return {
+    lsp_workspace_symbols = function(symbol)
+      local opts = no_preview_dropdown()
+      opts.symbols = symbol
+      opts.prompt_title = "LSP Dynamic Workspace Symbols / " .. symbol
+
+      require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
+    end,
+
+    find_files_no_preview = function()
+      require('telescope.builtin').find_files(no_preview_dropdown())
+    end,
+  }
+end)()
+
 
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
@@ -306,7 +327,7 @@ lvim.plugins = {
 
   {
     "navarasu/onedark.nvim",
-    config = function ()
+    config = function()
       local onedark = require("onedark")
 
       onedark.setup {
@@ -316,7 +337,7 @@ lvim.plugins = {
           variables = "italic"
         },
         diagnostics = {
-          background = false,    -- use background color for virtual text
+          background = false, -- use background color for virtual text
         },
       }
 
@@ -328,7 +349,7 @@ lvim.plugins = {
     "RRethy/nvim-treesitter-endwise",
     after = "nvim-treesitter",
     ft = { "ruby", "lua", "bash" },
-    config = function ()
+    config = function()
       require("nvim-treesitter.configs").setup { endwise = { enable = true } }
     end,
   },
@@ -336,7 +357,7 @@ lvim.plugins = {
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    setup = function ()
+    setup = function()
       vim.g.undotree_SetFocusWhenToggle = 1
       vim.g.undotree_WindowLayout = 2
     end
