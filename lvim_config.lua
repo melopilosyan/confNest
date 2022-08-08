@@ -136,6 +136,7 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
   ".git/*",
   "node_modules/*",
+  "tags",
 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -154,6 +155,13 @@ lvim.builtin.which_key.mappings["f"] = {
   c = { "<cmd>lua Finders.lsp_workspace_symbols('class')<cr>", "Classes" },
   m = { "<cmd>lua Finders.lsp_workspace_symbols('module')<cr>", "Modules" },
   M = { "<cmd>lua Finders.lsp_workspace_symbols('method')<cr>", "Methods" },
+}
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Ctags/Onedark",
+  R = {
+    "<cmd>silent !ctags -R --languages=ruby --exclude=.git --exclude=log<cr>",
+    "Ctags create Ruby"
+  },
 }
 
 _G.Finders = (function()
