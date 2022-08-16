@@ -3,6 +3,7 @@
   handle_size = 1
   enabled_plugins = ,
   always_split_with_profile = True
+  window_state = maximise
 [keybindings]
   next_tab = <Primary>Tab
   prev_tab = <Primary><Shift>Tab
