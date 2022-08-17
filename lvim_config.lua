@@ -237,6 +237,9 @@ lvim.builtin.treesitter.incremental_selection = {
 lvim.builtin.lualine.options.theme = "onedark"
 
 -- generic LSP settings
+lvim.lsp.buffer_mappings.normal_mode["gr"] = {
+  "<cmd>Telescope lsp_references<cr>", "Goto references"
+}
 
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.automatic_servers_installation = false
