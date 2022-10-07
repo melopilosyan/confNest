@@ -18,3 +18,5 @@ curl-requests
 Session.vim
 
 tags
+
+.env.development.local
