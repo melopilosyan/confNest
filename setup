@@ -36,7 +36,8 @@ symlink_lvim_config() {
 
   if [[ -e $link ]]; then
     rm -rf $link
-    symlink lvim_config.lua $link
+    symlink lvim/config.lua $link
+    symlink lvim/lua ~/.config/lvim/lua
   else
     echo "Lvim is not installed"
   fi

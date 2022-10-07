@@ -7,6 +7,8 @@ a global executable or a path to
 an executable
 ]]
 
+require "mp.globals"
+
 vim.cmd [[
 set viminfo^=% " Remember info about open buffers on close
 
@@ -98,6 +100,7 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
+lvim.keys.insert_mode["jj"] = false
 
 lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<CR>"
@@ -240,6 +243,8 @@ lvim.builtin.lualine.options.theme = "onedark"
 lvim.lsp.buffer_mappings.normal_mode["gr"] = {
   "<cmd>Telescope lsp_references<cr>", "Goto references"
 }
+
+lvim.lsp.diagnostics.float.focusable = true
 
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.automatic_servers_installation = false
