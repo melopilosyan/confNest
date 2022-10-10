@@ -143,6 +143,8 @@ lvim.builtin.telescope.defaults.file_ignore_patterns = {
 }
 
 -- Use which-key to add extra bindings with the leader-key prefix
+lvim.builtin.which_key.mappings["<leader>x"] = { "<cmd>silent! w<cr><cmd>luafile %<cr>", "Execute lua file" }
+
 lvim.builtin.which_key.mappings["x"] = { "<cmd>x<cr>", "Save & exit" }
 lvim.builtin.which_key.mappings["h"] = nil
 lvim.builtin.which_key.mappings.g.B = { "<cmd>Git blame<cr>", "Blame" }
