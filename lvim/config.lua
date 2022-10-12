@@ -169,12 +169,13 @@ lvim.builtin.which_key.mappings["f"] = {
   C = mp_finders("my_config_files()", "My config files"),
 }
 lvim.builtin.which_key.mappings["t"] = {
-  name = "Ctags/Onedark",
+  name = "Ctags/Tests",
   R = {
     "<cmd>silent !ctags -R --languages=ruby --exclude=.git --exclude=log<cr>",
     "Ctags create Ruby"
   },
   n = { "<cmd>tag<cr>", "Jump to next tag" },
+  i = { "<cmd>lua require('mp.rspec.integrated').run()<cr>", "RSpec run integrated" },
 }
 
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
