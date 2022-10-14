@@ -196,8 +196,9 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 
-lvim.builtin.terminal.active = true
-lvim.builtin.terminal.open_mapping = [[<c-\>]]
+lvim.builtin.terminal.active = false
+
+lvim.builtin.lualine.options.theme = "onedark"
 
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.glyphs.git.staged = "✔"
@@ -225,8 +226,6 @@ lvim.builtin.treesitter.incremental_selection = {
     node_decremental = ",",
   },
 }
-
-lvim.builtin.lualine.options.theme = "onedark"
 
 -- generic LSP settings
 lvim.lsp.buffer_mappings.normal_mode["gr"] = {
@@ -339,7 +338,7 @@ lvim.plugins = {
 
       onedark.setup {
         style = "cool",
-        toggle_style_key = "<leader>ts",
+        toggle_style_key = false,
         code_style = {
           variables = "italic"
         },
