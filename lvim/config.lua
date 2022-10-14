@@ -176,6 +176,7 @@ lvim.builtin.which_key.mappings["t"] = {
   },
   n = { "<cmd>tag<cr>", "Jump to next tag" },
   i = { "<cmd>lua require('mp.rspec.integrated').run()<cr>", "RSpec run integrated" },
+  w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
 }
 
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
