@@ -81,7 +81,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.showcmd = true        -- Show (partial) command in the last line of the screen this also shows visual selection info
 vim.opt.lazyredraw = true
 
-vim.opt.updatetime = 300
+vim.opt.updatetime = 100
 
 vim.opt.backspace = "indent,eol,start" -- Fix backspace indent
 
@@ -147,6 +147,7 @@ lvim.builtin.which_key.mappings["<leader>x"] = { "<cmd>silent! w<cr><cmd>luafile
 
 lvim.builtin.which_key.mappings["x"] = { "<cmd>x<cr>", "Save & exit" }
 lvim.builtin.which_key.mappings["h"] = nil
+lvim.builtin.which_key.mappings["/"] = nil
 lvim.builtin.which_key.mappings.g.B = { "<cmd>Git blame<cr>", "Blame" }
 lvim.builtin.which_key.mappings.g.l[2] = "Line blame"
 lvim.builtin.which_key.mappings.g.o[2] = "Open changed files"
