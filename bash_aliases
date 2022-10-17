@@ -61,6 +61,11 @@ alias solargraph.rails.link='ln -s ~/Projects/configs/rails.rb ./rails.rb'
 
 
 # Other stuff
+
+# Swap Caps Lock to Escape.
+# sudo apt install gnome-tweak-tool
+# > Gnome Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock key behavior
+
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
 alias lvims='lvim -S Session.vim'
