@@ -244,6 +244,7 @@ with(lvim.lsp, function(lsp)
     "<cmd>Telescope lsp_references<cr>", "Goto references"
   }
 
+  lsp.document_highlight = false
   lsp.diagnostics.float.focusable = true
 end)
 
