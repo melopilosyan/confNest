@@ -15,6 +15,8 @@ function spec:populate(path)
 end
 
 -- Some local globals
+local MAX_NOTIF_TIMEOUT_TO_COMPLETE_THE_TEST = 60 * 60 * 1000
+
 local COVERAGE_LINE_REQEX = "Coverage report generated.*$"
 local DROP_ERROR_CLASSES  = "RSpec::Expectations"
 local SPEC_FILE_REGEX     = "_spec.rb$"
@@ -107,7 +109,7 @@ end
 local function notify(msg, log_level, title, replace)
   return vim.notify(msg, log_level, {
     title   = "RSpec: " .. title,
-    timeout = 7000,
+    timeout = replace and 7000 or MAX_NOTIF_TIMEOUT_TO_COMPLETE_THE_TEST,
     replace = replace,
   })
 end
