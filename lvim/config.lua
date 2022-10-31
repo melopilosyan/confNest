@@ -285,6 +285,16 @@ lvim.plugins = {
   -- { "ecomba/vim-ruby-refactoring" },
 
   {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    cmd = { "MarkdownPreview" },
+    run = function() vim.fn["mkdp#util#install"]() end,
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+  },
+
+  {
     "navarasu/onedark.nvim",
     config = function()
       local onedark = require("onedark")
