@@ -156,7 +156,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
       "Ctags create Ruby"
     },
     n = { "<cmd>tag<cr>", "Jump to next tag" },
-    i = { "<cmd>lua require('mp.rspec.integrated').run()<cr>", "RSpec run integrated" },
+    i = { "<cmd>lua require('rspec.integrated').run_spec_file()<cr>", "RSpec run integrated" },
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
   }
 end)
@@ -254,6 +254,8 @@ lvim.plugins = {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
+
+  { "melopilosyan/rspec-integrated.nvim" },
 
   {
     "tpope/vim-projectionist",
