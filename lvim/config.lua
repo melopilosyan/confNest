@@ -125,6 +125,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm["/"] = nil
 
   lm.h = nil
+  lm.d = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
   lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
   lm.g.l[2] = "Line blame"
