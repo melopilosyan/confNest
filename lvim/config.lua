@@ -324,6 +324,18 @@ lvim.plugins = {
   },
 
   {
+    "rcarriga/nvim-notify",
+    config = function()
+      local notify = require("notify")
+      notify.setup {
+        stages = "fade",
+      }
+
+      vim.notify = notify
+    end,
+  },
+
+  {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     setup = function()
