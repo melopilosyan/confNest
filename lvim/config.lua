@@ -127,9 +127,9 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.h = nil
   lm.d = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
-  lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
   lm.g.l[2] = "Line blame"
-  lm.g.o[2] = "Open changed files"
+  lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
+  lm.g.o = { "<cmd>Telescope git_status initial_mode=normal<cr>", "Open changed files" }
 
   local function mp_finders(method_code, hint)
     return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
