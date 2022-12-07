@@ -43,6 +43,27 @@ symlink_lvim_config() {
   fi
 }
 
+kitty_install() {
+  echo -n "Installing Kitty... "
+  if command -v kitty 2>/dev/null > /dev/null; then
+    echo "Already installed"
+  else
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+    ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
+    echo "Done"
+  fi
+}
+
+kitty_configure() {
+  symlink kitty/bin/ls ~/.local/bin/ls
+  symlink kitty/bin/mg ~/.local/bin/mg
+  symlink kitty/conf ~/.config/kitty
+}
+
 symlink gitconfig ~/.gitconfig
 symlink gitignore_global ~/.gitignore_global
 
@@ -54,3 +75,6 @@ symlink nvim ~/.config/nvim
 symlink_lvim_config
 
 install_jetbrains_mono_nerd_font
+
+kitty_install
+kitty_configure

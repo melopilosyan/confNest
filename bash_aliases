@@ -3,6 +3,7 @@
 bind 'set completion-ignore-case on'
 
 export VISUAL=$(which lvim)
+export EDITOR=$(which lvim)
 
 alias supdate='sudo apt update'
 alias supgrade='sudo apt update && sudo apt -y upgrade'
