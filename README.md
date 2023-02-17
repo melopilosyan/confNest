@@ -6,19 +6,7 @@
 
 ### Install Neovim
 
-Download latest release and unzip: https://github.com/neovim/neovim/releases
--> `nvim-linux64.tar.gz`
-
-Add an executable file `~/.local/bin/nvim` with content:
-```bash
-#!/bin/bash
-
-exec <path-to-directory>/bin/nvim "$@"
-```
-
-```bash
-chmod +x ~/.local/bin/nvim
-```
+Run `./nvim-install-latest`.
 
 ### Install LSPs
 

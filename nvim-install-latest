@@ -1,0 +1,35 @@
+#!/bin/bash
+
+download_link=https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+nvim_deb="/tmp/nvim.$$.deb"
+
+remove_deb_file() {
+  rm -f "$nvim_deb"
+}
+
+fail() {
+  echo "Failed. Exiting..."
+  fail
+  exit 1
+}
+
+echo -n "Downloading nvim-linux64.deb from $download_link... "
+wget -q -O "$nvim_deb" "$download_link"
+if [ $? -eq 0 ]; then
+  echo "Done"
+else
+  fail
+fi
+
+# Purge existing neovim installation
+sudo dpkg -P neovim 2>&1 > /dev/null
+
+echo -n "Installing... "
+sudo dpkg -i "$nvim_deb" > /dev/null
+if [ $? -eq 0 ]; then
+  echo "Done"
+else
+  fail
+fi
+
+remove_deb_file
