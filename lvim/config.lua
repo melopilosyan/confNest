@@ -251,6 +251,13 @@ with(lvim.lsp, function(lsp)
   lsp.diagnostics.float.focusable = true
 end)
 
+vim.api.nvim_create_autocmd("FileType", {
+  once = true,
+  pattern = "slim",
+  desc = "Register slim-lint as null-ls diagnostics entry",
+  callback = function() vim.schedule(require("mp.null-ls.slim_lint")) end,
+})
+
 -- Additional Plugins
 lvim.plugins = {
   {
