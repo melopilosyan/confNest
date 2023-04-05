@@ -27,3 +27,5 @@
   autosquash = true
 [merge]
   tool = meld
+[commit]
+  verbose = true
