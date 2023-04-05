@@ -286,6 +286,8 @@ lvim.plugins = {
 
   -- { "ecomba/vim-ruby-refactoring" },
 
+  { "slim-template/vim-slim" },
+
   {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
