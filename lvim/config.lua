@@ -151,7 +151,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   }
 
   lm.t = {
-    name = "Ctags/Tests",
+    name = "Ctags/Tests/Toggle",
     R = {
       "<cmd>silent !ctags -R --languages=ruby --exclude=.git --exclude=log<cr>",
       "Ctags create Ruby"
@@ -161,6 +161,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
     i = { "<cmd>lua require('rspec.integrated').run_spec_file{only_current_example = true}<cr>", "RSpec run current example" },
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
+    m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
   }
 end)
 
