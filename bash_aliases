@@ -80,6 +80,8 @@ alias find.files.containing='grep --exclude="*.log" -rnw ./ -e'
 alias find.files.by.name='find . -name'
 alias open=xdg-open
 
+alias kitty.update='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+
 alias prettyjson="ruby -e 'require \"json\"; puts JSON.pretty_generate(JSON.parse(gets))'"
 
 prettyjson_s() {
