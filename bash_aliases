@@ -7,6 +7,7 @@ export EDITOR=$(which lvim)
 
 alias supdate='sudo apt update'
 alias supgrade='sudo apt update && sudo apt -y upgrade'
+alias supgrade.autoremove='supgrade && sudo apt -y autoremove'
 
 #### DB
 alias mysql.service='sudo service mysql'
