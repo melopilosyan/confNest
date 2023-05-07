@@ -1,35 +1,28 @@
 #!/bin/bash
 
-download_link=https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
-nvim_deb="/tmp/nvim.$$.deb"
+download_link=https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+version_tag=$(wget -q -O - "https://api.github.com/repos/neovim/neovim/tags?per_page=1" | sed -nr 's/.*name": "v(.*)",/\1/p')
+install_dir=~/App/nvim/$version_tag
 
-remove_deb_file() {
-  rm -f "$nvim_deb"
-}
+downloaded_versions=$(ls ~/App/nvim 2>/dev/null)
+if [[ "$downloaded_versions" == *"$version_tag"* ]]; then
+  echo "Latest version $version_tag is in use"
+  exit 0
+fi
 
-fail() {
+echo -n "Downloading nvim-linux64.tar.gz from $download_link ... "
+wget -q -P "$install_dir" "$download_link"
+if [ $? -eq 0 ]; then
+  echo "Done"
+else
   echo "Failed. Exiting..."
-  fail
   exit 1
-}
-
-echo -n "Downloading nvim-linux64.deb from $download_link... "
-wget -q -O "$nvim_deb" "$download_link"
-if [ $? -eq 0 ]; then
-  echo "Done"
-else
-  fail
 fi
 
-# Purge existing neovim installation
-sudo dpkg -P neovim 2>&1 > /dev/null
+echo -n "Extracting $install_dir/nvim-linux64.tar.gz ... "
+tar xzf "$install_dir/nvim-linux64.tar.gz" -C "$install_dir"
+echo "Done"
 
-echo -n "Installing... "
-sudo dpkg -i "$nvim_deb" > /dev/null
-if [ $? -eq 0 ]; then
-  echo "Done"
-else
-  fail
-fi
-
-remove_deb_file
+rm -f ~/.local/bin/nvim
+ln -s "$install_dir/nvim-linux64/bin/nvim" ~/.local/bin/nvim
+echo "~/.local/bin/nvim is pointing to .$version_tag/nvim-linux64/bin/nvim" >> ~/App/nvim/README
