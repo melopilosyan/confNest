@@ -96,47 +96,8 @@ slvim() {
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
-
-# xterm 256 color chart
-# Run this to see them all
-#  color=16; while [ $color -lt 245 ]; do echo -e "$color: \\033[38;5;${color}mhello\\033[48;5;${color}mworld\\033[0m"; ((color++)); done
-#
-# The ANSI sequence to select these, using the number in the bottom left corner,
-# starts 38;5; for the foreground and 48;5; for the background, then the color
-# number, so e.g.:
-#
-# echo -e "\\033[48;5;95;38;5;214mhello world\\033[0m"
-#
-# More info:
-# https://phoenixnap.com/kb/change-bash-prompt-linux
-# https://unix.stackexchange.com/questions/124407/what-color-codes-can-i-use-in-my-ps1-prompt
-
-# if [[ "$TERM" =~ 256color ]]; then
-#   PS1='\[\e[38;5;244m\]\t\[\e[0m\] \[\e[38;5;29m\]\W\[\e[0m\] \[\e[38;5;208m\]>\[\e[0m\]\[\e[38;5;196m\]>\[\e[0m\]\[\e[38;5;33m\]>\[\e[0m\] '
-# fi
-
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_DESCRIBE_STYLE="branch"
-export GIT_PS1_SHOWUPSTREAM="verbose name"
-
-inactive="\[\e[38;5;237m\]"
-info="\[\e[38;5;242m\]"
-
-user="$info\u$inactive"
-datetime="$info\D{%T %d.%m.%y}$inactive"
-
-_c="\[\e[38;5;22m\]"
-ltc="$_c┌── "  # left top corner
-lbc="$_c└─ "   # left bottom corner
-
-SYSTEM_INFO='"$ltc${inactive}as $user at $datetime in \[\e[38;5;29m\]\W "'
-GIT_INFO='"${inactive}on \[\e[38;5;129m\](%s\[\e[38;5;129m\])\\n$lbc"'
-FLAG_ARROWS='"\[\e[38;5;196m\]>\[\e[38;5;26m\]>\[\e[38;5;172m\]>\[\e[0m\] "'
-
-PROMPT_COMMAND="__git_ps1 $SYSTEM_INFO $FLAG_ARROWS $GIT_INFO"
+# Apply custom bash prompt
+[ -f ~/.custom_prompt ] && . ~/.custom_prompt
 
 # Having fun
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

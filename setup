@@ -68,6 +68,7 @@ symlink gitconfig ~/.gitconfig
 symlink gitignore_global ~/.gitignore_global
 
 symlink bash_aliases ~/.bash_aliases
+symlink custom_prompt ~/.custom_prompt
 
 symlink terminator ~/.config/terminator
 
