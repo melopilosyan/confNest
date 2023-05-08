@@ -158,7 +158,10 @@ with(lvim.builtin.which_key.mappings, function(lm)
     },
     n = { "<cmd>tag<cr>", "Jump to next tag" },
     I = { "<cmd>lua require('rspec.integrated').run_spec_file()<cr>", "RSpec run file" },
-    i = { "<cmd>lua require('rspec.integrated').run_spec_file{only_current_example = true}<cr>", "RSpec run current example" },
+    i = {
+      "<cmd>lua require('rspec.integrated').run_spec_file{only_current_example = true}<cr>",
+      "RSpec run current example"
+    },
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
@@ -207,13 +210,6 @@ with(lvim.builtin, function(bi)
       "node_modules/*",
       "tags",
     }
-
-    -- Remove the default settings of { theme = "dropdown" } from these pickers
-    bulk_change(ts.pickers, {
-      "live_grep",
-      "grep_string",
-      "lsp_references",
-    }, function(picker) picker.theme = nil end)
   end)
 
   --- Treesitter settings
@@ -249,7 +245,6 @@ with(lvim.lsp, function(lsp)
   }
 
   lsp.document_highlight = false
-  lsp.diagnostics.float.focusable = true
 end)
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -301,10 +296,8 @@ lvim.plugins = {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
     cmd = { "MarkdownPreview" },
-    run = function() vim.fn["mkdp#util#install"]() end,
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
+    build = function() vim.fn["mkdp#util#install"]() end,
+    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
   },
 
   {
@@ -329,7 +322,6 @@ lvim.plugins = {
 
   {
     "RRethy/nvim-treesitter-endwise",
-    after = "nvim-treesitter",
     ft = { "ruby", "lua", "bash" },
     config = function()
       require("nvim-treesitter.configs").setup { endwise = { enable = true } }
@@ -339,7 +331,7 @@ lvim.plugins = {
   {
     "nvim-treesitter/playground",
     cmd = "TSPlaygroundToggle",
-    config = function ()
+    config = function()
       require("nvim-treesitter.configs").setup {
         playground = {
           enable = true,
@@ -383,7 +375,7 @@ lvim.plugins = {
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    setup = function()
+    init = function()
       vim.g.undotree_SetFocusWhenToggle = 1
       vim.g.undotree_WindowLayout = 2
     end
