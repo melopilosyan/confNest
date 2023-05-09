@@ -1,0 +1,69 @@
+#!/bin/bash
+
+latest_release_tag() {
+  local github_repo=$1
+  local url="https://api.github.com/repos/$github_repo/tags?per_page=1"
+
+  curl -LsS "$url" | sed -nr 's/.*name": "v(.*)",/\1/p' || exit $?
+}
+
+set_release_download_url() {
+  local url=$1
+  local repo=$2
+  local tag=$3
+  local file_name=$4
+
+  eval $url="'https://github.com/$repo/releases/download/v$tag/$file_name'"
+}
+
+# @params "ryanoasis/nerd-fonts" "NerdFontsSymbolsOnly" "nerd_fonts_sym_only" "specific-tag"
+install_latest_release() {
+  local repo=$1
+  local zip_name=$2
+  local dir_name=$3
+  local tag=$4
+
+  [ "$tag" = "" ] && tag=$(latest_release_tag "$repo")
+
+  local font_dir=~/.local/share/fonts/$dir_name/v$tag
+  printf -v zip_name "$zip_name" "$tag"
+
+  ls "$font_dir" >/dev/null 2>&1
+  if [[ $? -eq 0 ]]; then
+    echo "$zip_name version $tag is installed. Skipping"
+    return 0
+  fi
+
+  local zip_dir="/tmp/fonts"
+  rm -rf "$zip_dir"
+
+  set_release_download_url zip_url "$repo" "$tag" "$zip_name.zip"
+
+  echo "Downloading $zip_url into $zip_dir"
+  curl -sS -LOJ --create-dirs --output-dir "$zip_dir" "$zip_url" || exit $?
+
+  mkdir -p "$font_dir"
+  echo "Extracting $zip_name.zip into $font_dir"
+  unzip -q -d "$font_dir" "$zip_dir/$zip_name.zip" || exit $?
+}
+
+remove_extra_fonts_from_jetbrains() {
+  local mono_dir=~/.local/share/fonts/jetbrains_mono
+  local latest_release_font_dir="$mono_dir/$(ls -1ct "$mono_dir" | tail -1)/fonts"
+  echo "Removing extra font files from $latest_release_font_dir..."
+
+  pushd "$latest_release_font_dir" >/dev/null
+  rm -rf webfonts variable ttf/JetBrainsMonoNL*
+  popd >/dev/null
+}
+
+echo "Installing NerdFontsSymbolsOnly..."
+install_latest_release "ryanoasis/nerd-fonts" "NerdFontsSymbolsOnly" "nerd_fonts_sym_only" "$NFS_TAG"
+
+echo "Installing JetBrainsMono..."
+install_latest_release "JetBrains/JetBrainsMono" "JetBrainsMono-%s" "jetbrains_mono" "$JBM_TAG"
+remove_extra_fonts_from_jetbrains
+
+echo "Updating fonts cache..."
+fc-cache -f
+echo "Done"
