@@ -39,6 +39,7 @@ user=" $c_info\u$c_inactive"
 datetime=" $c_info\D{%d.%m %T}$c_inactive"
 cwd="\001\e[38;5;29m\002 \W$c_inactive"
 ruby_icon="\001\e[38;5;124m\002"
+console_icon="\001\e[38;5;26m\002󰞷"
 
 ltc="$c_green╭──$c_inactive"  # left top corner
 lbc="$c_green╰─$c_inactive"   # left bottom corner
@@ -63,6 +64,6 @@ function __build_prompt_beginning() {
 
 system_info='"$(__build_prompt_beginning)$user $datetime $cwd $ruby_icon ${RUBY_VERSION#*-}$c_inactive "'
 git_info='"$c_git (%s$c_git)$c_inactive\n$lbc "'
-last_bit='"\001\e[38;5;26m\002$c_clear "'
+last_bit='"$console_icon$c_clear "'
 
 PROMPT_COMMAND="__git_ps1 $system_info $last_bit $git_info"
