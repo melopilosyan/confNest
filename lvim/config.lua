@@ -129,6 +129,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.x = { "<cmd>x<cr>", "Save & exit" }
   lm.g.l[2] = "Line blame"
   lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
+  lm.g.A = { "<cmd>Git add %<cr>", "Add/stage this file" }
   lm.g.o = { "<cmd>Telescope git_status initial_mode=normal<cr>", "Open changed files" }
 
   local function mp_finders(method_code, hint)
@@ -173,6 +174,7 @@ with(lvim.builtin, function(bi)
   bi.alpha.mode = "dashboard"
 
   bi.lualine.options.theme = "onedark"
+  bi.nvimtree.setup.view.side = "left"
 
   --- Deactivate these plugins
   bulk_change(bi, {
@@ -185,6 +187,19 @@ with(lvim.builtin, function(bi)
     "breadcrumbs",
     "indentlines",
   }, function(plugin) plugin.active = false end)
+
+  -- Better nerd font icons
+  local folder = ""
+  local folder_open = ""
+  with(bi.nvimtree.setup.renderer.icons.glyphs, function(g)
+    g.folder.default = folder
+    g.folder.open = folder_open
+    g.folder.symlink_open = folder_open
+    g.git.staged = "✔"
+    g.git.unstaged = "✘"
+    g.git.untracked = ""
+  end)
+  bi.breadcrumbs.options.icons.Folder = folder .. " "
 
   --- Telescope settings
   with(bi.telescope, function(ts)
@@ -224,17 +239,6 @@ with(lvim.builtin, function(bi)
         node_decremental = ",",
       },
     }
-  end)
-
-  --- NvimTree settings
-  with(bi.nvimtree.setup, function(setup)
-    setup.view.side = "left"
-
-    with(setup.renderer.icons.glyphs.git, function(git_glyphs)
-      git_glyphs.staged = "✔"
-      git_glyphs.unstaged = "✘"
-      git_glyphs.untracked = "★"
-    end)
   end)
 end)
 
