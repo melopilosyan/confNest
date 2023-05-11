@@ -48,13 +48,12 @@ install_kitty() {
   fi
 }
 
-link_as_home_dot_files() {
-  for source; do
-    symlink $source ~/.$source
-  done
-}
-
-link_as_home_dot_files gitconfig gitignore_global bash_aliases custom_prompt
+symlink \
+  dotfiles/.gitconfig \
+  dotfiles/.bash_aliases \
+  dotfiles/.custom_prompt \
+  dotfiles/.gitignore_global \
+  ~
 
 symlink \
   nvim \
