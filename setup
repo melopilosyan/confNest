@@ -1,34 +1,42 @@
 #!/bin/bash
 
+pexists() {
+  printf "%s\n" "⭐"
+}
+
+pdone() {
+  printf "%s\n" "✅"
+}
+
+# ❕❕❕ Having fun
 symlink() {
-  local source=$1
-  local destination=$2
+  local destination="${!#}" # Last argument
+  local source_names=${@:1:${#}-1} # Arguments except the last one
+  declare -a source_paths
 
-  echo -n "Symlink ${source}... "
-  if [[ -e $destination ]]; then
-    echo "Already exists"
+  for s in ${source_names[@]}; do
+    source_paths+=("$PWD/$s")
+  done
+
+  printf "Linking ${source_names[@]} into $destination... "
+  ln -sf ${source_paths[@]} $destination
+  pdone
+}
+
+symlink_lvim() {
+  local dir=~/.config/lvim
+
+  if [[ -d $dir ]]; then
+    symlink lvim/config.lua lvim/lua $dir
   else
-    ln -s "$(pwd)/${source}" $destination
-    echo "Done"
+    echo "❕❕❕ Refere to https://www.lunarvim.org/docs/installation to install LunarVim"
   fi
 }
 
-symlink_lvim_config() {
-  local link=~/.config/lvim/config.lua
-
-  if [[ -e $link ]]; then
-    rm -rf $link
-    symlink lvim/config.lua $link
-    symlink lvim/lua ~/.config/lvim/lua
-  else
-    echo "Lvim is not installed"
-  fi
-}
-
-kitty_install() {
-  echo -n "Installing Kitty... "
-  if command -v kitty 2>/dev/null > /dev/null; then
-    echo "Already installed"
+install_kitty() {
+  printf "Installing Kitty... "
+  if command -v kitty 1>/dev/null 2>&1; then
+    pexists
   else
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
     ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
@@ -36,26 +44,24 @@ kitty_install() {
     sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
     sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
     gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
-    echo "Done"
+    pdone
   fi
 }
 
-kitty_configure() {
-  symlink kitty/bin/ls ~/.local/bin/ls
-  symlink kitty/bin/mg ~/.local/bin/mg
-  symlink kitty/conf ~/.config/kitty
+link_as_home_dot_files() {
+  for source; do
+    symlink $source ~/.$source
+  done
 }
 
-symlink gitconfig ~/.gitconfig
-symlink gitignore_global ~/.gitignore_global
+link_as_home_dot_files gitconfig gitignore_global bash_aliases custom_prompt
 
-symlink bash_aliases ~/.bash_aliases
-symlink custom_prompt ~/.custom_prompt
+symlink \
+  nvim \
+  kitty/conf \
+  terminator \
+  ~/.config
 
-symlink terminator ~/.config/terminator
-
-symlink nvim ~/.config/nvim
-symlink_lvim_config
-
-kitty_install
-kitty_configure
+symlink_lvim
+install_kitty
+symlink kitty/bin/ls kitty/bin/mg ~/.local/bin/
