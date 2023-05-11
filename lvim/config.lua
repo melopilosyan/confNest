@@ -130,6 +130,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.g.l[2] = "Line blame"
   lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
   lm.g.A = { "<cmd>Git add %<cr>", "Add/stage this file" }
+  lm.g.g = { "<cmd>Git commit<cr>", "Git commit" }
   lm.g.o = { "<cmd>Telescope git_status initial_mode=normal<cr>", "Open changed files" }
 
   local function mp_finders(method_code, hint)
