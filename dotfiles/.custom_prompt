@@ -46,8 +46,7 @@ lbc="$c_green╰─$c_inactive"   # left bottom corner
 error_code_fmt="$c_err_wrapper  ╰─❰$c_err_code%s$c_err_wrapper❱\n"
 
 function __build_prompt_beginning() {
-  local error_code=$?
-  local beginning
+  local beginning error_code=$?
 
   if [[ $error_code != 0 ]]; then
     printf -v beginning -- "$error_code_fmt" "$error_code"
