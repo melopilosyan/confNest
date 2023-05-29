@@ -277,7 +277,7 @@ lvim.plugins = {
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
 
-  { "melopilosyan/rspec-integrated.nvim" },
+  { "melopilosyan/rspec-integrated.nvim", lazy = true },
 
   {
     "tpope/vim-projectionist",
@@ -306,14 +306,14 @@ lvim.plugins = {
 
   -- { "ecomba/vim-ruby-refactoring" },
 
-  { "slim-template/vim-slim" },
+  { "slim-template/vim-slim", ft = "slim" },
 
   {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
     cmd = { "MarkdownPreview" },
     build = function() vim.fn["mkdp#util#install"]() end,
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    config = function() vim.g.mkdp_filetypes = { "markdown" } end,
   },
 
   {
@@ -378,6 +378,7 @@ lvim.plugins = {
 
   {
     "rcarriga/nvim-notify",
+    event = "VeryLazy",
     config = function()
       local notify = require("notify")
       notify.setup {
@@ -391,9 +392,12 @@ lvim.plugins = {
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    init = function()
+    config = function()
       vim.g.undotree_SetFocusWhenToggle = 1
       vim.g.undotree_WindowLayout = 2
+      vim.g.undotree_ShortIndicators = 1
+      vim.g.undotree_SplitWidth = 25
+      vim.g.undotree_HelpLine = 0
     end
   },
   -- { "danymat/neogen", },
