@@ -398,6 +398,27 @@ lvim.plugins = {
   },
 
   {
+    "nvim-tree/nvim-web-devicons",
+    config = function ()
+      require'nvim-web-devicons'.setup {
+        -- /home/meliq/.local/share/lunarvim/site/pack/lazy/opt/nvim-web-devicons/README.md
+        override_by_extension = {
+          ["vue"] = {
+            icon = "󰡄",
+            -- ~/.local/share/lunarvim/site/pack/lazy/opt/nvim-web-devicons/lua/nvim-web-devicons-light.lua
+            -- color = "#466024",
+            -- cterm_color = "22",
+            -- ~/.local/share/lunarvim/site/pack/lazy/opt/nvim-web-devicons/lua/nvim-web-devicons.lua
+            color = "#8dc149",
+            cterm_color = "113",
+            name = "Vue",
+          }
+        }
+      }
+    end
+  },
+
+  {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     config = function()
