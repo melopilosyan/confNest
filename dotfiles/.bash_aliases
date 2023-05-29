@@ -22,6 +22,7 @@ alias elastic-start='sudo systemctl start elasticsearch.service'
 #### Git
 alias gs='git status'
 alias gl='git log'
+alias gls='git ls'
 alias gd='git diff'
 alias gb='git branch'
 alias ga='git add'
@@ -68,6 +69,7 @@ alias solargraph.rails.link='ln -s ~/Projects/configs/rails.rb ./rails.rb'
 # sudo apt install gnome-tweak-tool
 # > Gnome Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock key behavior
 
+alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
 alias lvims='lvim -S Session.vim'
