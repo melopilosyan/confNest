@@ -309,6 +309,14 @@ lvim.plugins = {
   { "slim-template/vim-slim", ft = "slim" },
 
   {
+    "ggandor/leap.nvim",
+    event = "VeryLazy",
+    config = function ()
+      require('leap').add_default_mappings()
+    end,
+  },
+
+  {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
     cmd = { "MarkdownPreview" },
