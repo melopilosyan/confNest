@@ -119,7 +119,7 @@ with(lvim.keys.visual_mode, function(vm)
   vm["p"] = [["_dP]]
 end)
 
---- Mappings with <leader> prefix
+--- Normal mode mappings with <leader> prefix
 with(lvim.builtin.which_key.mappings, function(lm)
   lm["<leader>x"] = { ":silent! w<cr><cmd>luafile %<cr>", "Execute lua file" }
   lm["/"] = nil
@@ -128,10 +128,12 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.d = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
   lm.g.l[2] = "Line blame"
-  lm.g.B = { "<cmd>Git blame<cr>", "Blame" }
-  lm.g.A = { "<cmd>Git add %<cr>", "Add/stage this file" }
+  lm.g.B = { "<cmd>Git blame<cr>", "Blame buffer" }
+  lm.g.G = { "<cmd>Git<cr>", "Git fugitive" }
   lm.g.g = { "<cmd>Git commit<cr>", "Git commit" }
   lm.g.o = { "<cmd>Telescope git_status initial_mode=normal<cr>", "Open changed files" }
+  lm.g.l = { "<cmd>lua require 'gitsigns'.blame_line{full=true}<cr>", "Line blame" }
+  lm.g.S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" }
 
   local function mp_finders(method_code, hint)
     return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
@@ -167,6 +169,15 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
+  }
+end)
+
+--- Visual mode mappings with <leader> prefix
+with(lvim.builtin.which_key.vmappings, function(vm)
+  vm.g = {
+    name = "Git",
+    r = { "<cmd>lua require('gitsigns').reset_hunk{vim.fn.line('.'), vim.fn.line('v')}<cr>", "Reset Hunk (linewise)" },
+    s = { "<cmd>lua require('gitsigns').stage_hunk{vim.fn.line('.'), vim.fn.line('v')}<cr>", "Stage Hunk (linewise)" },
   }
 end)
 
