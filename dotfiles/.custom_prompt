@@ -25,25 +25,25 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_DESCRIBE_STYLE="branch"
 export GIT_PS1_SHOWUPSTREAM="verbose name"
 
-# Using \001 and \002 around colors is necessary to prevent
-# issues with command line editing/browsing/completion!
-c_inactive="\001\e[38;5;237m\002"
-c_info="\001\e[38;5;242m\002"
-c_green="\001\e[38;5;22m\002"
-c_git="\001\e[38;5;128m\002"
-c_err_code="\001\e[1;31m\002"
-c_err_wrapper="\001\e[90m\002"
-c_clear="\001\e[0m\002"
+export c_inactive="\[\e[38;5;237m\]"
+export c_info="\[\e[38;5;242m\]"
+export c_green="\[\e[38;5;22m\]"
+export c_ruby="\[\e[38;5;124m\]"
+export c_git="\[\e[38;5;128m\]"
+export c_cwd="\[\e[38;5;29m\]"
+export c_err_code="\[\e[01;38;5;196m\]"
+export c_console_icon="\[\e[38;5;26m\]"
+export c_clear="\[\e[0m\]"
 
-user=" $c_info\u$c_inactive"
-datetime=" $c_info\D{%d.%m %T}$c_inactive"
-cwd="\001\e[38;5;29m\002 \W$c_inactive"
-ruby_icon="\001\e[38;5;124m\002"
-console_icon="\001\e[38;5;26m\002󰞷"
+user="$c_inactive  $c_info\u"
+datetime="$c_inactive  $c_info\D{%d.%m %T}"
+cwd="$c_cwd  \W"
+ruby_icon="$c_ruby  "
+console_icon="$c_console_icon 󰞷 "
 
-ltc="$c_green╭──$c_inactive"  # left top corner
-lbc="$c_green╰─$c_inactive"   # left bottom corner
-error_code_fmt="$c_err_wrapper  ╰─❰$c_err_code%s$c_err_wrapper❱\n"
+ltc="$c_green╭──"  # left top corner
+lbc="$c_green╰─"   # left bottom corner
+error_code_fmt="$c_info ╰─ $c_err_code%s\n"
 
 function __build_prompt_beginning() {
   local beginning error_code=$?
@@ -53,16 +53,16 @@ function __build_prompt_beginning() {
   fi
 
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    beginning="$beginning$ltc "
+    beginning="$beginning$ltc"
   fi
 
-  echo -e "$beginning$c_inactive"
+  echo -e "$beginning$c_clear"
 
   return $error_code
 }
 
-system_info='"$(__build_prompt_beginning)$user $datetime $cwd $ruby_icon ${RUBY_VERSION#*-}$c_inactive "'
-git_info='"$c_git (%s$c_git)$c_inactive\n$lbc "'
-last_bit='"$console_icon$c_clear "'
+system_info='"$(__build_prompt_beginning)$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
+git_info='"$c_git  (%s$c_git)\n$lbc"'
+last_bit='"$console_icon$c_clear"'
 
 PROMPT_COMMAND="__git_ps1 $system_info $last_bit $git_info"
