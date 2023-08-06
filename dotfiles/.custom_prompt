@@ -45,13 +45,12 @@ ruby_icon="$c_ruby  "
 
 ltc="$c_green╭──"  # left top corner
 lbc="$c_green╰─"   # left bottom corner
-error_code_fmt="$c_info ╰─ $c_err_code%s\n"
 
 function __build_prompt_beginning() {
   local beginning error_code=$?
 
   if [[ $error_code != 0 ]]; then
-    printf -v beginning -- "$error_code_fmt" "$error_code"
+    beginning="$c_info ╰─ $c_err_code$error_code\n"
   fi
 
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -59,8 +58,6 @@ function __build_prompt_beginning() {
   fi
 
   echo -e "$beginning$c_clear"
-
-  return $error_code
 }
 
 system_info='"$(__build_prompt_beginning)$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
