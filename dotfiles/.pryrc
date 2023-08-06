@@ -6,42 +6,61 @@ require "date"
 require "json"
 require "yaml"
 
-# Removes +\[+ and +\]+ bits from shell formatted color codes
-# and converts literal +\e+ to Unicode "\e" character.
-def shell_to_ruby(color)
-  ENV[color.to_s].gsub(/\\[\[\]]/, "").gsub('\e', "\e")
-end
-
 # See .custom_prompt for exported colors and separators
-ENV_COLORS = Hash.new { |h, k| h[k] = shell_to_ruby(k) }
-Colored = ->(text, color) { "#{ENV_COLORS[color]}#{text}#{ENV_COLORS[:c_clear]}" }
+module ColorPrompt
+  COLORS = Hash.new { |h, k| h[k] = shell_to_ruby(k) }
 
-PRIMARY_SEPARATOR = Colored[ENV.fetch("primary_prompt_separator"), :c_separator]
-SECONDARY_SEPARATOR = Colored[ENV.fetch("secondary_prompt_separator"), :c_separator]
-RAILS_ENV_COLORED = defined?(Rails) ? "#{Colored[Rails.env.upcase, :c_err_code]} " : ""
+  class << self
+    def add(name, description = "Prompt")
+      Pry::Prompt.add(name, description, separators) { |*args| format(*args) }
+    end
 
-Pry::Prompt.add(
-  "ruby-version",
-  "Colored, with Ruby version and Rails environment name if present",
-  [PRIMARY_SEPARATOR, SECONDARY_SEPARATOR]
-) do |context, nesting, pry_instance, separator|
-  if separator == SECONDARY_SEPARATOR
-    separator
-  else
-    format "%<rails_env>s%<ruby_version>s %<in_count>s %<context>s%<nesting>s %<separator>s",
-           rails_env: RAILS_ENV_COLORED,
-           ruby_version: Colored[RUBY_VERSION, :c_ruby],
-           in_count: Colored[pry_instance.input_ring.count, :c_inactive],
-           context: Colored[Pry.view_clip(context), :c_cwd],
-           nesting: nesting.positive? ? Colored[":#{nesting}", :c_info] : "",
-           separator: separator
+    def separators
+      primary_separator = dye(ENV.fetch("primary_prompt_separator"), :c_separator)
+
+      [primary_separator, secondary_separator]
+    end
+
+    def secondary_separator
+      @secondary_separator ||= dye(ENV.fetch("secondary_prompt_separator"), :c_separator)
+    end
+
+    def format(context, nesting, pry_instance, separator)
+      return separator if separator == secondary_separator
+
+      in_count = dye(pry_instance.input_ring.count, :c_inactive)
+      context = dye(Pry.view_clip(context), :c_cwd)
+      nesting = nesting.nonzero? && dye(":#{nesting}", :c_info)
+
+      "#{rails_env}#{ruby_version} #{in_count} #{context}#{nesting} #{separator}"
+    end
+
+    def ruby_version
+      @ruby_version ||= dye(RUBY_VERSION, :c_ruby)
+    end
+
+    def rails_env
+      @rails_env ||= defined?(Rails) ? dye("#{Rails.env.upcase} ", :c_err_code) : ""
+    end
+
+    def dye(str, color)
+      "#{COLORS[color]}#{str}#{COLORS[:c_clear]}"
+    end
+
+    private
+
+    # i.e., converts "\\[\\e[38;5;124m\\]" into "\e[38;5;124m"
+    def shell_to_ruby(color)
+      ENV[color.to_s].gsub(/\\[\[\]]/, "").gsub('\e', "\e")
+    end
   end
 end
 
-Pry.prompt = Pry::Prompt["ruby-version"]
+ColorPrompt.add "colored"
+Pry.prompt = Pry::Prompt["colored"]
 
-# Pry.config.print = proc { |output, value| output.puts "#{Colored['󰶻 ', :c_info]}#{value}" }
-Pry.config.output_prefix = Colored["󰶻 ", :c_info]
+# Pry.config.print = proc { |output, value| output.puts "decorated #{value}" }
+Pry.config.output_prefix = ColorPrompt.dye("󰶻 ", :c_info)
 
 Pry.commands.alias_command "sh", "show-method"
 Pry.commands.alias_command "q", "exit"
@@ -49,5 +68,5 @@ Pry.commands.alias_command "q", "exit"
 begin
   require "pry-doc"
 rescue LoadError
-  puts "#{SECONDARY_SEPARATOR}gem install pry-doc"
+  puts "#{ColorPrompt.secondary_separator}gem install pry-doc"
 end
