@@ -44,11 +44,16 @@ install_kitty() {
     sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
     sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
     gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
+
+    # Add support to be default terminal on Ubuntu
+    # https://github.com/kovidgoyal/kitty/issues/1101#issuecomment-617100609
+
     pdone
   fi
 }
 
 symlink \
+  dotfiles/.pryrc \
   dotfiles/.gitconfig \
   dotfiles/.rubocop.yml \
   dotfiles/.bash_aliases \
