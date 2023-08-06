@@ -1,5 +1,10 @@
 # vi:ft=sh:
 
+# https://hea-www.harvard.edu/~fine/Tech/vi.html
+# set -o vi
+# Or use default shortcuts
+# https://www.howtogeek.com/181/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc/
+
 bind 'set completion-ignore-case on'
 
 export VISUAL=$(which lvim)
@@ -68,6 +73,8 @@ alias solargraph.rails.link='ln -s ~/Projects/configs/rails.rb ./rails.rb'
 # Swap Caps Lock to Escape.
 # sudo apt install gnome-tweak-tool
 # > Gnome Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock key behavior
+
+alias path='echo -e ${PATH//:/\\n}'
 
 alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
