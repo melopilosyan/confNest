@@ -32,14 +32,16 @@ export c_ruby="\[\e[38;5;124m\]"
 export c_git="\[\e[38;5;128m\]"
 export c_cwd="\[\e[38;5;29m\]"
 export c_err_code="\[\e[01;38;5;196m\]"
-export c_console_icon="\[\e[38;5;26m\]"
+export c_separator="\[\e[38;5;26m\]"
 export c_clear="\[\e[0m\]"
+
+export primary_prompt_separator="󰞷 "
+export secondary_prompt_separator=" "
 
 user="$c_inactive  $c_info\u"
 datetime="$c_inactive  $c_info\D{%d.%m %T}"
 cwd="$c_cwd  \W"
 ruby_icon="$c_ruby  "
-console_icon="$c_console_icon 󰞷 "
 
 ltc="$c_green╭──"  # left top corner
 lbc="$c_green╰─"   # left bottom corner
@@ -63,6 +65,8 @@ function __build_prompt_beginning() {
 
 system_info='"$(__build_prompt_beginning)$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
 git_info='"$c_git  (%s$c_git)\n$lbc"'
-last_bit='"$console_icon$c_clear"'
+last_bit='"$c_separator $primary_prompt_separator$c_clear"'
 
 PROMPT_COMMAND="__git_ps1 $system_info $last_bit $git_info"
+
+PS2="$c_separator$secondary_prompt_separator$c_clear"

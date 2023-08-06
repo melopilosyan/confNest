@@ -12,11 +12,12 @@ def shell_to_ruby(color)
   ENV[color.to_s].gsub(/\\[\[\]]/, "").gsub('\e', "\e")
 end
 
+# See .custom_prompt for exported colors and separators
 ENV_COLORS = Hash.new { |h, k| h[k] = shell_to_ruby(k) }
 Colored = ->(text, color) { "#{ENV_COLORS[color]}#{text}#{ENV_COLORS[:c_clear]}" }
 
-PRIMARY_SEPARATOR = Colored["󰞷 ", :c_console_icon]
-SECONDARY_SEPARATOR = Colored[" ", :c_console_icon]
+PRIMARY_SEPARATOR = Colored[ENV.fetch("primary_prompt_separator"), :c_separator]
+SECONDARY_SEPARATOR = Colored[ENV.fetch("secondary_prompt_separator"), :c_separator]
 RAILS_ENV_COLORED = defined?(Rails) ? "#{Colored[Rails.env.upcase, :c_err_code]} " : ""
 
 Pry::Prompt.add(
