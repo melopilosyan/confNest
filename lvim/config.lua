@@ -22,8 +22,8 @@ cnoreabbrev Qall qall
 " Enable custom syntax highlight
 augroup ruby-rules
   autocmd!
-  autocmd BufNewFile,BufRead *.rbw,*.gemspec,Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru setlocal filetype=ruby
-  autocmd FileType ruby,eruby setlocal iskeyword+=!,?
+  autocmd BufNewFile,BufRead *.rbw,*.gemspec,Gemfile,Rakefile,Capfile,Vagrantfile,Thorfile,config.ru setlocal filetype=ruby
+  autocmd FileType ruby,eruby,slim setlocal iskeyword+=!,?
 augroup end
 
 augroup remove-trailing-whitespaces
