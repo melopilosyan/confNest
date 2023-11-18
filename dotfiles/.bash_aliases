@@ -63,10 +63,12 @@ alias tdev.log='tail -f log/development.log'
 alias foreman.dev='foreman start -f Procfile.dev'
 alias unistart='unicorn -p 3000'
 
-alias gem.install.dev='gem install solargraph rubocop rubocop-performance rubocop-rspec \
-  pry pry-doc \
-  cowsay lolcat \
-  gem-ctags && gem ctags'
+alias gem.install.global.dev='rvm @global do \
+  gem install solargraph solargraph-rails \
+    rubocop rubocop-performance rubocop-rspec \
+    pry pry-doc \
+    cowsay lolcat \
+    gem-ctags && gem ctags'
 
 #### Psql dump
 # alias psql.dump='pg_dump -Fc --no-acl --no-owner --verbose -U postgres -d DB_NAME > db_data.dump'
