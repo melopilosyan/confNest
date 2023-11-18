@@ -118,6 +118,5 @@ slvim() {
 [ -f ~/.custom_prompt ] && . ~/.custom_prompt
 
 # Having fun
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 alias saysomething='fortune 2>/dev/null | cowsay -f random 2>/dev/null | lolcat -t -F 0.2 2>/dev/null'
 saysomething
