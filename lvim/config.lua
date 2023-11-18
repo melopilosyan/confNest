@@ -259,6 +259,7 @@ end)
 
 --- LSP settings
 with(lvim.lsp, function(lsp)
+  lsp.installer.setup.automatic_installation = false
   lsp.buffer_mappings.normal_mode["gr"] = {
     "<cmd>Telescope lsp_references<cr>", "Goto references"
   }
