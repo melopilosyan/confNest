@@ -189,6 +189,10 @@ with(lvim.builtin.which_key.vmappings, function(vm)
     r = { "<cmd>lua require('gitsigns').reset_hunk{vim.fn.line('.'), vim.fn.line('v')}<cr>", "Reset Hunk (linewise)" },
     s = { "<cmd>lua require('gitsigns').stage_hunk{vim.fn.line('.'), vim.fn.line('v')}<cr>", "Stage Hunk (linewise)" },
   }
+  vm.f = {
+    name = "Find",
+    w = { "<cmd>lua require('mp.telescope.finders').selection()<cr>", "Selection" }
+  }
 end)
 
 with(lvim.builtin, function(bi)

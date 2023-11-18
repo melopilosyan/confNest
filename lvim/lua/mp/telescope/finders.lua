@@ -19,6 +19,11 @@ function M.word_under_cursor()
   builtin.grep_string { word_match = '-w', initial_mode = 'normal' }
 end
 
+function M.selection()
+  vim.cmd([[normal! "sy]])
+  builtin.grep_string { initial_mode = "normal", search = vim.fn.getreg("s") }
+end
+
 function M.my_config_files()
   M.files_no_preview {
     sorting_strategy = "ascending",
