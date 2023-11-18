@@ -69,6 +69,7 @@ alias gem.install.global.dev='rvm @global do \
     pry pry-doc \
     cowsay lolcat \
     gem-ctags && gem ctags'
+alias solargraph.install.definitions='ln -s ~/Projects/configs/solargraph_definitions.rb ./config/solargraph_definitions.rb'
 
 #### Psql dump
 # alias psql.dump='pg_dump -Fc --no-acl --no-owner --verbose -U postgres -d DB_NAME > db_data.dump'
