@@ -171,6 +171,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
+    s = { "<cmd>set spell! spelllang=en_uk<cr>", "Toggle spelling" },
   }
 end)
 
