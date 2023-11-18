@@ -14,6 +14,7 @@ alias supdate='sudo apt update'
 alias supgrade='sudo apt update && sudo apt -y upgrade'
 alias supgrade.autoremove='supgrade && sudo apt -y autoremove'
 
+alias clear.ram.cache="sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
 #### DB
 alias mysql.service='sudo service mysql'
 alias ms.start='sudo service mysql start'
