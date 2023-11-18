@@ -3,7 +3,9 @@ require "mp.globals"
 vim.cmd [[
 set viminfo^=% " Remember info about open buffers on close
 
-vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
+" Makes the dot(.) work in visual mode
+vnoremap . :norm.<cr>
+
 
 " open up the definition in a new window
 " nnoremap <silent> gv :vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>
