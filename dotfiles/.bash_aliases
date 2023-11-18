@@ -43,6 +43,7 @@ alias gemsets='rvm list gemsets'
 alias rvm-install-gemset='rvm --create --ruby-version' # $ rvm-install-gemset x.y.z@gemset-name
 alias rvm-delete-gemset='rvm gemset delete'
 
+alias be='bundle exec'
 #### Rails
 alias r='bin/rails'
 alias rk='bin/rake'
