@@ -6,6 +6,13 @@ set viminfo^=% " Remember info about open buffers on close
 " Makes the dot(.) work in visual mode
 vnoremap . :norm.<cr>
 
+function! EscapedSelection()
+  normal! gv"sy
+  return substitute(escape(getreg("s"), '\/.*$^~[]'), "\n", '\\n', "g")
+endfunction
+
+" Substitute occurrences of selected text in the buffer
+xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
 
 " open up the definition in a new window
 " nnoremap <silent> gv :vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>
