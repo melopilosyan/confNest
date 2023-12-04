@@ -95,6 +95,10 @@ local function bulk_change(tbl, keys, callback)
   for _, key in ipairs(keys) do callback(tbl[key]) end
 end
 
+local function mp_finders(method_code, hint)
+  return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
+end
+
 --- Lvim
 lvim.leader = "space"
 
@@ -144,10 +148,6 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.g.l = { "<cmd>lua require 'gitsigns'.blame_line{full=true}<cr>", "Line blame" }
   lm.g.S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" }
 
-  local function mp_finders(method_code, hint)
-    return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
-  end
-
   lm.f = {
     name = "Finders",
     f = mp_finders("files_no_preview()", "Files no preview"),
@@ -191,7 +191,7 @@ with(lvim.builtin.which_key.vmappings, function(vm)
   }
   vm.f = {
     name = "Find",
-    w = { "<cmd>lua require('mp.telescope.finders').selection()<cr>", "Selection" }
+    w = mp_finders("selection()", "Selection"),
   }
 end)
 
