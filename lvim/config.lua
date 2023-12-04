@@ -154,8 +154,8 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = mp_finders("word_under_cursor()", "Word under cursor"),
     W = mp_finders("word_under_cursor{grep_open_files = true}", "Word under cursor in open files"),
     p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
-    g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Grep" },
-    G = { "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>", "Grep open files" },
+    t = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Text" },
+    T = { "<cmd>lua require('telescope.builtin').live_grep{grep_open_files = true}<cr>", "Text in open files" },
 
     c = mp_finders("lsp_workspace_symbols('class')", "Classes"),
     m = mp_finders("lsp_workspace_symbols('module')", "Modules"),
