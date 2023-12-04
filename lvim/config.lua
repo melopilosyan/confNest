@@ -192,7 +192,9 @@ with(lvim.builtin.which_key.vmappings, function(vm)
   vm.f = {
     name = "Find",
     w = mp_finders("selection{word = true}", "Selection as word"),
+    W = mp_finders("selection{word = true, grep_open_files = true}", "Selection as word in open files"),
     t = mp_finders("selection()", "Selection as text"),
+    T = mp_finders("selection{grep_open_files = true}", "Selection as text in open files"),
   }
 end)
 
