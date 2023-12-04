@@ -4,11 +4,13 @@ local _, builtin = pcall(require, "telescope.builtin")
 local _, themes = pcall(require, "telescope.themes")
 
 local function deep_extent(t1, t2)
+  if not t1 then return t2 end
+
   return vim.tbl_deep_extend("force", t1, t2)
 end
 
 local function no_preview_dropdown(opts)
-  return themes.get_dropdown(deep_extent(opts or {}, { previewer = false, hidden = true }))
+  return themes.get_dropdown(deep_extent(opts, { previewer = false, hidden = true }))
 end
 
 function M.files_no_preview(opts)
