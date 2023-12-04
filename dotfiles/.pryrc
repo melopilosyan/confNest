@@ -25,14 +25,14 @@ module ColorPrompt
       @secondary_separator ||= dye(ENV.fetch("secondary_prompt_separator"), :c_separator)
     end
 
-    def format(context, nesting, pry_instance, separator)
+    def format(context, nesting, _pry_instance, separator)
       return separator if separator == secondary_separator
 
-      in_count = dye(pry_instance.input_ring.count, :c_inactive)
+      time = dye(Time.new.strftime("%H:%M:%S"), :c_inactive)
       context = dye(Pry.view_clip(context), :c_cwd)
       nesting = nesting.nonzero? && dye(":#{nesting}", :c_info)
 
-      "#{rails_env}#{ruby_version} #{in_count} #{context}#{nesting} #{separator}"
+      "#{rails_env}#{ruby_version} #{time} #{context}#{nesting} #{separator}"
     end
 
     def ruby_version
