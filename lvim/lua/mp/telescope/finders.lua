@@ -3,6 +3,14 @@ local M = {}
 local _, builtin = pcall(require, "telescope.builtin")
 local _, themes = pcall(require, "telescope.themes")
 
+local function pop(tbl, key)
+  if not tbl then return end
+
+  local value = tbl[key]
+  tbl[key] = nil
+  return value
+end
+
 local function deep_extent(t1, t2)
   if not t1 then return t2 end
 
@@ -21,9 +29,17 @@ function M.word_under_cursor()
   builtin.grep_string { word_match = '-w', initial_mode = 'normal' }
 end
 
-function M.selection()
+-- @table opts: Telescope parameters to grep_string plus fields below
+-- @field word: true|false H
+function M.selection(opts)
+  local word_match = pop(opts, "word") and "-w" or nil
+
   vim.cmd([[normal! "sy]])
-  builtin.grep_string { initial_mode = "normal", search = vim.fn.getreg("s") }
+
+  builtin.grep_string(deep_extent(opts, {
+    search = vim.fn.getreg("s"),
+    word_match = word_match, initial_mode = "normal",
+  }))
 end
 
 function M.my_config_files()

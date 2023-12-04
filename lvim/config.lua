@@ -191,7 +191,8 @@ with(lvim.builtin.which_key.vmappings, function(vm)
   }
   vm.f = {
     name = "Find",
-    w = mp_finders("selection()", "Selection"),
+    w = mp_finders("selection{word = true}", "Selection as word"),
+    t = mp_finders("selection()", "Selection as text"),
   }
 end)
 
