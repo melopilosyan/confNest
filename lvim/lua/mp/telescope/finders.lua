@@ -25,8 +25,8 @@ function M.files_no_preview(opts)
   builtin.find_files(no_preview_dropdown(opts))
 end
 
-function M.word_under_cursor()
-  builtin.grep_string { word_match = '-w', initial_mode = 'normal' }
+function M.word_under_cursor(opts)
+  builtin.grep_string(deep_extent(opts, { word_match = '-w', initial_mode = 'normal' }))
 end
 
 -- @table opts: Telescope parameters to grep_string plus fields below
