@@ -70,3 +70,20 @@ begin
 rescue LoadError
   puts "#{ColorPrompt.secondary_separator}gem install pry-doc"
 end
+
+def print_duration(run_count = 1, print_each: false)
+  results = Array.new run_count
+  start_time = Process.clock_gettime Process::CLOCK_MONOTONIC
+
+  run_count.times do |i|
+    start = Process.clock_gettime Process::CLOCK_MONOTONIC
+    yield
+    results[i] = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
+
+    puts results.last.round(9) if print_each
+  end
+
+  total = results.sum
+  runtime = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
+  puts "Average: #{(total / results.size).round 9}\nTotal:   #{total.round 9}\nRuntime: #{runtime.round 9}"
+end
