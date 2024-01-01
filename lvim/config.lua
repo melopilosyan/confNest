@@ -310,16 +310,6 @@ lvim.plugins = {
   },
 
   {
-    "tpope/vim-dispatch",
-    ft = { "ruby", "eruby" },
-  },
-
-  {
-    "tpope/vim-bundler",
-    ft = { "ruby", "eruby" },
-  },
-
-  {
     "tpope/vim-rake",
     ft = { "ruby" }
   },
