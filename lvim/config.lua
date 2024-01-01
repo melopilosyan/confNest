@@ -40,12 +40,6 @@ augroup remove-trailing-whitespaces
   autocmd BufWritePre * :%s/\s\+$//e
 augroup end
 
-"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup end
-
 "" Remember cursor position (You want this!)
 augroup remember-cursor-position
   autocmd!
