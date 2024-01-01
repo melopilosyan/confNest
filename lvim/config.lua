@@ -54,6 +54,7 @@ vim.opt.mouse = ""
 vim.opt.colorcolumn = "100"
 vim.opt.number = true
 vim.opt.relativenumber = true -- Show line relative number
+vim.opt.signcolumn = "yes"
 
 vim.opt.expandtab = true
 vim.opt.smarttab = true       -- Use spaces instead of tabs / Be smart when using tabs ;)
@@ -177,6 +178,13 @@ with(lvim.builtin.which_key.mappings, function(lm)
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
     s = { "<cmd>set spell! spelllang=en_gb<cr><cmd>set spell?<cr>", "Toggle spelling" },
+    c = { function()
+            vim.opt.number = not vim.opt.number:get()
+            vim.opt.relativenumber = not vim.opt.relativenumber:get()
+            vim.opt.signcolumn = vim.opt.signcolumn:get() == "yes" and "no" or "yes"
+          end,
+          "Toggle sign & number columns"
+    },
   }
 end)
 
