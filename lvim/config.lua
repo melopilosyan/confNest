@@ -302,6 +302,8 @@ lvim.plugins = {
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
 
+  { "tpope/vim-surround", event = "VeryLazy" },
+
   { "melopilosyan/rspec-integrated.nvim", lazy = true },
 
   {
