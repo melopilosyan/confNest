@@ -326,7 +326,9 @@ lvim.plugins = {
 
   {
     "tpope/vim-rails",
-    ft = { "ruby", "eruby" },
+    cond = function ()
+      return vim.fn.filereadable("config/environment.rb") == 1
+    end,
   },
 
   -- { "ecomba/vim-ruby-refactoring" },
