@@ -134,13 +134,16 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.h = nil
   lm.d = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
+
   lm.g.l[2] = "Line blame"
   lm.g.B = { "<cmd>Git blame<cr>", "Blame buffer" }
   lm.g.G = { "<cmd>Git<cr>", "Git fugitive" }
   lm.g.g = { "<cmd>Git commit<cr>", "Git commit" }
-  lm.g.o = { "<cmd>Telescope git_status initial_mode=normal<cr>", "Open changed files" }
+  lm.g.o = mp_finders("git_status()", "Open changed files")
   lm.g.l = { "<cmd>lua require 'gitsigns'.blame_line{full=true}<cr>", "Line blame" }
   lm.g.S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" }
+  lm.g.C = mp_finders("git_commits()", "Checkout commit")
+  lm.g.c = mp_finders("git_commits{file = true}", "Checkout commit(for current file)")
 
   lm.f = {
     name = "Finders",
@@ -148,8 +151,8 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = mp_finders("word_under_cursor()", "Word under cursor"),
     W = mp_finders("word_under_cursor{grep_open_files = true}", "Word under cursor in open files"),
     p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
-    t = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Text" },
-    T = { "<cmd>lua require('telescope.builtin').live_grep{grep_open_files = true}<cr>", "Text in open files" },
+    t = mp_finders("live_grep()", "Text"),
+    T = mp_finders("live_grep{grep_open_files = true}", "Text in open files"),
 
     c = mp_finders("lsp_workspace_symbols('class')", "Classes"),
     m = mp_finders("lsp_workspace_symbols('module')", "Modules"),
@@ -229,6 +232,7 @@ with(lvim.builtin, function(bi)
   with(bi.telescope, function(ts)
     local _, actions = pcall(require, "telescope.actions")
 
+    ts.theme = nil
     ts.defaults.mappings = {
       -- for input mode
       i = {
