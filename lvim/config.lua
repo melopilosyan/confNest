@@ -308,16 +308,19 @@ lvim.plugins = {
 
   {
     "tpope/vim-projectionist",
+    event = "VeryLazy",
     ft = { "ruby", "eruby" }
   },
 
   {
     "tpope/vim-rake",
+    event = "VeryLazy",
     ft = { "ruby" }
   },
 
   {
     "tpope/vim-rails",
+    event = "VeryLazy",
     cond = function ()
       return vim.fn.filereadable("config/environment.rb") == 1
     end,
