@@ -64,7 +64,6 @@ symlink \
 symlink \
   nvim \
   kitty/conf \
-  terminator \
   ~/.config
 
 symlink_lvim
