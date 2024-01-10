@@ -61,10 +61,6 @@ symlink \
   dotfiles/.gitignore_global \
   ~
 
-symlink \
-  nvim \
-  ~/.config
-
 symlink_lvim
 install_kitty
 ln -sf $PWD/kitty/conf ~/.config/kitty
