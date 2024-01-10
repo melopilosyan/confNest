@@ -63,9 +63,9 @@ symlink \
 
 symlink \
   nvim \
-  kitty/conf \
   ~/.config
 
 symlink_lvim
 install_kitty
+ln -sf $PWD/kitty/conf ~/.config/kitty
 symlink kitty/bin/ls kitty/bin/mg ~/.local/bin/
