@@ -36,6 +36,11 @@ alias gaa='git add --all'
 gcmm() {
   git commit -m "$1"
 }
+git-search-by-term() {
+  local term=$1
+  local show_lines_around=${2:-4}
+  git log --oneline -S "$term" | awk '{ print $1 }' | xargs git show | grep -C $show_lines_around "$term"
+}
 
 #### RVM
 alias rubies='rvm list rubies'
@@ -63,6 +68,7 @@ alias tdev.log='tail -f log/development.log'
 alias foreman.dev='foreman start -f Procfile.dev'
 alias unistart='unicorn -p 3000'
 
+alias gem.install.global='rvm @global do gem install'
 alias gem.install.global.dev='rvm @global do \
   gem install solargraph solargraph-rails \
     rubocop rubocop-performance rubocop-rspec \
