@@ -6,6 +6,12 @@ require "date"
 require "json"
 require "yaml"
 
+begin
+  require "pry-doc"
+rescue LoadError
+  # Oops
+end
+
 # See .custom_prompt for exported colors and separators
 module ColorPrompt
   COLORS = Hash.new { |h, k| h[k] = shell_to_ruby(k) }
@@ -68,12 +74,6 @@ if defined?(ActiveRecord::Base)
   def sql(query)
     ActiveRecord::Base.connection.execute(query).to_a
   end
-end
-
-begin
-  require "pry-doc"
-rescue LoadError
-  puts "#{ColorPrompt.secondary_separator}gem install pry-doc"
 end
 
 def print_duration(run_count = 1, print_each: false)
