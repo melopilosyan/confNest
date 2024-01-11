@@ -62,8 +62,13 @@ Pry.prompt = Pry::Prompt["colored"]
 # Pry.config.print = proc { |output, value| output.puts "decorated #{value}" }
 Pry.config.output_prefix = ColorPrompt.dye("󰶻 ", :c_info)
 
-Pry.commands.alias_command "sh", "show-method"
-Pry.commands.alias_command "q", "exit"
+##### Helper methods #####
+
+if defined?(ActiveRecord::Base)
+  def sql(query)
+    ActiveRecord::Base.connection.execute(query).to_a
+  end
+end
 
 begin
   require "pry-doc"
