@@ -324,6 +324,14 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.schedule(require("mp.null-ls.slim_lint")) end,
 })
 
+local filetype_augroup = vim.api.nvim_create_augroup("filetype", {})
+vim.api.nvim_create_autocmd("FileType", {
+  group = filetype_augroup,
+  pattern = "gitcommit",
+  desc = "Set spelling on for gitcommit files",
+  callback = function() vim.opt.spell = true end,
+})
+
 -- Additional Plugins
 lvim.plugins = {
   {
