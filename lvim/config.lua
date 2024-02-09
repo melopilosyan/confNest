@@ -394,6 +394,9 @@ lvim.plugins = {
         diagnostics = {
           background = false,
         },
+        lualine = {
+          transparent = true, -- lualine center bar transparency
+        },
       }
 
       onedark.load()
