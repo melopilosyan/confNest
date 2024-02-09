@@ -332,6 +332,13 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt.spell = true end,
 })
 
+-- lazy.nvim configs
+with(lvim.lazy.opts, function(lazy)
+  lazy.dev = {
+    path = "~/Projects",
+  }
+end)
+
 -- Additional Plugins
 lvim.plugins = {
   {
@@ -341,7 +348,11 @@ lvim.plugins = {
 
   { "tpope/vim-surround", event = "VeryLazy" },
 
-  { "melopilosyan/rspec-integrated.nvim", lazy = true },
+  {
+    "melopilosyan/rspec-integrated.nvim",
+    lazy = true,
+    dev = false,
+  },
 
   {
     "tpope/vim-projectionist",
