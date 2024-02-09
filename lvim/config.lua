@@ -195,6 +195,12 @@ with(lvim.builtin.which_key.mappings, function(lm)
           "Toggle sign & number columns"
     },
   }
+  lm.r = {
+    name = "Rails navigation/Run",
+    v = { "<cmd>Eview<cr>", "Open controller action view file" },
+    c = { "<cmd>Econtroller<cr>", "Open controller for this view file" },
+    d = { "<cmd>w<cr><cmd>!dot -T png -O % | open %.png<cr>", "Run 'dot -T png' and open the PNG" },
+  }
 end)
 
 --- Visual mode mappings with <leader> prefix
