@@ -92,6 +92,8 @@ vim.opt.backspace = "indent,eol,start" -- Fix backspace indent
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
+vim.opt.spelllang = "en_gb"
+
 --- Helper functions
 local function with(tbl, callback) callback(tbl) end
 
@@ -186,7 +188,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
-    s = { "<cmd>set spell! spelllang=en_gb<cr><cmd>set spell?<cr>", "Toggle spelling" },
+    s = { "<cmd>set spell!<cr><cmd>set spell?<cr>", "Toggle spelling" },
     c = { function()
             vim.opt.number = not vim.opt.number:get()
             vim.opt.relativenumber = not vim.opt.relativenumber:get()
