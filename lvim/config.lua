@@ -49,6 +49,15 @@ augroup end
 autocmd FocusLost * :wa
 ]]
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  group = vim.api.nvim_create_augroup("set yaml filetype", {}),
+  pattern = { "*.yml" },
+  desc = "Rails.vim sets *.yml files type to eruby.yaml. Set it back to yaml",
+  callback = function()
+    vim.defer_fn(function() vim.cmd "set filetype=yaml" end, 100)
+  end,
+})
+
 vim.opt.mouse = ""
 
 vim.opt.colorcolumn = "100"
