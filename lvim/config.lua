@@ -346,6 +346,14 @@ lvim.plugins = {
   },
 
   {
+    "tpope/vim-bundler",
+    event = "VeryLazy",
+    cond = function ()
+      return vim.fn.filereadable("Gemfile") == 1
+    end,
+  },
+
+  {
     "tpope/vim-rails",
     event = "VeryLazy",
     cond = function ()
