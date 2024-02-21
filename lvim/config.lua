@@ -310,10 +310,10 @@ end)
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
   group = vim.api.nvim_create_augroup("ruby-frozen", {}),
   pattern = { "*.rb", "*.rake" },
-  desc = "Annotate Ruby files with `frozen_string_literal: true`",
+  desc = "Annotate empty Ruby files with `frozen_string_literal: true`",
   callback = function() vim.schedule(function ()
     local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-    if not first_line:find("frozen_string_literal:") then
+    if  first_line == "" then
       vim.api.nvim_buf_set_lines(0, 0, 1, false, { "# frozen_string_literal: true", "", first_line })
     end
   end) end,
