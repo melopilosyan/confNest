@@ -117,6 +117,12 @@ slvim() {
   lvim $1 && source $1
 }
 
+# Show the RSS for the process filtered by command part.
+# RSS: resident set size, the non-swapped physical memory that a task has used (in kiloBytes).
+prss() {
+  ps -e -o rss,cmd | grep -E "$1|RSS" | head -2
+}
+
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
