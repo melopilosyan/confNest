@@ -151,6 +151,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.g.B = { "<cmd>Git blame<cr>", "Blame buffer" }
   lm.g.G = { "<cmd>Git<cr>", "Git fugitive" }
   lm.g.g = { "<cmd>Git commit<cr>", "Git commit" }
+  lm.g.A = { "<cmd>Git commit --amend<cr>", "Git commit --amend" }
   lm.g.o = mp_finders("git_status()", "Open changed files")
   lm.g.l = { "<cmd>lua require 'gitsigns'.blame_line{full=true}<cr>", "Line blame" }
   lm.g.S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" }
