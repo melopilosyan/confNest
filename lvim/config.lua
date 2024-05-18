@@ -204,6 +204,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
     v = { "<cmd>Eview<cr>", "Open controller action view file" },
     c = { "<cmd>Econtroller<cr>", "Open controller for this view file" },
     d = { "<cmd>w<cr><cmd>!dot -T png -O % | open %.png<cr>", "Run 'dot -T png' and open the PNG" },
+    r = { "<cmd>RE<cr>", "Jump to Rails related file | tpope/vim-rails" },
   }
 end)
 
