@@ -31,6 +31,18 @@ local function horizontal_top_prompt(opts1, opts2)
   return deep_extent(opts1, horizontal_top_prompt__options, opts2)
 end
 
+local function selection()
+  vim.cmd([[normal! "sy]])
+  return vim.fn.getreg("s")
+end
+
+function M.selection_to_files_no_preview(opts)
+  local path = vim.split(selection(), "/", { trimempty = true })
+  local file_name = table.remove(path)
+  local options = deep_extent(opts, { search_file = file_name, initial_mode = "normal" })
+  M.files_no_preview(options)
+end
+
 function M.files_no_preview(opts)
   builtin.find_files(no_preview_dropdown(opts))
 end
@@ -44,10 +56,8 @@ end
 function M.selection(opts)
   local word_match = pop(opts, "word") and "-w" or nil
 
-  vim.cmd([[normal! "sy]])
-
   builtin.grep_string(horizontal_top_prompt({
-    search = vim.fn.getreg("s"),
+    search = selection(),
     word_match = word_match,
     initial_mode = "normal",
   }, opts))
