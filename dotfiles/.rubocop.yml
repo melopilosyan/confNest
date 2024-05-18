@@ -39,6 +39,14 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 
+Style/RescueModifier:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*.rake"
+  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
+
 RSpec/ExampleLength:
   Enabled: false
 
