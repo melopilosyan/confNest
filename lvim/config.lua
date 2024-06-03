@@ -17,17 +17,6 @@ xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
 " open up the definition in a new window
 " nnoremap <silent> gv :vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>
 
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-
 " Enable custom syntax highlight
 augroup ruby-rules
   autocmd!
