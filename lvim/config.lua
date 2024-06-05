@@ -348,21 +348,16 @@ lvim.plugins = {
     dev = false,
   },
 
-  {
-    "tpope/vim-projectionist",
-    event = "VeryLazy",
-    ft = { "ruby", "eruby" }
-  },
-
+  -- INFO: Ruby/Rails specific plugins 
   {
     "tpope/vim-rake",
-    event = "VeryLazy",
+    dependencies = { "tpope/vim-projectionist" },
     ft = { "ruby" }
   },
 
   {
     "tpope/vim-bundler",
-    event = "VeryLazy",
+    dependencies = { "tpope/vim-projectionist" },
     cond = function ()
       return vim.fn.filereadable("Gemfile") == 1
     end,
@@ -370,11 +365,12 @@ lvim.plugins = {
 
   {
     "tpope/vim-rails",
-    event = "VeryLazy",
+    dependencies = { "tpope/vim-projectionist" },
     cond = function ()
       return vim.fn.filereadable("config/environment.rb") == 1
     end,
   },
+  -- INFO: Ruby/Rails specific plugins 
 
   -- { "ecomba/vim-ruby-refactoring" },
 
