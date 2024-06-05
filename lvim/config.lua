@@ -117,6 +117,7 @@ with(lvim.keys.normal_mode, function(nm)
   nm["n"] = "nzzzv"
   nm["N"] = "Nzzzv"
 
+  nm["\\"] = "<cmd>NvimTreeToggle<cr>"
   nm["<F5>"] = "<cmd>UndotreeToggle<cr>"
   nm["<F4>"] = "<cmd>Twilight<cr>"
   nm["<F8>"] = "<cmd>ZenMode<cr>"
@@ -134,6 +135,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
 
   lm.h = nil
   lm.d = nil
+  lm.e = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
 
   lm.g.l[2] = "Line blame"
