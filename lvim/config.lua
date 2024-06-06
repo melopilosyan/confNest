@@ -83,6 +83,8 @@ vim.opt.background = "dark"
 
 vim.opt.spelllang = "en_gb"
 
+vim.opt.clipboard = ""
+
 --- Helper functions
 local function with(tbl, callback) callback(tbl) end
 
