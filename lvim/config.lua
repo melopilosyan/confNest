@@ -190,6 +190,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
           end,
           "Toggle sign & number columns"
     },
+    C = { "<cmd>ColorizerToggle<cr>", "Colorizer toggle" },
   }
   lm.r = {
     name = "Rails navigation/Run",
@@ -414,6 +415,11 @@ lvim.plugins = {
 
       onedark.load()
     end
+  },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    cmd = "ColorizerToggle"
   },
 
   {
