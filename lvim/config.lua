@@ -246,6 +246,37 @@ with(lvim.builtin, function(bi)
     git.untracked = ""
   end)
 
+  -- INFO: Nvim-cmp settings
+  with(bi.cmp, function(cs)
+    cs.on_config_done = function(cmp)
+      local luasnip = require("luasnip")
+
+      local mapping = {
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+
+        ['<C-l>'] = cmp.mapping(function()
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          end
+        end, { 'i', 's' }),
+        ['<C-h>'] = cmp.mapping(function()
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end, { 'i', 's' }),
+        ['<C-e>'] = cmp.mapping(function()
+          if luasnip.choice_active() then
+            luasnip.change_choice(1)
+          end
+        end, { 'i', 's' }),
+        ['<C-a>'] = cmp.mapping.abort(),
+      }
+
+      cmp.setup { mapping = mapping }
+    end
+  end)
+
   --- Telescope settings
   with(bi.telescope, function(ts)
     local _, actions = pcall(require, "telescope.actions")
