@@ -239,18 +239,12 @@ with(lvim.builtin, function(bi)
     "indentlines",
   }, function(plugin) plugin.active = false end)
 
-  -- Better nerd font icons
-  local folder = ""
-  local folder_open = ""
-  with(bi.nvimtree.setup.renderer.icons.glyphs, function(g)
-    g.folder.default = folder
-    g.folder.open = folder_open
-    g.folder.symlink_open = folder_open
-    g.git.staged = "✔"
-    g.git.unstaged = "✘"
-    g.git.untracked = ""
+  -- NOTE: NvimTree Git signs
+  with(bi.nvimtree.setup.renderer.icons.glyphs.git, function(git)
+    git.staged = "✔"
+    git.unstaged = "✘"
+    git.untracked = ""
   end)
-  bi.breadcrumbs.options.icons.Folder = folder .. " "
 
   --- Telescope settings
   with(bi.telescope, function(ts)
