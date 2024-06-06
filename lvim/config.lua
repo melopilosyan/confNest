@@ -342,7 +342,7 @@ lvim.plugins = {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
-
+  { "tpope/vim-repeat", event = "VeryLazy" },
   { "tpope/vim-surround", event = "VeryLazy" },
 
   {
