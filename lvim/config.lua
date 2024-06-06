@@ -96,12 +96,21 @@ local function mp_finders(method_code, hint)
   return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
 end
 
+-- INFO: For easily switching between color schemes
+local function colorscheme(name, enabled, lualine_theme)
+  if enabled then
+    lvim.builtin.lualine.options.theme = lualine_theme or name
+    lvim.colorscheme = name
+  end
+  return enabled
+end
+
+
 --- Lvim
 lvim.leader = "space"
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedark"
 
 --- Inseart mode mappings
 with(lvim.keys.insert_mode, function(im)
@@ -223,9 +232,6 @@ end)
 with(lvim.builtin, function(bi)
   bi.alpha.active = true
   bi.alpha.mode = "dashboard"
-
-  bi.lualine.options.theme = "onedark"
-  bi.nvimtree.setup.view.side = "left"
 
   --- Deactivate these plugins
   bulk_change(bi, {
@@ -422,7 +428,49 @@ lvim.plugins = {
   },
 
   {
+    "folke/tokyonight.nvim",
+    priority = 1000,
+    enabled = colorscheme("tokyonight", true),
+    opts = {
+      style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+      transparent = false, -- Enable this to disable setting the background color
+      terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+      styles = {
+        -- Style to be applied to different syntax groups
+        -- Value is any valid attr-list value for `:help nvim_set_hl`
+        comments = { italic = true },
+        keywords = {},
+        functions = {},
+        variables = { italic = true },
+        -- Background styles. Can be "dark", "transparent" or "normal"
+        sidebars = "dark", -- style for sidebars, see below
+        floats = "dark", -- style for floating windows
+      },
+      hide_inactive_statusline = false,
+      dim_inactive = true, -- dims inactive windows
+
+      on_colors = function(c)
+        c.fg_dark = "#828bb8"
+        c.blue5 = "#89ddff"
+        c.bg_statusline = "none"
+      end,
+
+      on_highlights = function(hl, c)
+        hl["@label"] = { fg = "#EF7389", italic = true }
+        hl["@variable.builtin"] = { fg = "#F78677", style = { italic = true } }
+
+        hl.DiagnosticVirtualTextError.bg = "none"
+        hl.DiagnosticVirtualTextWarn.bg = "none"
+        hl.DiagnosticVirtualTextInfo.bg = "none"
+        hl.DiagnosticVirtualTextHint.bg = "none"
+      end,
+    },
+  },
+
+  {
     "navarasu/onedark.nvim",
+    priority = 1000,
+    enabled = colorscheme("onedark", false),
     config = function()
       local onedark = require("onedark")
 
