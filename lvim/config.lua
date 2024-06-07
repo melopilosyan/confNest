@@ -446,8 +446,6 @@ lvim.plugins = {
         sidebars = "dark", -- style for sidebars, see below
         floats = "dark", -- style for floating windows
       },
-      hide_inactive_statusline = false,
-      dim_inactive = true, -- dims inactive windows
 
       on_colors = function(c)
         c.fg_dark = "#828bb8"
@@ -456,8 +454,8 @@ lvim.plugins = {
       end,
 
       on_highlights = function(hl, c)
-        hl["@label"] = { fg = "#EF7389", italic = true }
-        hl["@variable.builtin"] = { fg = "#F78677", style = { italic = true } }
+        hl["@variable.builtin"].style = { italic = true }
+        hl["@variable.member"].style = { italic = true }
 
         hl.DiagnosticVirtualTextError.bg = "none"
         hl.DiagnosticVirtualTextWarn.bg = "none"
