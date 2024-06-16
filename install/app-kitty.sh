@@ -11,4 +11,4 @@ mkdir -p ~/.config/kitty
 source $OMAKUB_PATH/configs/kitty/generate.sh
 
 # Set the default theme
-kitty +kitten themes --config-file-name=theme.conf 'Tokyo Night Storm'
+THEME=tokyo-night source $OMAKUB_PATH/themes/kitty/_set.sh

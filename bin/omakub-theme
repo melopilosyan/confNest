@@ -1,11 +1,14 @@
+# vi:ft=sh:
+
 # Pick a preconfigured theme
-THEME_NAMES=("Tokyo Night" "Catppuccin" "Nord" "Everforest" "Gruvbox" "Kanagawa" "Rose Pine")
+THEME_NAMES=("Tokyo Night" "Catppuccin" "Nord" "Everforest" "Gruvbox" "Kanagawa")
 THEME=$(gum choose "${THEME_NAMES[@]}" --header "Choose your theme" --height 9 | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
 
 [ ! -n "$THEME" ] && exit 0
 
 # Install theme in Gnome, Terminal and Neovim
 source $OMAKUB_PATH/themes/gnome/$THEME.sh
+source $OMAKUB_PATH/themes/kitty/_set.sh
 cp $OMAKUB_PATH/themes/neovim/$THEME.lua ~/.config/nvim/lua/plugins/theme.lua
 
-echo "Restart your terminal for a full theme change"
+echo "$THEME theme installed."
