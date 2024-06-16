@@ -10,7 +10,7 @@ gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
 mkdir -p ~/.config/kitty
 
 cat <<CONF > ~/.config/kitty/kitty.conf
-include ~/.local/share/omakub/configs/kitty/kitty.conf
+include $OMAKUB_PATH/configs/kitty/kitty.conf
 touch_scroll_multiplier 5
 CONF
 
