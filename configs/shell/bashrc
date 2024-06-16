@@ -9,3 +9,9 @@ eval "$(zoxide init bash)"
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
+
+export VISUAL=$(which lvim)
+export EDITOR="$VISUAL"
+export SUDO_EDITOR="$VISUAL"
+
+saysomething
