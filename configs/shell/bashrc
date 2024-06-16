@@ -9,3 +9,5 @@ source $OMAKUB_PATH/configs/shell/aliases
 
 eval "$(zoxide init bash)"
 source /usr/share/doc/fzf/examples/key-bindings.bash
+
+[ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
