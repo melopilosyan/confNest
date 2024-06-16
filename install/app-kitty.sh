@@ -8,11 +8,7 @@ sed -i "s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/app
 gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
 
 mkdir -p ~/.config/kitty
-
-cat <<CONF > ~/.config/kitty/kitty.conf
-include $OMAKUB_PATH/configs/kitty/kitty.conf
-touch_scroll_multiplier 5
-CONF
+source $OMAKUB_PATH/configs/kitty/generate.sh
 
 # Set the default theme
 kitty +kitten themes --config-file-name=theme.conf 'Tokyo Night Storm'
