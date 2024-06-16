@@ -1,19 +1,24 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Be fancy
-source ~/.local/share/omakub/ascii.sh
-
-# Needed for all installers
-sudo apt update -y
-sudo apt install -y curl git unzip
-
 # Ensure computer doesn't go to sleep or lock while installing
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 0
 
+echo "Installing prerequisite tools..."
+sudo apt update > /dev/null
+sudo apt install -y git curl unzip > /dev/null
+
+export OMAKUB_PATH="$HOME/.local/share/omakub"
+
+echo "Cloning OMAKUB into $OMAKUB_PATH..."
+git clone https://github.com/melopilosyan/omakub.git $OMAKUB_PATH > /dev/null
+
+# Be fancy
+source $OMAKUB_PATH/ascii.sh
+
 # Run installers
-for script in ~/.local/share/omakub/install/*.sh; do source $script; done
+for script in $OMAKUB_PATH/install/*.sh; do source $script; done
 
 # Upgrade everything that might ask for a reboot
 sudo apt upgrade -y
