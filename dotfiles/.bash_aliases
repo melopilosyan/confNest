@@ -5,11 +5,6 @@
 # Or use default shortcuts
 # https://www.howtogeek.com/181/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc/
 
-bind 'set completion-ignore-case on'
-
-export VISUAL=$(which lvim)
-export EDITOR=$(which lvim)
-
 alias supdate='sudo apt update'
 alias supgrade='sudo apt update && sudo apt -y upgrade'
 alias supgrade.autoremove='supgrade && sudo apt -y autoremove'
