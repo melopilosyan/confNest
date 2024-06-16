@@ -1,0 +1,11 @@
+HISTSIZE=32768
+HISTFILESIZE=$HISTSIZE
+
+PATH="./bin:$PATH"
+
+set +h
+
+source $OMAKUB_PATH/configs/shell/aliases
+
+eval "$(zoxide init bash)"
+source /usr/share/doc/fzf/examples/key-bindings.bash
