@@ -29,5 +29,7 @@ rm -rf master.zip iaFonts
 fc-cache
 cd -
 
-# Set Cascadia Mono as the default
-gsettings set org.gnome.desktop.interface monospace-font-name 'CaskaydiaMono Nerd Font 10'
+# List available font names: `kitty +list-fonts`.
+
+# Set JetBrains Mono as default.
+FONT=jetbrains-mono sourrce $OMAKUB_PATH/fonts/_set.sh
