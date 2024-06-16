@@ -120,7 +120,7 @@ slvim() {
 # Show the RSS for the process filtered by command part.
 # RSS: resident set size, the non-swapped physical memory that a task has used (in kiloBytes).
 prss() {
-  ps -e -o rss,cmd | grep -E "$1|RSS" | sed '$d'
+  ps -e -o pid,rss,cmd | grep -E "$1|RSS" | sed '$d'
 }
 
 # Put workspace customs in this file
