@@ -126,4 +126,3 @@ prss() {
 
 # Having fun
 alias saysomething='fortune 2>/dev/null | cowsay -f random 2>/dev/null | lolcat -t -F 0.2 2>/dev/null'
-saysomething
