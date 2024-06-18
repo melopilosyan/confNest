@@ -453,9 +453,11 @@ lvim.plugins = {
         c.bg_statusline = "none"
       end,
 
-      on_highlights = function(hl, c)
+      on_highlights = function(hl)
         hl["@variable.builtin"].style = { italic = true }
         hl["@variable.member"].style = { italic = true }
+        hl["@symbol.hash.key"] = { link = "@property" }
+        hl["@variable.parameter.keyword"] = { link = "Keyword" }
 
         hl.DiagnosticVirtualTextError.bg = "none"
         hl.DiagnosticVirtualTextWarn.bg = "none"

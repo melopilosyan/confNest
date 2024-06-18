@@ -27,7 +27,7 @@ symlink_lvim() {
   local dir=~/.config/lvim
 
   if [[ -d $dir ]]; then
-    symlink lvim/config.lua lvim/lua $dir
+    symlink lvim/config.lua lvim/lua lvim/queries $dir
   else
     echo "❕❕❕ Refere to https://www.lunarvim.org/docs/installation to install LunarVim"
   fi
