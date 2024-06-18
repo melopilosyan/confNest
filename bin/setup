@@ -54,7 +54,6 @@ install_kitty() {
 
 symlink \
   dotfiles/.pryrc \
-  dotfiles/.gitconfig \
   dotfiles/.rubocop.yml \
   dotfiles/.bash_aliases \
   dotfiles/.custom_prompt \
