@@ -8,6 +8,12 @@ source $OMAKUB_PATH/configs/shell/aliases
 eval "$(zoxide init bash)"
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  source "$NVM_DIR/nvm.sh"
+  source "$NVM_DIR/bash_completion"
+fi
+
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
 
 export VISUAL=$(which lvim)
