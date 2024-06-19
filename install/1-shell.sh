@@ -1,3 +1,5 @@
+# NOTE: Find the OS default .bashrc at /etc/skel/.bashrc
+
 if ! grep -wq OMAKUB_PATH ~/.bashrc; then
   echo -e "\nexport OMAKUB_PATH='$OMAKUB_PATH'" >> ~/.bashrc
   echo 'source $OMAKUB_PATH/configs/shell/bashrc' >> ~/.bashrc
