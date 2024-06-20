@@ -141,7 +141,10 @@ end)
 
 --- Normal mode mappings with <leader> prefix
 with(lvim.builtin.which_key.mappings, function(lm)
-  lm["<leader>x"] = { ":silent! w<cr><cmd>luafile %<cr>", "Execute lua file" }
+  lm["<leader>x"] = {
+    ":silent! w<cr><cmd>lua require('mp.utils').run_current_file()<cr>",
+    "Execute current file"
+  }
   lm["/"] = nil
 
   lm.h = nil
