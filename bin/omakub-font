@@ -1,4 +1,16 @@
-# Pick a preconfigured theme
-FONT=$(gum choose "JetBrains Mono" "Cascadia Mono" "Fira Mono" "Meslo" --header "Choose your programming font:" --height 6 | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
+# vi:ft=sh:
 
-[ -n "$FONT" ] && source $OMAKUB_PATH/fonts/_set.sh
+# Pick a preconfigured font
+# List available font names: `kitty +list-fonts`.
+FONT=$(gum choose "JetBrains Mono" "Cascadia Code" --header "Choose your programming font:" --height 5)
+
+[ ! -n "$FONT" ] && exit 0
+
+FONT_SIZE=15
+
+# Install the font in Gnome and Kitty
+gsettings set org.gnome.desktop.interface monospace-font-name "$NERD_FONT $FONT_SIZE"
+echo -e "font_family $FONT\nfont_size $FONT_SIZE" > ~/.config/kitty/font.conf
+
+# Reload kitty instances
+kill -SIGUSR1 $(pidof kitty)
