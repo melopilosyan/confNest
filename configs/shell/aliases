@@ -10,6 +10,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cd.omakub="cd $OMAKUB_PATH"
+alias cd=z
 
 # Tools
 alias n='nvim'
