@@ -11,10 +11,9 @@ unzip FiraMono.zip -d FiraMono
 cp FiraMono/*.otf ~/.local/share/fonts
 rm -rf FiraMono.zip FiraMono
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
-unzip JetBrainsMono.zip -d JetBrainsMono
-cp JetBrainsMono/*.ttf ~/.local/share/fonts
-rm -rf JetBrainsMono.zip JetBrainsMono
+cd ~/Projects/configs
+rake install:jetbrains_mono
+cd -
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
 unzip Meslo.zip -d Meslo

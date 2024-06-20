@@ -4,7 +4,7 @@ FONT_SIZE=15
 
 case "$FONT" in
   jetbrains-mono)
-    NERD_FONT="JetBrainsMono NFM"
+    NERD_FONT="JetBrains Mono"
     ;;
   cascadia-mono)
     NERD_FONT="CaskaydiaMono Nerd Font"
