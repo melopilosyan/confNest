@@ -25,12 +25,11 @@ symlink() {
 
 symlink_lvim() {
   local dir=~/.config/lvim
+  [ -d $dir ] && return
 
-  if [[ -d $dir ]]; then
-    symlink lvim/config.lua lvim/lua lvim/queries $dir
-  else
-    echo "❕❕❕ Refere to https://www.lunarvim.org/docs/installation to install LunarVim"
-  fi
+  symlink lvim $dir
+
+  LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh) --no-install-dependencies
 }
 
 install_kitty() {
