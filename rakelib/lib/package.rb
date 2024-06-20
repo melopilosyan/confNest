@@ -17,6 +17,7 @@ Package = Data.define(:name, :repo, :archive, :display_name, :dir) do
     new(:neovim, "neovim/neovim", "nvim-linux64.tar.gz", "Neovim", apps_dir),
     new(:nerd_font, "ryanoasis/nerd-fonts", "NerdFontsSymbolsOnly.zip", "NerdFont Symbols", fonts_dir),
     new(:jetbrains_mono, "JetBrains/JetBrainsMono", "JetBrainsMono-%s.zip", "JetBrains Mono", fonts_dir),
+    new(:cascadia_code, "microsoft/cascadia-code", "CascadiaCode-%s.zip", "Cascadia Code", fonts_dir),
   ].map do |package|
     define_singleton_method(package.name) { package }
     package.name

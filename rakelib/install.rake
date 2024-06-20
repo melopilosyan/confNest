@@ -54,6 +54,18 @@ namespace :install do
   desc "Install the latest or provided version of NerdFontsSymbolsOnly from Github"
   register_font_installer Package.nerd_font
 
+  desc "Install the latest or provided version of CascadiaCode font face from Github"
+  register_font_installer Package.cascadia_code do |cc|
+    cc.upon_installation do
+      chdir cc.extract_dir do
+        sh <<-BASH
+          mv ttf/CascadiaCode.ttf ttf/CascadiaCodeItalic.ttf . &&
+          rm -r ttf otf woff2
+        BASH
+      end
+    end
+  end
+
   desc "Install the latest or provided version of JetBrainsMono font face from Github"
   register_font_installer Package.jetbrains_mono do |jbm|
     jbm.upon_installation do
