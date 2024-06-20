@@ -1,20 +1,10 @@
-local ok, plenary_reload = pcall(require, "plenary.reload")
-local reloader
-
-if not ok then
-  print("planery is not found")
-  reloader = require
-else
-  reloader = plenary_reload.reload_module
-end
-
 P = function(v)
   print(vim.inspect(v))
   return v
 end
 
 RELOAD = function(...)
-  return reloader(...)
+  return require("plenary.reload").reload_module(...)
 end
 
 R = function(name)
