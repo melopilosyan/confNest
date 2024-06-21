@@ -4,5 +4,5 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 
 sudo apt update
 
-sudo apt install brave-browser
+sudo apt install -y brave-browser
 xdg-settings set default-web-browser brave-browser.desktop
