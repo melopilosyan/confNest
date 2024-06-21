@@ -2,6 +2,7 @@ configs_dir=~/Projects/configs
 
 [ -d $configs_dir ] && return
 
+mkdir -p ~/.local/bin
 mkdir -p ~/Projects
 
 echo "Cloning configs into $configs_dir ..."
