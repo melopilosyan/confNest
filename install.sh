@@ -14,9 +14,6 @@ export OMAKUB_PATH="$HOME/.local/share/omakub"
 echo "Cloning OMAKUB into $OMAKUB_PATH..."
 git clone https://github.com/melopilosyan/omakub.git $OMAKUB_PATH > /dev/null
 
-# Be fancy
-source $OMAKUB_PATH/ascii.sh
-
 # Run installers
 for script in $OMAKUB_PATH/install/*.sh; do source $script; done
 
