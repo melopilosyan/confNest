@@ -2,6 +2,7 @@ HISTSIZE=32768
 HISTFILESIZE=$HISTSIZE
 
 PATH="./bin:$PATH"
+[ -d ~/.cargo/bin ] && PATH="$PATH:$HOME/.cargo/bin"
 
 source $OMAKUB_PATH/configs/shell/aliases
 
