@@ -6,8 +6,8 @@ PATH="./bin:$PATH"
 
 source $OMAKUB_PATH/configs/shell/aliases
 
-eval "$(zoxide init bash)"
-source /usr/share/doc/fzf/examples/key-bindings.bash
+command -v zoxide > /dev/null && eval "$(zoxide init bash)"
+command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
 
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
