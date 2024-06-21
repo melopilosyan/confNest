@@ -1,5 +1,8 @@
 cd ~/Projects/configs
 rake install:neovim
+
+# LunarVim requires installed Neovim
+bin/setup
 cd -
 
 if [ ! -d "$HOME/.config/nvim" ]; then
