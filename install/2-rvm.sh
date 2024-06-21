@@ -2,5 +2,7 @@ gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB8
 
 \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
 
+source ~/.rvm/scripts/rvm
+
 RUBY_LATEST=$(curl -s "https://api.github.com/repos/ruby/ruby/releases/latest" | sed -nr 's/.*"name": "v(.*)",/\1/p')
 rvm install $RUBY_LATEST -C "--enable-yjit"
