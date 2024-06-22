@@ -52,6 +52,7 @@ install_kitty() {
 }
 
 symlink \
+  dotfiles/.gemrc \
   dotfiles/.pryrc \
   dotfiles/.rubocop.yml \
   dotfiles/.bash_aliases \
