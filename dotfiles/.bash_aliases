@@ -70,7 +70,9 @@ alias gem.install.global.dev='rvm @global do \
     pry pry-doc \
     cowsay lolcat \
     gem-ctags && gem ctags'
-alias solargraph.install.definitions='ln -s ~/Projects/configs/solargraph_definitions.rb ./config/solargraph_definitions.rb'
+
+alias solargraph.install.config='cp -f $CONFIGS_DIR/solargraph/config.yml .solargraph.yml'
+alias solargraph.install.rails-definitions='cp -f $CONFIGS_DIR/solargraph/rails_definitions.rb ./config/solargraph_definitions.rb'
 
 #### Psql dump
 # alias psql.dump='pg_dump -Fc --no-acl --no-owner --verbose -U postgres -d DB_NAME > db_data.dump'
@@ -89,7 +91,7 @@ alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
 alias lvims='lvim -S Session.vim'
-alias cd.configs='cd ~/Projects/configs'
+alias cd.configs='cd $CONFIGS_DIR'
 alias cd.rspec-integration='cd ~/Projects/rspec-integrated.nvim'
 
 alias public_ip='curl icanhazip.com'
