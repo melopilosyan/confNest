@@ -9,10 +9,11 @@ echo "Installing prerequisite tools..."
 sudo apt update > /dev/null
 sudo apt install -y git curl unzip > /dev/null
 
-export OMAKUB_PATH="$HOME/.local/share/omakub"
+# Accept both DEST & OMAKUB_PATH from outside
+export OMAKUB_PATH=${DEST:-${OMAKUB_PATH:-$HOME/.local/share/omakub}}
 
 echo "Cloning OMAKUB into $OMAKUB_PATH..."
-git clone https://github.com/melopilosyan/omakub.git $OMAKUB_PATH > /dev/null
+git clone -q https://github.com/melopilosyan/omakub.git $OMAKUB_PATH
 
 # Run installers
 for script in $OMAKUB_PATH/install/*.sh; do source $script; done

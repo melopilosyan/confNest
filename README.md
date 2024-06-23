@@ -8,6 +8,13 @@ Turn a fresh Ubuntu installation into a fully-configured, beautiful, and modern 
 wget -qO- https://raw.githubusercontent.com/melopilosyan/omakub/master/install.sh | bash
 ```
 
+Optionally set custom install directories for Omakub and [configs](https://github.com/melopilosyan/configs)
+via `DEST` and `CONFIGS_DIR` environment variables.
+
+```bash
+wget ... | DEST=custom/omakub/dir CONFIGS_DIR=custom/configs/dir bash
+```
+
 ## License
 
 Omakub is released under the [MIT License](https://opensource.org/licenses/MIT).
