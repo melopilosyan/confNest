@@ -1,9 +1,10 @@
-configs_dir=~/Projects/configs
+export CONFIGS_DIR=${CONFIGS_DIR:-$HOME/Projects/configs}
 
-[ -d $configs_dir ] && return
+[ -d $CONFIGS_DIR ] && return
 
 mkdir -p ~/.local/bin
-mkdir -p ~/Projects
 
-echo "Cloning configs into $configs_dir ..."
-git clone https://github.com/melopilosyan/configs.git $configs_dir > /dev/null
+echo -e "\nexport CONFIGS_DIR='$CONFIGS_DIR'" >> ~/.bashrc
+
+echo "Cloning configs into $CONFIGS_DIR ..."
+git clone https://github.com/melopilosyan/configs.git $CONFIGS_DIR > /dev/null
