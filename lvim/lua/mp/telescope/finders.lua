@@ -67,7 +67,7 @@ function M.my_config_files()
   M.files_no_preview {
     sorting_strategy = "ascending",
     prompt_title = "~ My config files ~",
-    cwd = "~/Projects/configs",
+    cwd = vim.env.CONFIGS_DIR,
   }
 end
 
