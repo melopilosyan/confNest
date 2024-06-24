@@ -11,4 +11,4 @@ case "$THEME" in
     ;;
 esac
 
-kitty +kitten themes --reload-in=all --config-file-name=theme.conf "$KITTY_THEME"
+kitten themes --reload-in=all --config-file-name=theme.conf "$KITTY_THEME"
