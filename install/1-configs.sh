@@ -2,7 +2,7 @@ export CONFIGS_DIR=${CONFIGS_DIR:-$HOME/Projects/configs}
 
 [ -d $CONFIGS_DIR ] && return
 
-echo -e "\nexport CONFIGS_DIR='$CONFIGS_DIR'" >> ~/.bashrc
+grep -wq CONFIGS_DIR ~/.bashrc || echo -e "\nexport CONFIGS_DIR='$CONFIGS_DIR'" >> ~/.bashrc
 
 echo "Cloning configs into $CONFIGS_DIR ..."
 git clone -q https://github.com/melopilosyan/configs.git $CONFIGS_DIR
