@@ -5,7 +5,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock animate-show-apps false
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'focus-minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink false
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 64
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 48
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
