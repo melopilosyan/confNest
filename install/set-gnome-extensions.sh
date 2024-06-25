@@ -60,7 +60,7 @@ gsettings set org.gnome.shell.extensions.vitals battery-slot 0
 gsettings set org.gnome.shell.extensions.vitals fixed-widths true
 gsettings set org.gnome.shell.extensions.vitals hide-icons true
 gsettings set org.gnome.shell.extensions.vitals hide-zeros false
-gsettings set org.gnome.shell.extensions.vitals hot-sensors "['__network-rx_max__', '__network-tx_max__', '_processor_usage_', '_memory_free_', '_storage_free_']"
+gsettings set org.gnome.shell.extensions.vitals hot-sensors "['__network-rx_max__', '__network-tx_max__', '_processor_usage_', '_memory_free_']"
 gsettings set org.gnome.shell.extensions.vitals icon-style 0
 gsettings set org.gnome.shell.extensions.vitals include-public-ip true
 gsettings set org.gnome.shell.extensions.vitals include-static-gpu-info false
@@ -76,7 +76,7 @@ gsettings set org.gnome.shell.extensions.vitals show-gpu false
 gsettings set org.gnome.shell.extensions.vitals show-memory true
 gsettings set org.gnome.shell.extensions.vitals show-network true
 gsettings set org.gnome.shell.extensions.vitals show-processor true
-gsettings set org.gnome.shell.extensions.vitals show-storage true
+gsettings set org.gnome.shell.extensions.vitals show-storage false
 gsettings set org.gnome.shell.extensions.vitals show-system false
 gsettings set org.gnome.shell.extensions.vitals show-temperature false
 gsettings set org.gnome.shell.extensions.vitals show-voltage false
