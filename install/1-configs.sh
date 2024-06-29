@@ -1,4 +1,4 @@
-export CONFIGS_DIR=${CONFIGS_DIR:-$HOME/Projects/configs}
+export CONFIGS_DIR=${CONFIGS_DIR:-$HOME/.local/share/configs}
 
 grep -wq CONFIGS_DIR ~/.bashrc || echo -e "\nexport CONFIGS_DIR='$CONFIGS_DIR'" >> ~/.bashrc
 
