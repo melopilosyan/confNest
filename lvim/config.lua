@@ -254,6 +254,7 @@ with(lvim.builtin, function(bi)
     git.unstaged = "✘"
     git.untracked = ""
   end)
+  bi.nvimtree.setup.renderer.icons.glyphs.folder.open = "󰝰"
 
   -- INFO: Nvim-cmp settings
   with(bi.cmp, function(cs)

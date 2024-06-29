@@ -40,7 +40,7 @@ export secondary_prompt_separator=" "
 
 user="$c_inactive  $c_info\u"
 datetime="$c_inactive  $c_info\D{%d.%m %T}"
-cwd="$c_cwd  \W"
+cwd="$c_cwd 󰝰 \W"
 ruby_icon="$c_ruby  "
 
 ltc="$c_green╭──"  # left top corner
