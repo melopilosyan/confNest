@@ -23,7 +23,7 @@ git config --global rebase.autosquash true
 
 git config --global color.ui auto
 git config --global commit.verbose true
-git config --global core.excludesfile ~/.gitignore_global
+git config --global core.excludesfile "$CONFIGS_DIR/git/global-ignore"
 git config --global init.defaultBranch master
 
 # Enable git arguments completion for the g wrapper function defined in bash/functions.sh
