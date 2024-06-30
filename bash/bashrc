@@ -23,5 +23,6 @@ fi
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
 
 source "$CONFIGS_DIR/bash/functions.sh"
+source "$CONFIGS_DIR/bash/prompt.sh"
 
 saysomething
