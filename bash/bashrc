@@ -22,4 +22,6 @@ fi
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
 
+source "$CONFIGS_DIR/bash/functions.sh"
+
 saysomething
