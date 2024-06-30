@@ -17,6 +17,6 @@ fi
 
 export VISUAL=$(which lvim)
 export EDITOR="$VISUAL"
-export SUDO_EDITOR="$VISUAL"
+export SUDO_EDITOR=vim
 
 saysomething
