@@ -8,4 +8,4 @@ sed -i "s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/app
 
 gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
 
-source $OMAKUB_PATH/configs/kitty/generate.sh
+source "$CONFIGS_DIR/kitty/generate-config.sh"
