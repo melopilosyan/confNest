@@ -1,2 +1,4 @@
-INSTALLER=$(gum file $OMAKUB_PATH/install)
-[ -n "$INSTALLER" ] && gum confirm "Run installer?" && source $INSTALLER
+# vim:ft=sh:
+
+INSTALLER=$(gum file "$CONFIGS_DIR/install")
+[ -n "$INSTALLER" ] && gum confirm "Run installer?" && source "$INSTALLER"
