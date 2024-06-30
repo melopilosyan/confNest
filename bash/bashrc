@@ -1,6 +1,11 @@
 HISTSIZE=32768
 HISTFILESIZE=$HISTSIZE
 
+declare -x VISUAL
+VISUAL=$(which lvim)
+export EDITOR="$VISUAL"
+export SUDO_EDITOR=vim
+
 PATH="./bin:$PATH"
 [ -d ~/.cargo/bin ] && PATH="$PATH:$HOME/.cargo/bin"
 
@@ -9,14 +14,12 @@ command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.ba
 
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
+  # shellcheck source=~/.nvm/nvm.sh
   source "$NVM_DIR/nvm.sh"
+  # shellcheck source=~/.nvm/bash_completion
   source "$NVM_DIR/bash_completion"
 fi
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
-
-export VISUAL=$(which lvim)
-export EDITOR="$VISUAL"
-export SUDO_EDITOR=vim
 
 saysomething
