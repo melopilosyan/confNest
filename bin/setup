@@ -56,7 +56,6 @@ symlink \
   dotfiles/.pryrc \
   dotfiles/.rubocop.yml \
   dotfiles/.bash_aliases \
-  dotfiles/.custom_prompt \
   dotfiles/.gitignore_global \
   ~
 

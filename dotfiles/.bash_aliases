@@ -109,8 +109,5 @@ alias kitty.update='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /d
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
-# Apply custom bash prompt
-[ -f ~/.custom_prompt ] && . ~/.custom_prompt
-
 # Having fun
 alias saysomething='fortune 2>/dev/null | cowsay -f random 2>/dev/null | lolcat -t -F 0.2 2>/dev/null'
