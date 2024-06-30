@@ -5,9 +5,10 @@
 if [[ $PATH != *~/.local/bin* ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 mkdir -p ~/.local/bin
 
-if ! grep -wq OMAKUB_PATH ~/.bashrc; then
-  echo -e "\nexport OMAKUB_PATH='$OMAKUB_PATH'" >> ~/.bashrc
-  echo '[ -d $OMAKUB_PATH ] && source $OMAKUB_PATH/configs/shell/bashrc' >> ~/.bashrc
+if ! grep -wq CONFIGS_DIR ~/.bashrc; then
+  echo -e "\nexport CONFIGS_DIR=$CONFIGS_DIR" >> ~/.bashrc
+  # shellcheck disable=SC2016
+  echo '[ -d $CONFIGS_DIR ] && source $CONFIGS_DIR/shell/bashrc' >> ~/.bashrc
 fi
 
 [ -f ~/.inputrc ] && mv ~/.inputrc ~/.inputrc.bak
