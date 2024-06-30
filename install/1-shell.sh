@@ -7,7 +7,7 @@ mkdir -p ~/.local/bin
 
 if ! grep -wq CONFIGS_DIR ~/.bashrc; then
   echo -e "\nexport CONFIGS_DIR=$CONFIGS_DIR" >> ~/.bashrc
-  echo '[ -d $CONFIGS_DIR ] && source $CONFIGS_DIR/shell/bashrc' >> ~/.bashrc
+  echo '[ -d $CONFIGS_DIR ] && source $CONFIGS_DIR/bash/bashrc' >> ~/.bashrc
 fi
 
 [ -f ~/.inputrc ] && mv ~/.inputrc ~/.inputrc.bak
