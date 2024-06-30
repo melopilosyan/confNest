@@ -1,4 +1,7 @@
 # vim:ft=sh:
 
 INSTALLER=$(gum file "$CONFIGS_DIR/install")
-[ -n "$INSTALLER" ] && gum confirm "Run installer?" && source "$INSTALLER"
+
+[ -z "$INSTALLER" ] && exit 0
+
+gum confirm "Run installer?" && source "$INSTALLER"

@@ -1,4 +1,7 @@
 # vim:ft=sh:
 
 HELP=$(gum choose "Hotkeys" "Commands" --header "What do you need help with?" --height 5 | tr '[:upper:]' '[:lower:]')
-[ -n "$HELP" ] && gum pager < "$CONFIGS_DIR/help/$HELP.md"
+
+[ -z "$HELP" ] && exit 0
+
+gum pager < "$CONFIGS_DIR/help/$HELP.md"

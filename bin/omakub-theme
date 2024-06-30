@@ -4,7 +4,7 @@
 THEME_NAMES=("Tokyo Night" "Catppuccin" "Nord" "Everforest" "Gruvbox" "Kanagawa")
 THEME=$(gum choose "${THEME_NAMES[@]}" --header "Choose your theme" --height 9 | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
 
-[ ! -n "$THEME" ] && exit 0
+[ -z "$THEME" ] && exit 0
 
 # Install theme in Gnome, Terminal and Neovim
 source "$CONFIGS_DIR/themes/gnome/$THEME.sh"
