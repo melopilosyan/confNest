@@ -9,14 +9,15 @@ echo "Installing prerequisite tools..."
 sudo apt update > /dev/null
 sudo apt install -y git curl unzip > /dev/null
 
-# Accept both DEST & OMAKUB_PATH from outside
-export OMAKUB_PATH=${DEST:-${OMAKUB_PATH:-$HOME/.local/share/omakub}}
+# Accept optional custom installation DESTination
+export CONFIGS_DIR=${DEST:-$HOME/.local/share/configs}
 
-echo "Cloning OMAKUB into $OMAKUB_PATH..."
-git clone -q https://github.com/melopilosyan/omakub.git $OMAKUB_PATH
+echo "Cloning configs into $CONFIGS_DIR ..."
+git clone -q https://github.com/melopilosyan/configs.git "$CONFIGS_DIR"
 
 # Run installers
-for script in $OMAKUB_PATH/install/*.sh; do source $script; done
+# shellcheck disable=SC1090
+for script in "$CONFIGS_DIR"/install/*.sh; do source "$script"; done
 
 # Upgrade everything that might ask for a reboot
 sudo apt upgrade -y
