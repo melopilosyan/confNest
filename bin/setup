@@ -56,7 +56,6 @@ symlink \
   dotfiles/.pryrc \
   dotfiles/.rubocop.yml \
   dotfiles/.bash_aliases \
-  dotfiles/.gitignore_global \
   ~
 
 symlink_lvim
