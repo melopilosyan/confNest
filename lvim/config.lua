@@ -326,6 +326,11 @@ with(lvim.builtin, function(bi)
         node_decremental = ",",
       },
     }
+
+    local lv_disable = ts.highlight.disable
+    ts.highlight.disable = function(lang, buf)
+      return lang == "gitcommit" or lv_disable(lang, buf)
+    end
   end)
 end)
 
