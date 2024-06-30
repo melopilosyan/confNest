@@ -1,0 +1,12 @@
+{
+    "996391a2-65d2-4259-b5ef-562366b20b62": {
+        "id": "996391a2-65d2-4259-b5ef-562366b20b62",
+        "name": "Brave Search",
+        "keyword": "b",
+        "cmd": "https://search.brave.com/search?q=%s",
+        "icon": "/usr/share/icons/hicolor/128x128/apps/brave-browser.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1717979344.4016767
+    }
+}
