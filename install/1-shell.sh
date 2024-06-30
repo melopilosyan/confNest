@@ -11,4 +11,4 @@ if ! grep -wq OMAKUB_PATH ~/.bashrc; then
 fi
 
 [ -f ~/.inputrc ] && mv ~/.inputrc ~/.inputrc.bak
-echo "\$include $OMAKUB_PATH/configs/shell/inputrc" > ~/.inputrc
+echo "\$include $CONFIGS_DIR/readline/inputrc" > ~/.inputrc
