@@ -1,3 +1,3 @@
-cd $OMAKUB_PATH
-git remote set-url origin git@github.com:melopilosyan/omakub.git
-cd - > /dev/null
+cd "$CONFIGS_DIR" || return
+git remote set-url origin git@github.com:melopilosyan/configs.git
+cd - || return
