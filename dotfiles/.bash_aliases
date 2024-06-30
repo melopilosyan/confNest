@@ -29,7 +29,6 @@ alias start.dbs='sudo service redis_6379 start && sudo service postgresql start'
 alias elastic-start='sudo systemctl start elasticsearch.service'
 
 #### Git
-alias gs='git status'
 alias gl='git log'
 alias gls='git ls'
 alias gd='git diff'
