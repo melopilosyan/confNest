@@ -35,14 +35,6 @@ alias gd='git diff'
 alias gb='git branch'
 alias ga='git add'
 alias gaa='git add --all'
-gcmm() {
-  git commit -m "$1"
-}
-git-search-by-term() {
-  local term=$1
-  local show_lines_around=${2:-4}
-  git log --oneline -S "$term" | awk '{ print $1 }' | xargs git show | grep -C $show_lines_around "$term"
-}
 
 #### RVM
 alias rubies='rvm list rubies'
@@ -113,22 +105,6 @@ alias hg='rg --hyperlink-format=kitty'
 
 alias ssh.kitty='kitty +kitten ssh'
 alias kitty.update='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
-
-alias prettyjson="ruby -e 'require \"json\"; puts JSON.pretty_generate(JSON.parse(gets))'"
-
-prettyjson_s() {
-  echo "$1" | prettyjson
-}
-
-slvim() {
-  lvim $1 && source $1
-}
-
-# Show the RSS for the process filtered by command part.
-# RSS: resident set size, the non-swapped physical memory that a task has used (in kiloBytes).
-prss() {
-  ps -e -o pid,rss,cmd | grep -E "$1|RSS" | sed '$d'
-}
 
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
