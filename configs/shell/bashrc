@@ -4,8 +4,6 @@ HISTFILESIZE=$HISTSIZE
 PATH="./bin:$PATH"
 [ -d ~/.cargo/bin ] && PATH="$PATH:$HOME/.cargo/bin"
 
-source $OMAKUB_PATH/configs/shell/aliases
-
 command -v zoxide > /dev/null && eval "$(zoxide init bash)"
 command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
 

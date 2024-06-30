@@ -10,6 +10,14 @@ alias supgrade='sudo apt update && sudo apt -y upgrade'
 alias supgrade.autoremove='supgrade && sudo apt -y autoremove'
 
 alias clear.ram.cache="sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
+
+# File system
+alias ls='eza -lh --group-directories-first --icons --hyperlink'
+alias la='ls -a'
+alias lt='ls --total-size'
+alias tree='eza --tree --hyperlink'
+alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
+
 #### DB
 alias mysql.service='sudo service mysql'
 alias ms.start='sudo service mysql start'
@@ -87,10 +95,12 @@ alias solargraph.install.rails-definitions='cp -f $CONFIGS_DIR/solargraph/rails_
 
 alias path='echo -e ${PATH//:/\\n}'
 
+alias omakub='$CONFIGS_DIR/bin/omakub'
 alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
 alias lvims='lvim -S Session.vim'
+
 alias cd.configs='cd $CONFIGS_DIR'
 alias cd.rspec-integration='cd ~/Projects/rspec-integrated.nvim'
 
