@@ -16,7 +16,6 @@ echo "Cloning configs into $CONFIGS_DIR ..."
 git clone -q https://github.com/melopilosyan/configs.git "$CONFIGS_DIR"
 
 # Run installers
-# shellcheck disable=SC1090
 for script in "$CONFIGS_DIR"/install/*.sh; do source "$script"; done
 
 # Upgrade everything that might ask for a reboot

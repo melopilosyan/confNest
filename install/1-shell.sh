@@ -7,7 +7,6 @@ mkdir -p ~/.local/bin
 
 if ! grep -wq CONFIGS_DIR ~/.bashrc; then
   echo -e "\nexport CONFIGS_DIR=$CONFIGS_DIR" >> ~/.bashrc
-  # shellcheck disable=SC2016
   echo '[ -d $CONFIGS_DIR ] && source $CONFIGS_DIR/shell/bashrc' >> ~/.bashrc
 fi
 
