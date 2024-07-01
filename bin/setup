@@ -50,5 +50,3 @@ install_kitty() {
     pdone
   fi
 }
-
-symlink_lvim
