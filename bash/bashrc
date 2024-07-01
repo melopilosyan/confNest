@@ -12,12 +12,10 @@ PATH="./bin:$PATH"
 command -v zoxide > /dev/null && eval "$(zoxide init bash)"
 command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
 
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  # shellcheck source=~/.nvm/nvm.sh
-  source "$NVM_DIR/nvm.sh"
-  # shellcheck source=~/.nvm/bash_completion
-  source "$NVM_DIR/bash_completion"
+if [ -s ~/.nvm/nvm.sh ]; then
+  export NVM_DIR=~/.nvm
+  source ~/.nvm/nvm.sh
+  source ~/.nvm/bash_completion
 fi
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
