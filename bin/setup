@@ -51,11 +51,4 @@ install_kitty() {
   fi
 }
 
-symlink \
-  dotfiles/.gemrc \
-  dotfiles/.pryrc \
-  dotfiles/.rubocop.yml \
-  dotfiles/.bash_aliases \
-  ~
-
 symlink_lvim
