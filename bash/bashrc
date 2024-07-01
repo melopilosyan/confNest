@@ -9,7 +9,6 @@ export SUDO_EDITOR=vim
 PATH="./bin:$PATH"
 [ -d ~/.cargo/bin ] && PATH="$PATH:$HOME/.cargo/bin"
 
-command -v zoxide > /dev/null && eval "$(zoxide init bash)"
 command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
 
 if [ -s ~/.nvm/nvm.sh ]; then
@@ -22,5 +21,8 @@ fi
 
 source "$CONFIGS_DIR/bash/functions.sh"
 source "$CONFIGS_DIR/bash/prompt.sh"
+
+# Zoxide init script must be evaluated at the very end
+command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd bash)"
 
 saysomething
