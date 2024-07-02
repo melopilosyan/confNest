@@ -1,9 +1,9 @@
 sudo apt install -y \
-  fzf ripgrep bat eza zoxide plocate btop apache2-utils xclip \
+  fzf bat eza zoxide plocate btop apache2-utils xclip \
   vim fortune
 
-# Install latest fd realease from github
-FD_LATEST=$(curl -s "https://api.github.com/repos/sharkdp/fd/tags?per_page=1" | sed -nr 's/.*"name": "v(.*)",/\1/p')
-curl -sLo fd.deb "https://github.com/sharkdp/fd/releases/download/v$FD_LATEST/fd-musl_${FD_LATEST}_amd64.deb"
-sudo apt install -y ./fd.deb
-rm fd.deb
+# fd - find entries in the filesystem
+install_deb_package_from_gh 'sharkdp/fd' 'fd_VERSION_amd64'
+
+# rg - recursively search the current directory for lines matching a pattern
+install_deb_package_from_gh 'BurntSushi/ripgrep' 'ripgrep_VERSION-1_amd64'
