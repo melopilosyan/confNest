@@ -12,3 +12,6 @@ fi
 
 [ -f ~/.inputrc ] && mv ~/.inputrc ~/.inputrc.bak
 echo "\$include $CONFIGS_DIR/readline/inputrc" > ~/.inputrc
+
+# Make functions available diring initial installation.
+source "$CONFIGS_DIR/bash/functions.sh"

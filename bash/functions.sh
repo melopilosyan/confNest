@@ -24,3 +24,22 @@ prss() {
   # shellcheck disable=SC2009
   ps -e -o pid,rss,cmd | grep -E "$1|RSS" | sed '$d'
 }
+
+# Use optional "VERSION" placeholder in the file name.
+install_deb_package_from_gh() {
+  local repo=$1 file_name=$2 version=$3 download_url
+
+  version=${version:-$(latest_gh_release_version "$repo")}
+  file_name=${file_name/VERSION/${version#v}} # $version without "v"
+  download_url="https://github.com/$repo/releases/download/$version/$file_name.deb"
+
+  echo "Downloading $download_url ..."
+  curl -sLo package.deb "$download_url" || exit $?
+
+  sudo dpkg -i package.deb
+  rm package.deb
+}
+
+latest_gh_release_version() {
+  curl -sSL "https://api.github.com/repos/$1/releases/latest" | jq -r '.name' | cat || exit $?
+}
