@@ -41,5 +41,8 @@ install_deb_package_from_gh() {
 }
 
 latest_gh_release_version() {
-  curl -sSL "https://api.github.com/repos/$1/releases/latest" | jq -r '.name' | cat || exit $?
+  local repo=$1 lose_v=$2 filter
+
+  [ -n "$lose_v" ] && filter='|sub("v";"")'
+  curl -sSL "https://api.github.com/repos/$repo/releases/latest" | jq -r ".name$filter" || exit $?
 }
