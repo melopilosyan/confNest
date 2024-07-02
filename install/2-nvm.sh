@@ -1,7 +1,7 @@
 command -v node >/dev/null && echo "Node is installed. Skipping NVM installation." && return
 
-NVM_LATEST=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/tags?per_page=1" | sed -nr 's/.*name": "v(.*)",/\1/p')
-PROFILE=/dev/null bash -c "curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_LATEST/install.sh | bash"
+NVM_LATEST=$(latest_gh_release_version 'nvm-sh/nvm')
+curl -so- "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_LATEST/install.sh" | PROFILE=/dev/null bash
 
 export NVM_DIR=~/.nvm
 source ~/.nvm/nvm.sh
