@@ -20,7 +20,7 @@ fi
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
 
 source "$CONFIGS_DIR/bash/functions.sh"
-source "$CONFIGS_DIR/bash/prompt.sh"
+source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 
 # Zoxide init script must be evaluated at the very end
 command -v zoxide >/dev/null && eval "$(zoxide init --cmd cd bash)"
