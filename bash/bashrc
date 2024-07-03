@@ -14,7 +14,6 @@ command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.ba
 if [ -s ~/.nvm/nvm.sh ]; then
   export NVM_DIR=~/.nvm
   source ~/.nvm/nvm.sh
-  source ~/.nvm/bash_completion
 fi
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
