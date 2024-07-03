@@ -25,6 +25,11 @@ prss() {
   ps -e -o pid,rss,cmd | grep -E "$1|RSS" | sed '$d'
 }
 
+source_all() {
+  local script
+  for script in "$@"; do source "$script"; done
+}
+
 # Use optional "VERSION" placeholder in the file name.
 install_deb_package_from_gh() {
   local repo=$1 file_name=$2 version=$3 download_url
