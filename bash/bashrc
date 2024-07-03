@@ -7,15 +7,16 @@ export EDITOR="$VISUAL"
 export SUDO_EDITOR=vim
 
 PATH="./bin:$PATH"
-[ -d ~/.cargo/bin ] && PATH="$PATH:$HOME/.cargo/bin"
+test -d ~/.cargo/bin && PATH="$PATH:$_"
 
-command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
+test -s /usr/share/doc/fzf/examples/key-bindings.bash && source "$_"
 
 export NVM_DIR=~/.nvm
 # Load but postpone using NVM until its manually used
 test -s ~/.nvm/nvm.sh && source "$_" --no-use
 
-[ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
+# Load RVM
+test -s ~/.rvm/scripts/rvm && source "$_"
 
 source "$CONFIGS_DIR/bash/functions.sh"
 source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
