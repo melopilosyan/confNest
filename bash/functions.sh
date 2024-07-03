@@ -39,10 +39,7 @@ install_deb_package_from_gh() {
   download_url="https://github.com/$repo/releases/download/$version/$file_name.deb"
 
   echo "Downloading $download_url ..."
-  curl -sLo package.deb "$download_url" || exit $?
-
-  sudo dpkg -i package.deb
-  rm package.deb
+  install_deb_from_web "$download_url"
 }
 
 latest_gh_release_version() {
@@ -50,4 +47,10 @@ latest_gh_release_version() {
 
   [ -n "$lose_v" ] && filter='|sub("v";"")'
   curl -sSL "https://api.github.com/repos/$repo/releases/latest" | jq -r ".name$filter" || exit $?
+}
+
+install_deb_from_web() {
+  curl -sSLo package.deb "$1" || exit $?
+  sudo dpkg -i package.deb
+  rm package.deb
 }
