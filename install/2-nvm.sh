@@ -1,7 +1,9 @@
 command -v node >/dev/null && echo "Node is installed. Skipping NVM installation." && return
 
 NVM_LATEST=$(latest_gh_release_version 'nvm-sh/nvm')
-curl -so- "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_LATEST/install.sh" | PROFILE=/dev/null bash
+PROFILE=/dev/null bash <(curl -s "https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_LATEST/install.sh")
+
+ln -sf ~/.nvm/bash_completion ~/.local/share/bash-completion/completions/nvm
 
 export NVM_DIR=~/.nvm
 source ~/.nvm/nvm.sh
