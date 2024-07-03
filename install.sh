@@ -15,8 +15,9 @@ export CONFIGS_DIR=${DEST:-$HOME/.local/share/configs}
 echo "Cloning configs into $CONFIGS_DIR ..."
 git clone -q https://github.com/melopilosyan/configs.git "$CONFIGS_DIR"
 
-# Run installers
-for script in "$CONFIGS_DIR"/install/*.sh; do source "$script"; done
+# Setup and run installers
+source "$CONFIGS_DIR/setup.sh"
+source_all "$CONFIGS_DIR"/install/*.sh
 
 # Upgrade everything that might ask for a reboot
 sudo apt upgrade -y
