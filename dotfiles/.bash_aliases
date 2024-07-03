@@ -16,7 +16,7 @@ alias ls='eza -lh --group-directories-first --icons --hyperlink'
 alias la='ls -a'
 alias lt='ls --total-size'
 alias tree='eza --tree --hyperlink'
-alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
 #### DB
 alias mysql.service='sudo service mysql'
