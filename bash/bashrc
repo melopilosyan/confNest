@@ -11,10 +11,9 @@ PATH="./bin:$PATH"
 
 command -v fzf > /dev/null && source /usr/share/doc/fzf/examples/key-bindings.bash
 
-if [ -s ~/.nvm/nvm.sh ]; then
-  export NVM_DIR=~/.nvm
-  source ~/.nvm/nvm.sh
-fi
+export NVM_DIR=~/.nvm
+# Load but postpone using NVM until its manually used
+test -s ~/.nvm/nvm.sh && source "$_" --no-use
 
 [ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm
 
