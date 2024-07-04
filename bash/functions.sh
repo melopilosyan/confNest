@@ -1,3 +1,8 @@
+# Invoke command's --version option
+v() {
+  "$@" --version
+}
+
 g() {
   if [ $# -gt 0 ]; then
     git "$@"
