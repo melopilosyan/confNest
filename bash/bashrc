@@ -6,14 +6,11 @@ VISUAL=$(which lvim)
 export EDITOR="$VISUAL"
 export SUDO_EDITOR=vim
 
+test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
 PATH="./bin:$PATH"
 test -d ~/.cargo/bin && PATH="$PATH:$_"
 
 test -s /usr/share/doc/fzf/examples/key-bindings.bash && source "$_"
-
-export NVM_DIR=~/.nvm
-# Load but postpone using NVM until its manually used
-test -s ~/.nvm/nvm.sh && source "$_" --no-use
 
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
