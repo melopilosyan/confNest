@@ -35,14 +35,8 @@ source_all() {
   for script in "$@"; do source "$script"; done
 }
 
-# Use optional "VERSION" placeholder in the file name.
 install_binary_package_from_gh() {
-  local repo=$1 file_name=$2 download_url
-  version=$3
-
-  version=${version:-$(latest_gh_release_version "$repo")}
-  file_name=${file_name/VERSION/${version#v}} # $version without "v"
-  download_url="https://github.com/$repo/releases/download/$version/$file_name"
+  fetch_gh_package_info "$1" "$2" "$3"
 
   echo "Downloading and installing binary from $download_url ..."
   curl -fsSLo "$file_name" "$download_url" || exit $?
@@ -50,16 +44,22 @@ install_binary_package_from_gh() {
   rm "$file_name"
 }
 
-# Use optional "VERSION" placeholder in the file name.
 install_deb_package_from_gh() {
-  local repo=$1 file_name=$2 version=$3 download_url
+  fetch_gh_package_info "$1" "$2" "$3"
+  install_deb_from_web "$download_url.deb"
+}
+
+# $1 - Github repository: username/repo.
+# $2 - File name template with optional VERSION placeholder.
+# $3 - Package version to download (optional).
+#
+# Sets $version, $file_name & $download_url variables globally to be used afterwords.
+fetch_gh_package_info() {
+  repo=$1 file_name=$2 version=$3
 
   version=${version:-$(latest_gh_release_version "$repo")}
   file_name=${file_name/VERSION/${version#v}} # $version without "v"
-  download_url="https://github.com/$repo/releases/download/$version/$file_name.deb"
-
-  echo "Downloading $download_url ..."
-  install_deb_from_web "$download_url"
+  download_url="https://github.com/$repo/releases/download/$version/$file_name"
 }
 
 latest_gh_release_version() {
@@ -70,6 +70,7 @@ latest_gh_release_version() {
 }
 
 install_deb_from_web() {
+  echo "Downloading $1 ..."
   curl -sSLo package.deb "$1" || exit $?
   sudo dpkg -i package.deb
   rm package.deb
