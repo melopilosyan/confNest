@@ -10,7 +10,9 @@ test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
 PATH="./bin:$PATH"
 test -d ~/.cargo/bin && PATH="$PATH:$_"
 
-test -s /usr/share/doc/fzf/examples/key-bindings.bash && source "$_"
+# Load FZF key bindings
+export FZF_COMPLETION_TRIGGER='*'
+test -s ~/.local/share/fzf/bash-integration.sh && source "$_"
 
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
