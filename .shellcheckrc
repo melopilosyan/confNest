@@ -3,3 +3,6 @@ disable=SC1090
 
 # Expressions don't expand in single quotes, use double quotes for that.
 disable=SC2016
+
+# Variable is referenced but not assigned.
+disable=SC2154
