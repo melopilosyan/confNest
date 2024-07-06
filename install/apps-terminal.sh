@@ -1,7 +1,10 @@
-sudo apt install -y eza zoxide plocate btop apache2-utils xclip vim fortune
+sudo apt install -y zoxide plocate btop apache2-utils xclip vim fortune
 
 # As in amd64
 arch=$(dpkg --print-architecture)
+
+# As in x86_64
+xarch=$(uname -m)
 
 # fd - find entries in the filesystem
 install_deb_package_from_gh 'sharkdp/fd' "fd_VERSION_$arch"
@@ -14,6 +17,9 @@ install_deb_package_from_gh 'charmbracelet/gum' "gum_VERSION_$arch"
 
 # bat - a cat clone with syntax highlighting and Git integration
 install_deb_package_from_gh 'sharkdp/bat' "bat_VERSION_$arch"
+
+# eza - a modern, maintained replacement for ls
+install_binary_package_from_gh 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
 
 # fzf - an interactive filter program for any kind of list
 install_binary_package_from_gh 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"

@@ -63,10 +63,10 @@ install_deb_package_from_gh() {
 }
 
 latest_gh_release_version() {
-  local repo=$1 lose_v=$2 filter
+  local repo=$1 lose_v=$2 filter='.tag_name|sub("_";".";"g")'
 
-  [ -n "$lose_v" ] && filter='|sub("v";"")'
-  curl -sSL "https://api.github.com/repos/$repo/releases/latest" | jq -r ".name$filter" || exit $?
+  [ -n "$lose_v" ] && filter+='|sub("v";"")'
+  curl -sSL "https://api.github.com/repos/$repo/releases/latest" | jq -r "$filter" || exit $?
 }
 
 install_deb_from_web() {
