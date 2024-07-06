@@ -4,16 +4,16 @@ sudo apt install -y eza zoxide plocate btop apache2-utils xclip vim fortune
 arch=$(dpkg --print-architecture)
 
 # fd - find entries in the filesystem
-install_deb_package_from_gh 'sharkdp/fd' 'fd_VERSION_amd64'
+install_deb_package_from_gh 'sharkdp/fd' "fd_VERSION_$arch"
 
 # rg - recursively search the current directory for lines matching a pattern
-install_deb_package_from_gh 'BurntSushi/ripgrep' 'ripgrep_VERSION-1_amd64'
+install_deb_package_from_gh 'BurntSushi/ripgrep' "ripgrep_VERSION-1_$arch"
 
 # gum - a tool for glamorous shell scripts
-install_deb_package_from_gh 'charmbracelet/gum' 'gum_VERSION_amd64'
+install_deb_package_from_gh 'charmbracelet/gum' "gum_VERSION_$arch"
 
 # bat - a cat clone with syntax highlighting and Git integration
-install_deb_package_from_gh 'sharkdp/bat' 'bat_VERSION_amd64'
+install_deb_package_from_gh 'sharkdp/bat' "bat_VERSION_$arch"
 
 # fzf - an interactive filter program for any kind of list
 install_binary_package_from_gh 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"
