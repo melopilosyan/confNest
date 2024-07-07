@@ -49,6 +49,7 @@ install_from_github() {
 
   __check_if_version_is_installed && return 0
   install_from_url "https://github.com/$repo/releases/download/$version/$file_name" || return 0
+  __run_post_install_callback_if_present || return 0
   __cache_installed_version
 }
 
@@ -94,6 +95,13 @@ __check_if_version_is_installed() {
 
   [ "$version" = "$installed_version" ] &&
     echo "$repo is already the newest version ($version)"
+}
+
+# Returns a non-zero value if the callback exists and returns a non-zero value.
+__run_post_install_callback_if_present() {
+  local cb="${package}_post_install_callback"
+  type "$cb" >/dev/null 2>&1 || return 0
+  "$cb"
 }
 
 __cache_installed_version() {

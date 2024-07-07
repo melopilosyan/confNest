@@ -21,10 +21,12 @@ install_from_github 'sharkdp/bat' "bat_VERSION_$arch.deb"
 # eza - a modern, maintained replacement for ls
 install_from_github 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
 
+junegunn_fzf_post_install_callback() {
+  mkdir -p ~/.local/share/fzf
+  # Prepare bash integration to be sourced directly from bashrc
+  fzf --bash > ~/.local/share/fzf/bash-integration.sh
+  # Install man page
+  curl -fsSLo ~/.local/share/man/man1/fzf.1 "https://raw.githubusercontent.com/junegunn/fzf/$version/man/man1/fzf.1"
+}
 # fzf - an interactive filter program for any kind of list
 install_from_github 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"
-mkdir -p ~/.local/share/fzf
-# Prepare bash integration to be sourced directly from bashrc
-fzf --bash > ~/.local/share/fzf/bash-integration.sh
-# Install man page
-curl -fsSLo ~/.local/share/man/man1/fzf.1 "https://raw.githubusercontent.com/junegunn/fzf/$version/man/man1/fzf.1"
