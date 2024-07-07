@@ -4,6 +4,6 @@
 
 # sudo apt install -y virtualbox virtualbox-ext-pack
 
-install_deb_from_web "https://download.virtualbox.org/virtualbox/7.0.18/virtualbox-7.0_7.0.18-162988~Ubuntu~noble_amd64.deb"
+install_from_url "https://download.virtualbox.org/virtualbox/7.0.18/virtualbox-7.0_7.0.18-162988~Ubuntu~noble_amd64.deb"
 
 sudo usermod -aG vboxusers ${USER}
