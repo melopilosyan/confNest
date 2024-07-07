@@ -7,22 +7,22 @@ arch=$(dpkg --print-architecture)
 xarch=$(uname -m)
 
 # fd - find entries in the filesystem
-install_deb_package_from_gh 'sharkdp/fd' "fd_VERSION_$arch"
+install_from_github 'sharkdp/fd' "fd_VERSION_$arch.deb"
 
 # rg - recursively search the current directory for lines matching a pattern
-install_deb_package_from_gh 'BurntSushi/ripgrep' "ripgrep_VERSION-1_$arch"
+install_from_github 'BurntSushi/ripgrep' "ripgrep_VERSION-1_$arch.deb"
 
 # gum - a tool for glamorous shell scripts
-install_deb_package_from_gh 'charmbracelet/gum' "gum_VERSION_$arch"
+install_from_github 'charmbracelet/gum' "gum_VERSION_$arch.deb"
 
 # bat - a cat clone with syntax highlighting and Git integration
-install_deb_package_from_gh 'sharkdp/bat' "bat_VERSION_$arch"
+install_from_github 'sharkdp/bat' "bat_VERSION_$arch.deb"
 
 # eza - a modern, maintained replacement for ls
-install_binary_package_from_gh 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
+install_from_github 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
 
 # fzf - an interactive filter program for any kind of list
-install_binary_package_from_gh 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"
+install_from_github 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"
 mkdir -p ~/.local/share/fzf
 # Prepare bash integration to be sourced directly from bashrc
 fzf --bash > ~/.local/share/fzf/bash-integration.sh
