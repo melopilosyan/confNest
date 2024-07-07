@@ -47,7 +47,9 @@ install_from_github() {
   # Substitute VERSION with the version number.
   file_name=${file_name/VERSION/${version#v}} # $version without "v"
 
+  __check_if_version_is_installed && return 0
   install_from_url "https://github.com/$repo/releases/download/$version/$file_name" || return 0
+  __cache_installed_version
 }
 
 # $1 - Github repository: username/repo.
@@ -82,3 +84,20 @@ install_from_url() {
 
   rm "$file_name"
 }
+
+# Returns 1 if the package version is already installed.
+__check_if_version_is_installed() {
+  [ ! -s $ghp_versions_cache ] && echo '{}' > $ghp_versions_cache
+
+  package=${repo//[^A-Za-z0-9]/_}
+  installed_version=$(jq -r ".$package" $ghp_versions_cache)
+
+  [ "$version" = "$installed_version" ] &&
+    echo "$repo is already the newest version ($version)"
+}
+
+__cache_installed_version() {
+  cat $ghp_versions_cache | jq --arg k "$package" --arg v "$version" '. += {$k:$v}' |
+    tee $ghp_versions_cache >/dev/null
+}
+ghp_versions_cache=~/.cache/installed-github-package-versions.json
