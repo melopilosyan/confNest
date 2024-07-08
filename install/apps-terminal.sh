@@ -1,4 +1,4 @@
-sudo apt install -y zoxide plocate btop apache2-utils xclip vim fortune
+sudo apt install -y plocate btop apache2-utils xclip vim fortune
 
 # As in amd64
 arch=$(dpkg --print-architecture)
@@ -18,9 +18,18 @@ install_from_github 'charmbracelet/gum' "gum_VERSION_$arch.deb"
 # bat - a cat clone with syntax highlighting and Git integration
 install_from_github 'sharkdp/bat' "bat_VERSION_$arch.deb"
 
+# zoxide - a smarter cd command for your terminal
+ajeetdsouza_zoxide_post_install_callback() {
+  mkdir -p ~/.local/share/zoxide
+  # Prepare bash integration to be sourced directly from bashrc
+  zoxide init --cmd cd bash > "$_/bash-integration.sh"
+}
+install_from_github 'ajeetdsouza/zoxide' "zoxide_VERSION-1_$arch.deb"
+
 # eza - a modern, maintained replacement for ls
 install_from_github 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
 
+# fzf - an interactive filter program for any kind of list
 junegunn_fzf_post_install_callback() {
   mkdir -p ~/.local/share/fzf
   # Prepare bash integration to be sourced directly from bashrc
@@ -28,5 +37,4 @@ junegunn_fzf_post_install_callback() {
   # Install man page
   curl -fsSLo ~/.local/share/man/man1/fzf.1 "https://raw.githubusercontent.com/junegunn/fzf/$version/man/man1/fzf.1"
 }
-# fzf - an interactive filter program for any kind of list
 install_from_github 'junegunn/fzf' "fzf-VERSION-linux_$arch.tar.gz"
