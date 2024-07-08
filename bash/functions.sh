@@ -71,11 +71,11 @@ install_from_url() {
 
   case "$file_name" in
     *.deb)
-      sudo dpkg -i "$file_name"
+      sudo dpkg -i "$file_name" || return $?
       ;;
     *.tar.gz)
       echo "Installing $file_name into ~/.local/bin ..."
-      tar xzf "$file_name" -C ~/.local/bin
+      tar xzf "$file_name" -C ~/.local/bin || return $?
       ;;
     *)
       echo ">>> Can not install $file_name"
@@ -105,7 +105,10 @@ __run_post_install_callback_if_present() {
 }
 
 __cache_installed_version() {
-  cat $ghp_versions_cache | jq --arg k "$package" --arg v "$version" '. += {$k:$v}' |
-    tee $ghp_versions_cache >/dev/null
+  local json
+  json=$(jq --arg k "$package" --arg v "$version" '. += {$k:$v}' $ghp_versions_cache)
+  [ -z "$json" ] && echo ">>> Can not cache '$package' '$version'" && return 0
+
+  echo -e "$json" > $ghp_versions_cache
 }
 ghp_versions_cache=~/.cache/installed-github-package-versions.json
