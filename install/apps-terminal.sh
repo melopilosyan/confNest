@@ -1,4 +1,4 @@
-sudo apt install -y plocate btop apache2-utils xclip vim fortune
+sudo apt install -y xclip vim fortune
 
 # As in amd64
 arch=$(dpkg --print-architecture)
