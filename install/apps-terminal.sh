@@ -1,4 +1,4 @@
-sudo apt install -y xclip vim fortune
+sudo apt install -y xclip vim universal-ctags fortune
 
 # As in amd64
 arch=$(dpkg --print-architecture)
