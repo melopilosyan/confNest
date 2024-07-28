@@ -10,15 +10,11 @@ test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
 PATH="./bin:$PATH"
 test -d ~/.cargo/bin && PATH="$PATH:$_"
 
-# Load FZF key bindings
-export FZF_COMPLETION_TRIGGER='*'
-test -s ~/.local/share/fzf/bash-integration.sh && source "$_"
+source "$CONFIGS_DIR/bash/functions.sh"
+source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
-
-source "$CONFIGS_DIR/bash/functions.sh"
-source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 
 # The Zoxide init script must be evaluated at the very end so that it can add its hook to PROMPT_COMMAND.
 test -s ~/.local/share/zoxide/bash-integration.sh && source "$_"
