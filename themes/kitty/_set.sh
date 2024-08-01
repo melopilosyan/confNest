@@ -4,4 +4,4 @@ case "$THEME" in
   *) KITTY_THEME="Tokyo Night Storm";;
 esac
 
-kitten themes --reload-in=all --config-file-name=theme.conf "$KITTY_THEME"
+kitten themes --reload-in=all "$KITTY_THEME"
