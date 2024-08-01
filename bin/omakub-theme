@@ -6,8 +6,8 @@ THEME=$(gum choose "${THEME_NAMES[@]}" --header "Choose the theme" --height 5 | 
 
 [ -z "$THEME" ] && exit 0
 
-# Install theme in Gnome, Terminal and Neovim
-source "$CONFIGS_DIR/themes/gnome/$THEME.sh"
+# Install the theme in Gnome, Kitty and Neovim
+source "$CONFIGS_DIR/themes/gnome/_set.sh"
 source "$CONFIGS_DIR/themes/kitty/_set.sh"
 #cp "$CONFIGS_DIR/themes/neovim/$THEME.lua" ~/.config/nvim/lua/plugins/theme.lua
 
