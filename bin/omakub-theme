@@ -1,8 +1,7 @@
 # vi:ft=sh:
 
 # Pick a preconfigured theme
-THEME_NAMES=("Tokyo Night" "Nord" "Everforest")
-THEME=$(gum choose "${THEME_NAMES[@]}" --header "Choose the theme" --height 5 | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
+THEME=$(gum choose "Tokyo Night" "Nord" "Everforest" --header "Choose the theme" --height 5)
 
 [ -z "$THEME" ] && exit 0
 
