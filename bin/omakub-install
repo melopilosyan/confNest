@@ -4,5 +4,4 @@ INSTALLER=$(gum file "$CONFIGS_DIR/install")
 
 [ -z "$INSTALLER" ] && exit 0
 
-source "$CONFIGS_DIR/bash/functions.sh"
 gum confirm "Run installer?" && source "$INSTALLER"
