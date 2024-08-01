@@ -6,8 +6,6 @@ THEME=$(gum choose "Tokyo Night" "Nord" "Everforest" --header "Choose the theme"
 [ -z "$THEME" ] && exit 0
 
 # Install the theme in Gnome, Kitty and Neovim
-source "$CONFIGS_DIR/themes/gnome/_set.sh"
-source "$CONFIGS_DIR/themes/kitty/_set.sh"
-#cp "$CONFIGS_DIR/themes/neovim/$THEME.lua" ~/.config/nvim/lua/plugins/theme.lua
+source_all "$CONFIGS_DIR"/themes/*/_set.sh
 
 echo "$THEME theme installed."
