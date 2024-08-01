@@ -8,5 +8,15 @@
         "is_default_search": true,
         "run_without_argument": false,
         "added": 1717979344.4016767
+    },
+    "5c975629-ea7f-4e4d-ac71-42a5a6e81286": {
+        "id": "5c975629-ea7f-4e4d-ac71-42a5a6e81286",
+        "name": "Search Cambridge Dictionary",
+        "keyword": "d",
+        "cmd": "https://dictionary.cambridge.org/search/direct/?datasetsearch=english&q=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1722504707.4430664
     }
 }
