@@ -1,4 +1,5 @@
 require "mp.globals"
+local colorscheme = require("mp.colorscheme")
 
 vim.cmd [[
 set viminfo^=% " Remember info about open buffers on close
@@ -95,16 +96,6 @@ end
 local function mp_finders(method_code, hint)
   return { "<cmd>lua require('mp.telescope.finders')." .. method_code .. "<cr>", hint }
 end
-
--- INFO: For easily switching between color schemes
-local function colorscheme(name, enabled, lualine_theme)
-  if enabled then
-    lvim.builtin.lualine.options.theme = lualine_theme or name
-    lvim.colorscheme = name
-  end
-  return enabled
-end
-
 
 --- Lvim
 lvim.leader = "space"
@@ -333,6 +324,16 @@ with(lvim.builtin, function(bi)
       return lang == "gitcommit" or lv_disable(lang, buf)
     end
   end)
+
+  with(bi.bufferline, function(bl)
+    if colorscheme.is("nord") then
+      bl.highlights = require("nord").bufferline.highlights({
+        italic = false,
+        bold = true,
+        fill = "#181c24"
+      })
+    end
+  end)
 end)
 
 --- LSP settings
@@ -438,9 +439,39 @@ lvim.plugins = {
   },
 
   {
+    "shaunsingh/nord.nvim",
+    priority = 1000,
+    enabled = colorscheme.selected("nord"),
+    init = function ()
+      -- Make sidebars and popup menus like nvim-tree and telescope have a different background
+      vim.g.nord_contrast = true
+      -- Enable the border between verticaly split windows visable
+      vim.g.nord_borders = false
+      -- Disable the setting of background color so that NeoVim can use your terminal background
+      vim.g.nord_disable_background = true
+      -- Set the cursorline transparent/visible
+      vim.g.nord_cursorline_transparent = false
+      -- Re-enables the background of the sidebar if you disabled the background of everything
+      vim.g.nord_enable_sidebar_background = false
+      -- Enables/disables italics
+      vim.g.nord_italic = true
+      -- Enables/disables colorful backgrounds when used in diff mode
+      vim.g.nord_uniform_diff_background = true
+      -- Enables/disables bold
+      vim.g.nord_bold = true
+    end
+  },
+
+	{
+    "neanias/everforest-nvim",
+    priority = 1000,
+    enabled = colorscheme.selected("everforest"),
+  },
+
+  {
     "folke/tokyonight.nvim",
     priority = 1000,
-    enabled = colorscheme("tokyonight", true),
+    enabled = colorscheme.selected("tokyonight"),
     opts = {
       style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
       transparent = false, -- Enable this to disable setting the background color
@@ -475,31 +506,6 @@ lvim.plugins = {
         hl.DiagnosticVirtualTextHint.bg = "none"
       end,
     },
-  },
-
-  {
-    "navarasu/onedark.nvim",
-    priority = 1000,
-    enabled = colorscheme("onedark", false),
-    config = function()
-      local onedark = require("onedark")
-
-      onedark.setup {
-        style = "cool",
-        toggle_style_key = false,
-        code_style = {
-          variables = "italic"
-        },
-        diagnostics = {
-          background = false,
-        },
-        lualine = {
-          transparent = true, -- lualine center bar transparency
-        },
-      }
-
-      onedark.load()
-    end
   },
 
   {
