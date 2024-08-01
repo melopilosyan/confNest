@@ -11,9 +11,6 @@ include $configs_kitty/nerd-font.conf
 # Updated when the font changes.
 include font.conf
 
-# Managed by the themes kitten.
-include theme.conf
-
 # Computer specific. Change as needed.
 touch_scroll_multiplier 5
 CONF
