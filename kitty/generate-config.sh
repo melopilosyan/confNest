@@ -21,6 +21,3 @@ font_size 15
 CONF
 
 ln -sf "$configs_kitty/open-actions.conf" $kitty_conf
-
-# Set the default theme
-source "$CONFIGS_DIR/themes/kitty/_set.sh"
