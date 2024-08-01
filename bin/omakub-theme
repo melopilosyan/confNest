@@ -1,4 +1,4 @@
-# vi:ft=sh:
+# vim:ft=sh:
 
 # Pick a preconfigured theme
 THEME=$(gum choose "Tokyo Night" "Nord" "Everforest" --header "Choose the theme" --height 5)
@@ -8,4 +8,4 @@ THEME=$(gum choose "Tokyo Night" "Nord" "Everforest" --header "Choose the theme"
 # Install the theme in Gnome, Kitty and Neovim
 source_all "$CONFIGS_DIR"/themes/*/_set.sh
 
-echo "$THEME theme installed."
+echo "Installed theme: $THEME"
