@@ -1,9 +1,9 @@
 case "$THEME" in
-  everforest)
+  Everforest)
     COLOR="bark"
     BG_IMAGE="fog_forest_2.jpg"
     ;;
-  nord)
+  Nord)
     COLOR="blue"
     BG_IMAGE="nord_scenary.png"
     ;;
