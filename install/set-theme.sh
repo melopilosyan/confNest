@@ -1,2 +1,2 @@
-# Setup default theme
-source "$CONFIGS_DIR/themes/gnome/tokyo-night.sh"
+# Set the default Tokyo Night theme
+source_all "$CONFIGS_DIR"/themes/*/_set.sh
