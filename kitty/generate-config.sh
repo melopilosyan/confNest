@@ -26,4 +26,4 @@ CONF
 ln -sf "$configs_kitty/open-actions.conf" $kitty_conf
 
 # Set the default theme
-THEME=tokyo-night source "$CONFIGS_DIR/themes/kitty/_set.sh"
+source "$CONFIGS_DIR/themes/kitty/_set.sh"
