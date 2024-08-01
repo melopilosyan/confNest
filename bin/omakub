@@ -6,4 +6,7 @@ else
 	SUB=$1
 fi
 
-[ -n "$SUB" ] && source "$CONFIGS_DIR/bin/omakub-$SUB"
+[ -z "$SUB" ] && exit 0
+
+source "$CONFIGS_DIR/bash/functions.sh"
+source "$CONFIGS_DIR/bin/omakub-$SUB"
