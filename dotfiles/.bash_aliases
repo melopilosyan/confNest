@@ -106,6 +106,8 @@ alias hg='rg --hyperlink-format=kitty'
 alias ssh.kitty='kitty +kitten ssh'
 alias kitty.update='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 
+alias weather='curl -s https://wttr.in/Gyumri'
+
 # Put workspace customs in this file
 [ -f ~/.bash_aliases_endemic ] && . ~/.bash_aliases_endemic
 
