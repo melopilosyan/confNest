@@ -18,5 +18,15 @@
         "is_default_search": false,
         "run_without_argument": false,
         "added": 1722504707.4430664
+    },
+    "beea6792-2b78-45cc-8d15-4f5519b8d106": {
+        "id": "beea6792-2b78-45cc-8d15-4f5519b8d106",
+        "name": "Google Translate",
+        "keyword": "t",
+        "cmd": "https://translate.google.com/?text=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1723460781.1962733
     }
 }
