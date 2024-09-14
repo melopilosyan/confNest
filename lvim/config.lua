@@ -183,6 +183,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
       "<cmd>lua require('rspec.integrated').run_spec_file{only_current_example = true}<cr>",
       "RSpec run current example"
     },
+    S = { "<cmd>lua require('rspec.integrated').run({suite=true})<cr>", "RSpec run test suite" },
     ["."] = { "<cmd>lua require('rspec.integrated').run_spec_file{repeat_last_run = true}<cr>",
       "RSpec repeat last run" },
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
