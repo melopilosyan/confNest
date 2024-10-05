@@ -59,7 +59,7 @@ class Installer
 
   def remove_previous_version!
     puts "Removing previous versions ..."
-    chdir(home_dir) { sh "rm -r $(\\ls -d */ | grep -v #{release.version})" }
+    chdir(home_dir) { sh "rm -rf $(command ls -d */ | grep -v #{release.version})" }
   end
 
   def insist_install!
