@@ -30,6 +30,19 @@ prss() {
   ps -e -o pid,rss,cmd | grep -E "$1|RSS" | sed '$d'
 }
 
+ps.cpu() {
+  ps auxf | sort -nr -k 3 | head -"${1:-10}"
+}
+
+ps.mem() {
+  ps auxf | sort -nr -k 4 | head -"${1:-10}"
+}
+
+du.top() {
+  local d=${1:-.}
+  du -cksh "${d%/}"/* | sort -hr | head -"${2:-10}"
+}
+
 source_all() {
   local script
   for script in "$@"; do source "$script"; done
