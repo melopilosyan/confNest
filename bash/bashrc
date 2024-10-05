@@ -16,7 +16,4 @@ source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
 
-# The Zoxide init script must be evaluated at the very end so that it can add its hook to PROMPT_COMMAND.
-test -s ~/.local/share/zoxide/bash-integration.sh && source "$_"
-
 saysomething

@@ -18,14 +18,6 @@ install_from_github 'charmbracelet/gum' "gum_VERSION_$arch.deb"
 # bat - a cat clone with syntax highlighting and Git integration
 install_from_github 'sharkdp/bat' "bat_VERSION_$arch.deb"
 
-# zoxide - a smarter cd command for your terminal
-ajeetdsouza_zoxide_post_install_callback() {
-  mkdir -p ~/.local/share/zoxide
-  # Prepare bash integration to be sourced directly from bashrc
-  zoxide init --cmd cd bash > "$_/bash-integration.sh"
-}
-install_from_github 'ajeetdsouza/zoxide' "zoxide_VERSION-1_$arch.deb"
-
 # eza - a modern, maintained replacement for ls
 install_from_github 'eza-community/eza' "eza_$xarch-unknown-linux-gnu.tar.gz"
 
