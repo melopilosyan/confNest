@@ -71,24 +71,30 @@ Pry.config.output_prefix = ColorPrompt.dye("󰶻 ", :c_info)
 ##### Helper methods #####
 
 if defined?(ActiveRecord::Base)
-  def sql(query)
-    ActiveRecord::Base.connection.execute(query).to_a
+  def query_db(sql)
+    ActiveRecord::Base.connection.execute(sql).to_a
   end
 end
 
-def print_duration(run_count = 1, print_each: false)
-  results = Array.new run_count
-  start_time = Process.clock_gettime Process::CLOCK_MONOTONIC
+def simple_benchmark(run_count = 1, print_all: false, unit: :float_millisecond)
+  results = Array.new(run_count)
+  start_time = clock_time(unit)
 
   run_count.times do |i|
-    start = Process.clock_gettime Process::CLOCK_MONOTONIC
+    start = clock_time(unit)
     yield
-    results[i] = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
-
-    puts results.last.round(9) if print_each
+    results[i] = clock_time(unit) - start
   end
 
+  runtime = clock_time(unit) - start_time
   total = results.sum
-  runtime = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
-  puts "Average: #{(total / results.size).round 9}\nTotal:   #{total.round 9}\nRuntime: #{runtime.round 9}"
+
+  puts results.pretty_inspect, nil if print_all
+
+  fmt = "Average: %<average>.9f ms\nTotal:   %<total>.9f ms\nRuntime: %<runtime>.9f ms"
+  { average: total / results.size, total:, runtime: }.tap { puts format(fmt, _1) }
+end
+
+def clock_time(unit = :float_millisecond)
+  Process.clock_gettime(Process::CLOCK_MONOTONIC, unit)
 end
