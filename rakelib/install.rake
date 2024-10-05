@@ -70,12 +70,8 @@ namespace :install do
   register_font_installer Package.jetbrains_mono do |jbm|
     jbm.upon_installation do
       chdir jbm.extract_dir do
-        # Unlike bash, shell doesn't like comments and blank spaces after backslash (line continuation)
-        sh <<-BASH.gsub(/(\\|\$d\s{3})(.+)$/, '\1')
-          d=fonts/ttf && \\                                       # Set variable d = fonts/ttf
-          find $d -type f ! -name "*NL*" -exec mv -t . {} + && \\ # Move files without "NL" in the name from d into current directory
-          rm -r fonts || \\                                       # Remove fonts
-          ! test -d $d                                            # Check if d is not a directory - hack to always exit with success
+        sh <<-BASH.strip
+          find fonts/ttf/ -type f ! -name "*NL*" -exec mv -t . {} + && rm -rf fonts/
         BASH
       end
     end
