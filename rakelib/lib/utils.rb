@@ -15,3 +15,7 @@ def halt!(message)
   warn message
   exit 1
 end
+
+def local_bin(exe)
+  File.expand_path("~/.local/bin/#{exe}")
+end
