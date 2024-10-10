@@ -123,6 +123,8 @@ with(lvim.keys.normal_mode, function(nm)
   nm["<F5>"] = "<cmd>UndotreeToggle<cr>"
   nm["<F4>"] = "<cmd>Twilight<cr>"
   nm["<F8>"] = "<cmd>ZenMode<cr>"
+
+  nm["<A-x>"] = "<cmd>silent! w<cr><cmd>lua require('mp.utils').run_current_file()<cr>"
 end)
 
 --- Visual mode mappings
@@ -132,10 +134,6 @@ end)
 
 --- Normal mode mappings with <leader> prefix
 with(lvim.builtin.which_key.mappings, function(lm)
-  lm["<leader>x"] = {
-    ":silent! w<cr><cmd>lua require('mp.utils').run_current_file()<cr>",
-    "Execute current file"
-  }
   lm["/"] = nil
 
   lm.h = nil
