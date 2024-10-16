@@ -27,3 +27,5 @@ ff() {
     fzf "$@" --multi --margin 4%,1.5% --border \
         --preview-label "Ctrl-d/u to scroll down/up" --preview-label-pos 0:bottom
 }
+
+alias ffd='ff --walker-root'
