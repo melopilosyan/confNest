@@ -38,32 +38,42 @@ export c_clear="\[\e[0m\]"
 export primary_prompt_separator="󰞷 "
 export secondary_prompt_separator=" "
 
-user="$c_inactive  $c_info\u"
-datetime="$c_inactive  $c_info\D{%d.%m %T}"
-cwd="$c_cwd 󰝰 \W"
-ruby_icon="$c_ruby  "
+export user="$c_inactive  $c_info\u"
+export datetime="$c_inactive  $c_info\D{%d.%m %T}"
+export cwd="$c_cwd 󰝰 \W"
+export ruby_icon="$c_ruby  "
 
-ltc="$c_green╭──"  # left top corner
-lbc="$c_green╰─"   # left bottom corner
+export ltc="$c_green╭──" # left top corner
+export lbc="$c_green╰─"  # left bottom corner
 
-function __build_prompt_beginning() {
-  local beginning error_code=$?
+export __cwd=$HOME
+export __failure_code=
+export __top_corner=
 
-  if [[ $error_code != 0 ]]; then
-    beginning="$c_info ╰─ $c_err_code$error_code\n"
+function __assign_prompt_beginning() {
+  local cmd_ret_val=$?
+
+  if [[ $cmd_ret_val != 0 ]]; then
+    __failure_code="$c_info ╰─ $c_err_code$cmd_ret_val\n"
+  else
+    __failure_code=
   fi
+
+  if [ "$__cwd" == "$PWD" ]; then return; fi
 
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    beginning="$beginning$ltc"
+    __top_corner="$ltc"
+  else
+    __top_corner=
   fi
 
-  echo -e "$beginning$c_clear"
+  __cwd=$PWD
 }
 
-system_info='"$(__build_prompt_beginning)$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
+system_info='"$__failure_code$__top_corner$c_clear$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
 git_info='"$c_git  (%s$c_git)\n$lbc"'
 last_bit='"$c_separator $primary_prompt_separator$c_clear"'
 
-PROMPT_COMMAND="__git_ps1 $system_info $last_bit $git_info"
+PROMPT_COMMAND="__assign_prompt_beginning;__git_ps1 $system_info $last_bit $git_info"
 
 PS2="$c_separator$secondary_prompt_separator$c_clear"
