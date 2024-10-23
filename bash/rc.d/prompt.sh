@@ -38,12 +38,11 @@ export c_clear="\[\e[0m\]"
 export primary_prompt_separator="󰞷 "
 export secondary_prompt_separator=" "
 
-export user="$c_inactive  $c_info\u"
-export datetime="$c_inactive  $c_info\D{%d.%m %T}"
+export time="$c_info\t"
 export cwd="$c_cwd 󰝰 \W"
-export ruby_icon="$c_ruby  "
+export ruby_version="$c_ruby  \${RUBY_VERSION#*-}"
 
-export ltc="$c_green╭──" # left top corner
+export ltc="$c_green╭── " # left top corner
 export lbc="$c_green╰─"  # left bottom corner
 
 export __cwd=$HOME
@@ -70,7 +69,7 @@ function __assign_prompt_beginning() {
   __cwd=$PWD
 }
 
-system_info='"$__failure_code$__top_corner$c_clear$user$datetime$cwd$ruby_icon${RUBY_VERSION#*-}"'
+system_info='"$__failure_code$__top_corner$time$cwd$ruby_version"'
 git_info='"$c_git  (%s$c_git)\n$lbc"'
 last_bit='"$c_separator $primary_prompt_separator$c_clear"'
 
