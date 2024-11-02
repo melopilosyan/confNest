@@ -38,34 +38,3 @@ class PryPrompt
 end
 
 PryPrompt.new.add
-
-##### Helper methods #####
-
-if defined?(ActiveRecord::Base)
-  def query_db(sql)
-    ActiveRecord::Base.connection.execute(sql).to_a
-  end
-end
-
-def simple_benchmark(run_count = 1, print_all: false, unit: :float_millisecond)
-  results = Array.new(run_count)
-  start_time = clock_time(unit)
-
-  run_count.times do |i|
-    start = clock_time(unit)
-    yield
-    results[i] = clock_time(unit) - start
-  end
-
-  runtime = clock_time(unit) - start_time
-  total = results.sum
-
-  puts results.pretty_inspect, nil if print_all
-
-  fmt = "Average: %<average>.9f ms\nTotal:   %<total>.9f ms\nRuntime: %<runtime>.9f ms"
-  { average: total / results.size, total:, runtime: }.tap { puts format(fmt, _1) }
-end
-
-def clock_time(unit = :float_millisecond)
-  Process.clock_gettime(Process::CLOCK_MONOTONIC, unit)
-end
