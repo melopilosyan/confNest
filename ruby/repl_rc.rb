@@ -25,6 +25,11 @@ module Ansi
   def self.shell_to_ruby(env_name)
     ENV.fetch(env_name).gsub(/\\[\[\]]/, "").gsub('\e', "\e")
   end
+
+  def self.from_rgb(rgb_color, str = nil)
+    hex_to_dec = rgb_color.delete_prefix("#").scan(/../).map { _1.to_i(16) }
+    "\e[38;2;#{hex_to_dec.join(";")}m#{str}"
+  end
 end
 
 module ColorPromptHelpers
