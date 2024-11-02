@@ -25,7 +25,6 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_DESCRIBE_STYLE="branch"
 export GIT_PS1_SHOWUPSTREAM="verbose name"
 
-export c_inactive="\[\e[38;5;237m\]"
 export c_info="\[\e[38;5;242m\]"
 export c_green="\[\e[38;5;22m\]"
 export c_ruby="\[\e[38;5;124m\]"
@@ -35,12 +34,8 @@ export c_err_code="\[\e[01;38;5;196m\]"
 export c_separator="\[\e[38;5;26m\]"
 export c_clear="\[\e[0m\]"
 
-export primary_prompt_separator="󰞷 "
-export secondary_prompt_separator=" "
-
-export time="$c_info\t"
-export cwd="$c_cwd 󰝰 \W"
-export ruby_version="$c_ruby  \${RUBY_VERSION#*-}"
+export c_psep="$c_separator󰞷 $c_clear"
+export c_ssep="$c_separator $c_clear"
 
 export ltc="$c_green╭── " # left top corner
 export lbc="$c_green╰─"  # left bottom corner
@@ -69,10 +64,10 @@ function __assign_prompt_beginning() {
   __cwd=$PWD
 }
 
-system_info='"$__failure_code$__top_corner$time$cwd$ruby_version"'
+system_info='"$__failure_code$__top_corner$c_info\t $c_cwd󰝰 \W $c_ruby \${RUBY_VERSION#*-}"'
 git_info='"$c_git  (%s$c_git)\n$lbc"'
-last_bit='"$c_separator $primary_prompt_separator$c_clear"'
+last_bit='" $c_psep"'
 
 PROMPT_COMMAND="__assign_prompt_beginning;__git_ps1 $system_info $last_bit $git_info"
 
-PS2="$c_separator$secondary_prompt_separator$c_clear"
+PS2=$c_ssep

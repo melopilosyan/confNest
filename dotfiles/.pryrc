@@ -6,67 +6,38 @@ require "date"
 require "json"
 require "yaml"
 
+require "#{ENV.fetch "CONFIGS_DIR"}/ruby/repl_rc"
+
 begin
   require "pry-doc"
 rescue LoadError
   # Oops
 end
 
-# See .custom_prompt for exported colors and separators
-module ColorPrompt
-  COLORS = Hash.new { |h, k| h[k] = shell_to_ruby(k) }
+class PryPrompt
+  include ColorPromptHelpers
 
-  class << self
-    def add(name, description = "Prompt")
-      Pry::Prompt.add(name, description, separators) { |*args| format(*args) }
-    end
+  def add(name = "colored", description = "Prompt")
+    Pry.prompt = Pry::Prompt.new(name, description, [builder(p_sep), builder(s_sep)])
+    Pry.config.output_prefix = output_prefix
+  end
 
-    def separators
-      primary_separator = dye(ENV.fetch("primary_prompt_separator"), :c_separator)
+  def builder(sep)
+    prompt = context = nil
+    @prefix ||= env_segment((name = Pry.config.prompt_name) == "pry" ? nil : name)
 
-      [primary_separator, secondary_separator]
-    end
+    proc do |ctx, nesting, _pry_instance|
+      next prompt if context == ctx
 
-    def secondary_separator
-      @secondary_separator ||= dye(ENV.fetch("secondary_prompt_separator"), :c_separator)
-    end
-
-    def format(context, nesting, _pry_instance, separator)
-      return separator if separator == secondary_separator
-
-      time = dye(Time.new.strftime("%H:%M:%S"), :c_inactive)
-      context = dye(Pry.view_clip(context), :c_cwd)
-      nesting = nesting.nonzero? && dye(":#{nesting}", :c_info)
-
-      "#{rails_env}#{ruby_version} #{time} #{context}#{nesting} #{separator}"
-    end
-
-    def ruby_version
-      @ruby_version ||= dye(RUBY_VERSION, :c_ruby)
-    end
-
-    def rails_env
-      @rails_env ||= defined?(Rails) ? dye("#{Rails.env.upcase} ", :c_err_code) : ""
-    end
-
-    def dye(str, color)
-      "#{COLORS[color]}#{str}#{COLORS[:c_clear]}"
-    end
-
-    private
-
-    # i.e., converts "\\[\\e[38;5;124m\\]" into "\e[38;5;124m"
-    def shell_to_ruby(color)
-      ENV[color.to_s].gsub(/\\[\[\]]/, "").gsub('\e', "\e")
+      context = ctx
+      ctx = Pry.view_clip(ctx)
+      connest = nesting.zero? ? c_cwd(ctx) : "#{c_cwd}#{ctx}#{c_info}:#{nesting}"
+      prompt = "#{@prefix} #{scope "pry", connest} #{sep}"
     end
   end
 end
 
-ColorPrompt.add "colored"
-Pry.prompt = Pry::Prompt["colored"]
-
-# Pry.config.print = proc { |output, value| output.puts "decorated #{value}" }
-Pry.config.output_prefix = ColorPrompt.dye("󰶻 ", :c_info)
+PryPrompt.new.add
 
 ##### Helper methods #####
 
