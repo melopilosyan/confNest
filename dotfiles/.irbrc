@@ -30,3 +30,13 @@ module InitPromptAfterSetup
   end
 end
 IRB::Irb.prepend InitPromptAfterSetup
+
+class Dancer < IRB::Command::Base
+  category "Having fun"
+  description "Display dancing Ruby logo."
+
+  def execute(*)
+    IRB.send :easter_egg, :dancing
+  end
+end
+IRB::Command.register :dance, Dancer
