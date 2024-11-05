@@ -17,6 +17,7 @@ export FZF_FILE_PREVIEW_OPTS='
   --bind change:first
   --info right
 '
+export FZF_ALT_C_COMMAND=""
 export FZF_CTRL_T_OPTS=$FZF_FILE_PREVIEW_OPTS
 
 # Load key bindings and bash completion
