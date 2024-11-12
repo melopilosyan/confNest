@@ -7,14 +7,14 @@ export FZF_DEFAULT_OPTS='
   --color separator:#292e42,info:#3d59a1,prompt:#29a4bd,query:#c0caf5
   --color preview-bg:#24283b,preview-border:#24283b,preview-scrollbar:#3b4261,preview-label:#3b4261
   --pointer "" --marker "󱊁 " --prompt "  "
+  --bind ctrl-d:preview-half-page-down
+  --bind ctrl-u:preview-half-page-up
+  --bind change:first
   --cycle
 '
 export FZF_FILE_PREVIEW_OPTS='
   --preview "fzf-preview.sh {}" --preview-window 65%
   --walker file,hidden --walker-skip tmp,log,.git,node_modules
-  --bind ctrl-d:preview-half-page-down
-  --bind ctrl-u:preview-half-page-up
-  --bind change:first
   --info right
 '
 export FZF_ALT_C_COMMAND=""
