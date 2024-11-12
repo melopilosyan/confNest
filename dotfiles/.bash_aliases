@@ -85,7 +85,6 @@ alias solargraph.install.rails-definitions='cp -f $CONFIGS_DIR/solargraph/rails_
 
 alias path='echo -e ${PATH//:/\\n}'
 
-alias omakub='$CONFIGS_DIR/bin/omakub'
 alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'

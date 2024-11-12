@@ -7,7 +7,7 @@ export EDITOR="$VISUAL"
 export SUDO_EDITOR=vim
 
 test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
-PATH="./bin:$PATH"
+PATH="./bin:$CONFIGS_DIR/bin:$PATH"
 test -d ~/.cargo/bin && PATH="$PATH:$_"
 
 source "$CONFIGS_DIR/bash/functions.sh"
