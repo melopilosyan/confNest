@@ -10,7 +10,7 @@ export FZF_DEFAULT_OPTS='
   --cycle
 '
 export FZF_FILE_PREVIEW_OPTS='
-  --preview "$CONFIGS_DIR/bin/fzf-preview.sh {}" --preview-window 65%
+  --preview "fzf-preview.sh {}" --preview-window 65%
   --walker file,hidden --walker-skip tmp,log,.git,node_modules
   --bind ctrl-d:preview-half-page-down
   --bind ctrl-u:preview-half-page-up
