@@ -28,8 +28,8 @@
 # Published under the MIT License (https://opensource.org/license/mit)
 
 # Create the file to store bookmarks
-export SDIRS="${SDIRS:-${XDG_DATA_HOME:-$HOME/.local/share}/sdirs}"
-test -f "$SDIRS" || touch "$SDIRS"
+export BASHMARKS="${BASHMARKS:-${XDG_DATA_HOME:-$HOME/.local/share}/bashmarks}"
+test -f "$BASHMARKS" || touch "$BASHMARKS"
 
 # Remove alias "l" from default .bashrc
 alias l &>/dev/null && unalias l >/dev/null
@@ -62,20 +62,20 @@ _valid_bookmark_name() {
 }
 
 _set_bookmark_path() {
-  source "$SDIRS"
+  source "$BASHMARKS"
 
   local env_name="_BM_$1"
   path="${!env_name}" # Substitute _BM_name with its value
 }
 
 _delete_saved_bookmark() {
-  if [ -s "$SDIRS" ] && grep "$1=" "$SDIRS" >/dev/null; then
+  if [ -s "$BASHMARKS" ] && grep "$1=" "$BASHMARKS" >/dev/null; then
     temp=$(mktemp -t bashmarks.XXXX) || exit 1
     # shellcheck disable=SC2064
     trap "/bin/rm -f -- '$temp'" EXIT
 
-    sed "/$1=/d" "$SDIRS" >"$temp"
-    /bin/mv "$temp" "$SDIRS"
+    sed "/$1=/d" "$BASHMARKS" >"$temp"
+    /bin/mv "$temp" "$BASHMARKS"
 
     /bin/rm -f -- "$temp"
     trap - EXIT
@@ -87,7 +87,7 @@ b() {
   _valid_bookmark_name "$1" || return
 
   _delete_saved_bookmark "$1"
-  echo "_BM_$1=\"${2:-$PWD}\"" >>"$SDIRS"
+  echo "_BM_$1=\"${2:-$PWD}\"" >>"$BASHMARKS"
 }
 
 j() {
@@ -124,7 +124,7 @@ d() {
 }
 
 l() {
-  source "$SDIRS"
+  source "$BASHMARKS"
 
   for env_name in ${!_BM_*}; do
     printf "\e[0;33m%-20s\e[0m %s\n" "${env_name/_BM_/}" "${!env_name}"
@@ -133,7 +133,7 @@ l() {
 
 # completion command
 function _bookmark_comp {
-  source "$SDIRS"
+  source "$BASHMARKS"
 
   local env_names="${!_BM_*}" curw=${COMP_WORDS[COMP_CWORD]}
   # shellcheck disable=SC2207
