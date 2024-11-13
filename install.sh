@@ -10,7 +10,7 @@ sudo apt update > /dev/null
 sudo apt install -y git curl unzip > /dev/null
 
 # Accept optional custom installation DESTination
-export CONFIGS_DIR=${DEST:-$HOME/.local/share/configs}
+export CONFIGS_DIR="${DEST:-${XDG_CONFIG_HOME:-$HOME/.config}/configs}"
 
 echo "Cloning configs into $CONFIGS_DIR ..."
 git clone -q https://github.com/melopilosyan/configs.git "$CONFIGS_DIR"
