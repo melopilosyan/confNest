@@ -35,7 +35,7 @@ test -f "$BASHMARKS" || touch "$BASHMARKS"
 alias l &>/dev/null && unalias l >/dev/null
 
 _print_help_message() {
-  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  if [[ $1 =~ -h|--help ]]; then
     echo 'Bookmark frequently used directories
 
 Usage:
@@ -52,10 +52,10 @@ Tab autocompletion is available for j, p and d.'
 }
 
 _valid_bookmark_name() {
-  if [ -z "$1" ]; then
+  if [[ -z $1 ]]; then
     >&2 echo "Bookmark name is required."
     return 1
-  elif [ "$1" != "${1//[^A-Za-z0-9_]/}" ]; then
+  elif [[ $1 != "${1//[^A-Za-z0-9_]/}" ]]; then
     >&2 echo "Bookmark name is invalid. Use only alphanumeric characters and the '_'."
     return 2
   fi
@@ -69,7 +69,7 @@ _set_bookmark_path() {
 }
 
 _delete_saved_bookmark() {
-  if [ -s "$BASHMARKS" ] && grep "$1=" "$BASHMARKS" >/dev/null; then
+  if [[ -s $BASHMARKS ]] && grep "$1=" "$BASHMARKS" >/dev/null; then
     temp=$(mktemp -t bashmarks.XXXX) || exit 1
     # shellcheck disable=SC2064
     trap "/bin/rm -f -- '$temp'" EXIT
@@ -96,9 +96,9 @@ j() {
 
   _set_bookmark_path "$1"
 
-  if [ -d "$path" ]; then
+  if [[ -d $path ]]; then
     cd "$path" || return
-  elif [ -z "$path" ]; then
+  elif [[ -z $path ]]; then
     >&2 echo "'${1}' bashmark does not exist"
     return 3
   else
