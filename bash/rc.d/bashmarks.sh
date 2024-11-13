@@ -45,7 +45,7 @@ Usage:
   d <name>                 - Delete the bookmark
   l                        - List all bookmarks
 
-Tab autocimplition is available for b, d and p.'
+Tab autocompletion is available for j, p and d.'
     return 0
   fi
   return 1
