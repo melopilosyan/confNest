@@ -9,6 +9,7 @@ cd "$new_dir" || return
 
 CONFIGS_DIR=$new_dir
 source install/1-shell.sh
+source install/bashmarks.sh
 source install/link-dotfiles.sh
 source kitty/generate-config.sh
 
