@@ -28,7 +28,7 @@
 # Published under the MIT License (https://opensource.org/license/mit)
 
 # Create the file to store bookmarks
-export SDIRS="${SDIRS:-$HOME/.sdirs}"
+export SDIRS="${SDIRS:-${XDG_DATA_HOME:-$HOME/.local/share}/sdirs}"
 test -f "$SDIRS" || touch "$SDIRS"
 
 # Remove alias "l" from default .bashrc
