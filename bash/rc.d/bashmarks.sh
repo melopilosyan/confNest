@@ -61,11 +61,17 @@ _valid_bookmark_name() {
   fi
 }
 
-_set_bookmark_path() {
+_load_bookmarks() {
   source "$BASHMARKS"
+  _bm_env_vars="${!_BM_*}" # Get the list of ENV variable names with _BM_ prefix
+  _bm_names="${_bm_env_vars//_BM_/}" # Remove the prefix from names
+}
 
+_set_bookmark_path() {
   local env_name="_BM_$1"
-  path="${!env_name}" # Substitute _BM_name with its value
+  _bm_path="${!env_name}" # Substitute _BM_name with its value
+
+  [[ -z $_bm_path ]] && _load_bookmarks && _bm_path="${!env_name}"
 }
 
 _delete_saved_bookmark() {
@@ -88,6 +94,7 @@ b() {
 
   _delete_saved_bookmark "$1"
   echo "_BM_$1=\"${2:-$PWD}\"" >>"$BASHMARKS"
+  _load_bookmarks
 }
 
 j() {
@@ -96,13 +103,13 @@ j() {
 
   _set_bookmark_path "$1"
 
-  if [[ -d $path ]]; then
-    cd "$path" || return
-  elif [[ -z $path ]]; then
+  if [[ -d $_bm_path ]]; then
+    cd "$_bm_path" || return
+  elif [[ -z $_bm_path ]]; then
     >&2 echo "'${1}' bashmark does not exist"
     return 3
   else
-    >&2 echo "'${path}' is not a directory"
+    >&2 echo "'${_bm_path}' is not a directory"
     return 4
   fi
 }
@@ -112,7 +119,7 @@ p() {
   _valid_bookmark_name "$1" || return
 
   _set_bookmark_path "$1"
-  echo "$path"
+  echo "$_bm_path"
 }
 
 d() {
@@ -121,23 +128,26 @@ d() {
 
   _delete_saved_bookmark "$1"
   unset "_BM_$1"
+  _load_bookmarks
 }
 
 l() {
-  source "$BASHMARKS"
+  _load_bookmarks
 
-  for env_name in ${!_BM_*}; do
+  local env_name
+  for env_name in $_bm_env_vars; do
     printf "\e[0;33m%-20s\e[0m %s\n" "${env_name/_BM_/}" "${!env_name}"
   done
 }
 
-# completion command
 function _bookmark_comp {
-  source "$BASHMARKS"
+  [[ -z $_bm_names ]] && _load_bookmarks
+  # Complete only the first argument
+  (( COMP_CWORD != 1 )) && return 0
 
-  local env_names="${!_BM_*}" curw=${COMP_WORDS[COMP_CWORD]}
+  local curr_word="${COMP_WORDS[COMP_CWORD]}"
   # shellcheck disable=SC2207
-  COMPREPLY=($(compgen -W "${env_names//_BM_/}" -- "$curw"))
+  COMPREPLY=($(compgen -W "$_bm_names" -- "$curr_word"))
   return 0
 }
 
