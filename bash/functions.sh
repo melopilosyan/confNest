@@ -6,6 +6,7 @@ v() {
 g() {
   if [ $# -gt 0 ]; then
     git "$@"
+    [[ $1 == init ]] && __refresh_prompt=1
   else
     git status
   fi
