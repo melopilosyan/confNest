@@ -58,7 +58,7 @@ function __assign_prompt_beginning() {
     __failure_code=
   fi
 
-  if [ "$__cwd" == "$PWD" ]; then return; fi
+  [[ -z $__refresh_prompt && $__cwd == "$PWD" ]] && return
 
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     __top_corner="$ltc"
@@ -67,6 +67,7 @@ function __assign_prompt_beginning() {
   fi
 
   __cwd=$PWD
+  unset __refresh_prompt
 }
 
 system_info='"$__failure_code$__top_corner$c_info\t $c_cwd󰝰 \W $c_ruby \${RUBY_VERSION#*-}"'
