@@ -176,15 +176,14 @@ with(lvim.builtin.which_key.mappings, function(lm)
       "Ctags create Ruby"
     },
     n = { "<cmd>tag<cr>", "Jump to next tag" },
-    I = { "<cmd>lua require('rspec.integrated').run_spec_file()<cr>", "RSpec run file" },
-    i = {
-      "<cmd>lua require('rspec.integrated').run_spec_file{only_current_example = true}<cr>",
-      "RSpec run current example"
-    },
-    d = { "<cmd>lua require('rspec.integrated').run({debug=true})<cr>", "RSpec interactive debugging" },
-    S = { "<cmd>lua require('rspec.integrated').run({suite=true})<cr>", "RSpec run test suite" },
-    ["."] = { "<cmd>lua require('rspec.integrated').run_spec_file{repeat_last_run = true}<cr>",
-      "RSpec repeat last run" },
+
+    -- RSpec runners
+    I = { "<cmd>lua require('rspec').run_current_file()<cr>", "RSpec run current file" },
+    i = { "<cmd>lua require('rspec').run_current_example()<cr>", "RSpec run current example" },
+    d = { "<cmd>lua require('rspec').debug()<cr>", "RSpec debug/run in terminal" },
+    S = { "<cmd>lua require('rspec').run_suite()<cr>", "RSpec run test suite" },
+    ["."] = { "<cmd>lua require('rspec').repeat_last_run()<cr>", "RSpec repeat last run" },
+
     w = { "<cmd>lua require('mp.rspec.floating_window').run()<cr>", "RSpec run in window" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Treesitter playground toggle" },
     m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle" },
