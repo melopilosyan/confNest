@@ -6,7 +6,10 @@ v() {
 g() {
   if [ $# -gt 0 ]; then
     git "$@"
+
+    local git_status_code=$?
     [[ $1 == init ]] && __refresh_prompt=1
+    return $git_status_code
   else
     git status
   fi
