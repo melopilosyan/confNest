@@ -27,12 +27,9 @@
 # Copyright (c) 2024 Meliq Pilosyan
 # Published under the MIT License (https://opensource.org/license/mit)
 
-# Create the file to store bookmarks
 export BASHMARKS="${BASHMARKS:-${XDG_DATA_HOME:-$HOME/.local/share}/bashmarks}"
-test -f "$BASHMARKS" || touch "$BASHMARKS"
 
-# Remove alias "l" from default .bashrc
-alias l &>/dev/null && unalias l >/dev/null
+# NOTE: Remove the "l" alias from ~/.bashrc, if prezent.
 
 _print_help_message() {
   if [[ $1 =~ -h|--help ]]; then
@@ -62,7 +59,7 @@ _valid_bookmark_name() {
 }
 
 _load_bookmarks() {
-  source "$BASHMARKS"
+  [[ -e $BASHMARKS ]] && source "$BASHMARKS"
   _bm_env_vars="${!_BM_*}" # Get the list of ENV variable names with _BM_ prefix
   _bm_names="${_bm_env_vars//_BM_/}" # Remove the prefix from names
 }
@@ -94,6 +91,7 @@ b() {
 
   _delete_saved_bookmark "$1"
   echo "_BM_$1=\"${2:-$PWD}\"" >>"$BASHMARKS"
+  # Load to update _bm_names cache
   _load_bookmarks
 }
 
@@ -128,6 +126,7 @@ d() {
 
   _delete_saved_bookmark "$1"
   unset "_BM_$1"
+  # Load to update _bm_names cache
   _load_bookmarks
 }
 
