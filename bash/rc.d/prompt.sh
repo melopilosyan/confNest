@@ -42,38 +42,31 @@ export c_clear="\[\e[0m\]"
 export c_psep="$c_separator󰞷 $c_clear"
 export c_ssep="$c_separator $c_clear"
 
-export ltc="$c_green╭── " # left top corner
-export lbc="$c_green╰─"  # left bottom corner
-
 export __cwd=$HOME
-export __failure_code=
-export __top_corner=
 
-function __assign_prompt_beginning() {
-  local cmd_ret_val=$?
+__set_PS1() {
+  local rc=$? failure
+  ((rc != 0)) && failure="$c_info ╰─ $c_err_code$rc\n"
 
-  if [[ $cmd_ret_val != 0 ]]; then
-    __failure_code="$c_info ╰─ $c_err_code$cmd_ret_val\n"
-  else
-    __failure_code=
-  fi
-
-  [[ -z $__refresh_prompt && $__cwd == "$PWD" ]] && return
-
-  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    __top_corner="$ltc"
-  else
+  if [[ -n $__refresh_prompt || $__cwd != "$PWD" ]]; then
     __top_corner=
+    /usr/bin/git rev-parse --is-inside-work-tree >/dev/null 2>&1 &&
+      __top_corner="$c_green╭── "
+
+    __cwd=$PWD
+    unset __refresh_prompt
   fi
 
-  __cwd=$PWD
-  unset __refresh_prompt
+  local beginning="$failure$__top_corner$c_info\t $c_cwd󰝰 \W $c_ruby ${RUBY_VERSION#*-}"
+
+  if [[ -n $__top_corner ]]; then
+    __git_ps1 "$beginning" " $c_psep" "$c_git  (%s$c_git)\n$c_green╰─"
+  else
+    PS1="$beginning $c_psep"
+  fi
+
+  return $rc
 }
 
-system_info='"$__failure_code$__top_corner$c_info\t $c_cwd󰝰 \W $c_ruby \${RUBY_VERSION#*-}"'
-git_info='"$c_git  (%s$c_git)\n$lbc"'
-last_bit='" $c_psep"'
-
-PROMPT_COMMAND="__assign_prompt_beginning;__git_ps1 $system_info $last_bit $git_info"
-
+PROMPT_COMMAND="__set_PS1"
 PS2=$c_ssep
