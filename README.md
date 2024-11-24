@@ -14,9 +14,25 @@ wget -qO- https://raw.githubusercontent.com/melopilosyan/configs/main/install.sh
 
 Installation mechanics based on [basecamp/omakub](https://github.com/basecamp/omakub).
 
-## Standalone scripts / tools
+## 🛠️ Standalone scripts / tools
 
-### [cs](/bin/cs) - Cheat Sheets
+### [Bashmarks](/bash/rc.d/bashmarks.sh) 🔖
+Bash optimized version of https://github.com/huyng/bashmarks. \
+Defines `b`, `j`, `p`, `d`, `l` functions to bookmark, jump to, print,
+delete and list frequently used directories.
+
+#### Installation
+Download the [/bash/rc.d/bashmarks.sh](/bash/rc.d/bashmarks.sh) and source it from `~/.bashrc`.
+
+```sh
+curl -o bashmarks.sh https://raw.githubusercontent.com/melopilosyan/configs/main/bash/rc.d/bashmarks.sh
+source bashmarks.sh
+b -h
+
+source <path/to/bashmarks.sh> # Source from ~/.bashrc to make it permanent
+```
+
+### [cs](/bin/cs) - Cheat Sheets 💡
 Interactive browser for https://cht.sh (https://github.com/chubin/cheat.sh)
 with caching, fuzzy search on predefined ':list' items & custom queries and
 preview of downloaded sheets via FZF.
