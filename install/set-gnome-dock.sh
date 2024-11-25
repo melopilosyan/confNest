@@ -1,7 +1,6 @@
 # Set default pinned applications (funny installer name to ensure it runs after all app installations!)
 gsettings set org.gnome.shell favorite-apps "['kitty.desktop', 'brave-browser.desktop', 'org.gnome.Nautilus.desktop']"
 
-gsettings set org.gnome.shell.extensions.dash-to-dock animate-show-apps false
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'focus-minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink false
