@@ -15,6 +15,15 @@ install_from_github 'BurntSushi/ripgrep' "ripgrep_VERSION-1_$arch.deb"
 # gum - a tool for glamorous shell scripts
 install_from_github 'charmbracelet/gum' "gum_VERSION_$arch.deb"
 
+sharkdp_bat_post_install_callback() {
+  [[ -f /etc/apt/preferences.d/bat ]] && return 0
+
+  cat <<PREF | sudo tee /etc/apt/preferences.d/bat >/dev/null
+Package: bat
+Pin: version *
+Pin-Priority: -1
+PREF
+}
 # bat - a cat clone with syntax highlighting and Git integration
 install_from_github 'sharkdp/bat' "bat_VERSION_$arch.deb"
 
