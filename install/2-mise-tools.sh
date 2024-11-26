@@ -1,3 +1,5 @@
+command which -s node && echo "Node is installed. Skipping Mise installation." && return
+
 # Install mise in ~/.local/bin/mise
 curl https://mise.run | sh
 
