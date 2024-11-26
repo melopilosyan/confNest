@@ -1,14 +1,17 @@
 case "$THEME" in
   Everforest)
-    COLOR="bark"
+    ACCENT_COLOR="slate"
+    GNOME_THEME="Yaru-sage-dark"
     BG_IMAGE="fog_forest_2.jpg"
     ;;
   Nord)
-    COLOR="blue"
-    BG_IMAGE="nord_scenary.png"
+    ACCENT_COLOR="orange"
+    GNOME_THEME="Yaru-dark"
+    BG_IMAGE="nordfox.jpeg"
     ;;
   *)
-    COLOR="prussiangreen"
+    ACCENT_COLOR="brown"
+    GNOME_THEME="Yaru-wartybrown-dark"
     BG_IMAGE="cosmic-cliffs-in-the-carina-nebula.png"
     ;;
 esac
@@ -24,5 +27,8 @@ gsettings set org.gnome.desktop.background picture-options 'zoom'
 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'Yaru'
-gsettings set org.gnome.desktop.interface gtk-theme "Yaru-$COLOR-dark"
-gsettings set org.gnome.desktop.interface icon-theme "Yaru-$COLOR"
+
+# Gnome Tweaks says this is for legacy applications
+gsettings set org.gnome.desktop.interface gtk-theme "$GNOME_THEME"
+gsettings set org.gnome.desktop.interface icon-theme "$GNOME_THEME"
+gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
