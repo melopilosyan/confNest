@@ -15,5 +15,3 @@ source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
-
-saysomething
