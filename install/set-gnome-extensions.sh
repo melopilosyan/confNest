@@ -43,7 +43,18 @@ gsettings set org.gnome.shell.extensions.tactile col-3 0
 gsettings set org.gnome.shell.extensions.tactile row-0 1
 gsettings set org.gnome.shell.extensions.tactile row-1 6
 gsettings set org.gnome.shell.extensions.tactile row-2 1
-gsettings set org.gnome.shell.extensions.tactile gap-size 16
+gsettings set org.gnome.shell.extensions.tactile layout-2-col-1 10
+gsettings set org.gnome.shell.extensions.tactile layout-2-col-3 0
+gsettings set org.gnome.shell.extensions.tactile layout-2-row-1 14
+gsettings set org.gnome.shell.extensions.tactile layout-3-col-0 2
+gsettings set org.gnome.shell.extensions.tactile layout-3-col-1 3
+gsettings set org.gnome.shell.extensions.tactile layout-3-col-2 2
+gsettings set org.gnome.shell.extensions.tactile layout-3-col-3 0
+gsettings set org.gnome.shell.extensions.tactile layout-3-row-0 2
+gsettings set org.gnome.shell.extensions.tactile layout-3-row-1 6
+gsettings set org.gnome.shell.extensions.tactile layout-3-row-2 2
+gsettings set org.gnome.shell.extensions.tactile layout-4-row-1 14
+gsettings set org.gnome.shell.extensions.tactile gap-size 12
 
 # Configure Just Perfection
 gsettings set org.gnome.shell.extensions.just-perfection animation 2
