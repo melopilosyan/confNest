@@ -67,16 +67,26 @@ gsettings set org.gnome.shell.extensions.blur-my-shell.appfolder blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.lockscreen blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.screenshot blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.window-list blur false
-gsettings set org.gnome.shell.extensions.blur-my-shell.panel brightness 0.6
-gsettings set org.gnome.shell.extensions.blur-my-shell.panel sigma 30
-gsettings set org.gnome.shell.extensions.blur-my-shell.panel pipeline 'pipeline_default'
 gsettings set org.gnome.shell.extensions.blur-my-shell.overview blur true
-gsettings set org.gnome.shell.extensions.blur-my-shell.overview pipeline 'pipeline_default'
+gsettings set org.gnome.shell.extensions.blur-my-shell.overview style-components 0
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel blur true
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel style-panel 0
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel static-blur true
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel override-background true
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock blur true
-gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock brightness 0.6
-gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock sigma 30
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock static-blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock style-dash-to-dock 0
+gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock unblur-in-overview true
+gsettings set org.gnome.shell.extensions.blur-my-shell pipelines "{
+'pipeline_default': {'name': <'Default'>, 'effects': <[
+  <{'type': <'native_static_gaussian_blur'>, 'id': <'effect0'>, 'params': <{
+    'radius': <30>, 'brightness': <0.7>}>}>
+]>},
+'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[
+  <{'type': <'native_static_gaussian_blur'>, 'id': <'effect1'>, 'params': <{
+    'radius': <30>, 'brightness': <0.7>}>}>,
+  <{'type': <'corner'>, 'id': <'effect2'>, 'params': <{'radius': <12>}>}>
+]>}}"
 
 # Configure Vitals
 gsettings set org.gnome.shell.extensions.vitals alphabetize true
