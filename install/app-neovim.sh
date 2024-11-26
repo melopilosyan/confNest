@@ -1,4 +1,4 @@
-rake -C "$CONFIGS_DIR" install:neovim
+command which -s nvim || rake -C "$CONFIGS_DIR" install:neovim
 
 test -d ~/.config/lvim && return
 
