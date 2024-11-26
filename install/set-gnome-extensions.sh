@@ -1,26 +1,39 @@
-sudo apt install -y gnome-shell-extension-manager pipx
-pipx install gnome-extensions-cli --system-site-packages
+command which -s gnome-extensions pipx || sudo apt install -y gnome-shell-extension-manager pipx
+command which -s gext || pipx install gnome-extensions-cli --system-site-packages
 
 # Turn off default Ubuntu extensions
 gnome-extensions disable ubuntu-appindicators@ubuntu.com
 gnome-extensions disable ding@rastersoft.com
 
 # Pause to assure user is ready to accept confirmations
-gum confirm "To install Gnome extensions, you need to accept confirmations." --affirmative "OK" --negative ""
+[[ -z $GEXT_TESTING ]] &&
+  gum confirm "To install Gnome extensions, you need to accept confirmations." --affirmative "OK" --negative ""
+
+readarray -t exts < <(gnome-extensions list)
+installed_exts=" ${exts[*]} " # Space surrounded extension names
+
+install_if_missing() {
+  local ext="$1" schema="$2"
+  [[ "$installed_exts" == *" $ext "* ]] && return
+
+  gext install "$ext"
+  [[ -z $schema ]] && return
+
+  sudo cp ~/.local/share/gnome-shell/extensions/"$ext"/schemas/org.gnome.shell.extensions."$schema".gschema.xml \
+    /usr/share/glib-2.0/schemas/
+  compile_schemas=1
+}
 
 # Install new extensions
-gext install tactile@lundal.io
-gext install just-perfection-desktop@just-perfection
-gext install blur-my-shell@aunetx
-gext install emoji-copy@felipeftn
-gext install Vitals@CoreCoding.com
+install_if_missing tactile@lundal.io tactile
+install_if_missing just-perfection-desktop@just-perfection just-perfection
+install_if_missing blur-my-shell@aunetx blur-my-shell
+install_if_missing emoji-copy@felipeftn
+install_if_missing Vitals@CoreCoding.com vitals
 
 # Compile gsettings schemas in order to be able to set them
-sudo cp ~/.local/share/gnome-shell/extensions/tactile@lundal.io/schemas/org.gnome.shell.extensions.tactile.gschema.xml /usr/share/glib-2.0/schemas/
-sudo cp ~/.local/share/gnome-shell/extensions/just-perfection-desktop\@just-perfection/schemas/org.gnome.shell.extensions.just-perfection.gschema.xml /usr/share/glib-2.0/schemas/
-sudo cp ~/.local/share/gnome-shell/extensions/blur-my-shell\@aunetx/schemas/org.gnome.shell.extensions.blur-my-shell.gschema.xml /usr/share/glib-2.0/schemas/
-sudo cp ~/.local/share/gnome-shell/extensions/Vitals\@CoreCoding.com/schemas/org.gnome.shell.extensions.vitals.gschema.xml /usr/share/glib-2.0/schemas/
-sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+[[ -n $compile_schemas ]] && sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+unset compile_schemas
 
 # Configure Tactile
 gsettings set org.gnome.shell.extensions.tactile col-0 1
