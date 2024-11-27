@@ -1,3 +1,9 @@
+# Copyright (c) 2024 Meliq Pilosyan, https://github.com/melopilosyan
+# Published under the MIT License (https://opensource.org/license/mit)
+#
+# Initially copied from https://github.com/huyng/bashmarks
+# at https://github.com/huyng/bashmarks/blob/ef37b3749313cd41a742826ffc9a2381a4637bfa/bashmarks.sh
+
 # Copyright (c) 2010, Huy Nguyen, http://www.huyng.com
 # All rights reserved.
 #
@@ -21,15 +27,9 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# Initially copied from https://github.com/huyng/bashmarks
-# at https://github.com/huyng/bashmarks/blob/ef37b3749313cd41a742826ffc9a2381a4637bfa/bashmarks.sh
-#
-# Copyright (c) 2024 Meliq Pilosyan
-# Published under the MIT License (https://opensource.org/license/mit)
-
 export BASHMARKS="${BASHMARKS:-${XDG_DATA_HOME:-$HOME/.local/share}/bashmarks}"
 
-# NOTE: Remove the "l" alias from ~/.bashrc, if prezent.
+# NOTE: Remove the "l" alias from ~/.bashrc, if present.
 
 _print_help_message() {
   if [[ $1 =~ -h|--help ]]; then
@@ -53,14 +53,14 @@ _valid_bookmark_name() {
     >&2 echo "Bookmark name is required."
     return 1
   elif [[ $1 != "${1//[^A-Za-z0-9_]/}" ]]; then
-    >&2 echo "Bookmark name is invalid. Use only alphanumeric characters and the '_'."
+    >&2 echo "Bookmark name is invalid. Use only alphanumeric characters and underscore."
     return 2
   fi
 }
 
 _load_bookmarks() {
   [[ -e $BASHMARKS ]] && source "$BASHMARKS"
-  _bm_env_vars="${!_BM_*}" # Get the list of ENV variable names with _BM_ prefix
+  _bm_env_vars="${!_BM_*}"           # Get the list of ENV variable names with _BM_ prefix
   _bm_names="${_bm_env_vars//_BM_/}" # Remove the prefix from names
 }
 
@@ -139,10 +139,10 @@ l() {
   done
 }
 
-function _bookmark_comp {
+_bookmark_comp() {
   [[ -z $_bm_names ]] && _load_bookmarks
   # Complete only the first argument
-  (( COMP_CWORD != 1 )) && return 0
+  ((COMP_CWORD != 1)) && return 0
 
   local curr_word="${COMP_WORDS[COMP_CWORD]}"
   # shellcheck disable=SC2207
