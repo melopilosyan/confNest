@@ -42,7 +42,8 @@ Usage:
   d <name>                 - Delete the bookmark
   l                        - List all bookmarks
 
-Tab autocompletion is available for j, p and d.'
+TAB completion is available for bookmarked and new names.
+The latter completes the sanitized current directory name.'
     return 0
   fi
   return 1
@@ -150,10 +151,21 @@ _bookmark_comp() {
   return 0
 }
 
+_new_bookmark_comp() {
+  ((COMP_CWORD != 1)) && return 0
+
+  local dir_name="${PWD##*/}"
+  local name="${dir_name//[^A-Za-z0-9]/_}" # Replace non alphanumerics with underscore
+  COMPREPLY=("${name,,}")                  # Convert to lowercase
+  return 0
+}
+
 # Enable programmable completion facilities (see Programmable Completion in bash(1)).
 shopt -s progcomp
 
-# Setup completion for j, p, d functions/commands
+# Setup new name completion to the current directory name for the b command
+complete -F _new_bookmark_comp b
+# Setup bookmarks name completion for j, p, d commands
 complete -F _bookmark_comp j
 complete -F _bookmark_comp p
 complete -F _bookmark_comp d
