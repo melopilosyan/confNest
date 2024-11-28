@@ -32,21 +32,19 @@ export BASHMARKS="${BASHMARKS:-${XDG_DATA_HOME:-$HOME/.local/share}/bashmarks}"
 # NOTE: Remove the "l" alias from ~/.bashrc, if present.
 
 _print_help_message() {
-  if [[ $1 =~ -h|--help ]]; then
-    echo 'Bookmark frequently used directories
+  [[ $1 =~ -h|--help ]] || return 1
+
+  echo 'Bookmark frequently used directories
 
 Usage:
-  b <name> [ABSOLUTE_PATH] - Bookmark current or ABSOLUTE_PATH directory as "name"
-  j <name>                 - Jump/cd to the directory bookmarked as "name"
-  p <name>                 - Print the directory path for "name"
+  b <name> [ABSOLUTE_PATH] - Bookmark current or ABSOLUTE_PATH directory as <name>
+  j <name>                 - Jump/cd to the directory bookmarked as <name>
+  p <name>                 - Print the directory path for <name>
   d <name>                 - Delete the bookmark
   l                        - List all bookmarks
 
 TAB completion is available for bookmarked and new names.
 The latter completes the sanitized current directory name.'
-    return 0
-  fi
-  return 1
 }
 
 _valid_bookmark_name() {
@@ -77,9 +75,8 @@ b() {
   _valid_bookmark_name "$1" || return
 
   [[ -s $BASHMARKS ]] && sed -i "/_BM_$1=/d" "$BASHMARKS"
-  echo "_BM_$1=\"${2:-$PWD}\"" >>"$BASHMARKS"
-  # Load to update _bm_names cache
-  _load_bookmarks
+  printf '_BM_%s="%s"\n' "$1" "${2:-$PWD}" >>"$BASHMARKS"
+  _load_bookmarks # to update _bm_names cache
 }
 
 j() {
@@ -91,7 +88,7 @@ j() {
   if [[ -d $_bm_path ]]; then
     cd "$_bm_path" || return
   elif [[ -z $_bm_path ]]; then
-    >&2 echo "'${1}' bashmark does not exist"
+    >&2 echo "'${1}' bookmark does not exist"
     return 3
   else
     >&2 echo "'${_bm_path}' is not a directory"
@@ -113,8 +110,7 @@ d() {
 
   [[ -s $BASHMARKS ]] && sed -i "/_BM_$1=/d" "$BASHMARKS"
   unset "_BM_$1"
-  # Load to update _bm_names cache
-  _load_bookmarks
+  _load_bookmarks # to update _bm_names cache
 }
 
 l() {
@@ -131,10 +127,7 @@ _bookmark_comp() {
   # Complete only the first argument
   ((COMP_CWORD != 1)) && return 0
 
-  local curr_word="${COMP_WORDS[COMP_CWORD]}"
-  # shellcheck disable=SC2207
-  COMPREPLY=($(compgen -W "$_bm_names" -- "$curr_word"))
-  return 0
+  readarray -t COMPREPLY < <(compgen -W "$_bm_names" -- "${COMP_WORDS[COMP_CWORD]}")
 }
 
 _new_bookmark_comp() {
@@ -143,7 +136,6 @@ _new_bookmark_comp() {
   local dir_name="${PWD##*/}"
   local name="${dir_name//[^A-Za-z0-9]/_}" # Replace non alphanumerics with underscore
   COMPREPLY=("${name,,}")                  # Convert to lowercase
-  return 0
 }
 
 # Enable programmable completion facilities (see Programmable Completion in bash(1)).
