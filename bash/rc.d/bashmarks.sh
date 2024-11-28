@@ -72,25 +72,11 @@ _set_bookmark_path() {
   [[ -z $_bm_path ]] && _load_bookmarks && _bm_path="${!env_name}"
 }
 
-_delete_saved_bookmark() {
-  if [[ -s $BASHMARKS ]] && grep "$1=" "$BASHMARKS" >/dev/null; then
-    temp=$(mktemp -t bashmarks.XXXX) || exit 1
-    # shellcheck disable=SC2064
-    trap "/bin/rm -f -- '$temp'" EXIT
-
-    sed "/$1=/d" "$BASHMARKS" >"$temp"
-    /bin/mv "$temp" "$BASHMARKS"
-
-    /bin/rm -f -- "$temp"
-    trap - EXIT
-  fi
-}
-
 b() {
   _print_help_message "$1" && return 0
   _valid_bookmark_name "$1" || return
 
-  _delete_saved_bookmark "$1"
+  [[ -s $BASHMARKS ]] && sed -i "/_BM_$1=/d" "$BASHMARKS"
   echo "_BM_$1=\"${2:-$PWD}\"" >>"$BASHMARKS"
   # Load to update _bm_names cache
   _load_bookmarks
@@ -125,7 +111,7 @@ d() {
   _print_help_message "$1" && return 0
   _valid_bookmark_name "$1" || return
 
-  _delete_saved_bookmark "$1"
+  [[ -s $BASHMARKS ]] && sed -i "/_BM_$1=/d" "$BASHMARKS"
   unset "_BM_$1"
   # Load to update _bm_names cache
   _load_bookmarks
