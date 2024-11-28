@@ -58,7 +58,7 @@ _valid_bookmark_name() {
 }
 
 _load_bookmarks() {
-  [[ -e $BASHMARKS ]] && source "$BASHMARKS"
+  [[ -f $BASHMARKS ]] && source "$BASHMARKS"
   _bm_env_vars="${!_BM_*}"           # Get the list of ENV variable names with _BM_ prefix
   _bm_names="${_bm_env_vars//_BM_/}" # Remove the prefix from names
 }
