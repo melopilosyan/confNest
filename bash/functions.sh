@@ -47,6 +47,10 @@ du.top() {
   du -cksh "${d%/}"/* | sort -hr | head -"${2:-10}"
 }
 
+du.d1() {
+  du -d 1 -ahL "${1:-.}" | sort -hr
+}
+
 source_all() {
   local script
   for script in "$@"; do source "$script"; done
