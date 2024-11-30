@@ -1,4 +1,6 @@
-case "$THEME" in
+theme="${THEME:-Tokyo Night}"
+
+case "$theme" in
   Everforest) NVIM_THEME=everforest;;
   Nord) NVIM_THEME=nord;;
   *) NVIM_THEME=tokyonight;;

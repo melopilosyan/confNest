@@ -1,4 +1,6 @@
-case "$THEME" in
+theme="${THEME:-Nord}"
+
+case "$theme" in
   Everforest)
     ACCENT_COLOR="slate"
     GNOME_THEME="Yaru-sage-dark"
