@@ -1,4 +1,6 @@
-case "$THEME" in
+theme="${THEME:-Nord}"
+
+case "$theme" in
   Everforest) KITTY_THEME="Everforest Dark Medium";;
   Nord) KITTY_THEME=Nord;;
   *) KITTY_THEME="Tokyo Night Storm";;

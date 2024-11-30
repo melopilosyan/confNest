@@ -1,9 +1,12 @@
 # vim:ft=sh:
 
 # Pick a preconfigured theme
-THEME=$(gum choose "Tokyo Night" "Nord" "Everforest" --header "Choose the theme" --height 5)
+THEME=$(gum choose Defaults "Tokyo Night" "Nord" "Everforest" --header "Choose the theme" --height 6)
 
 [ -z "$THEME" ] && exit 0
+
+# Set the individual default for each themeable component.
+[[ $THEME == Defaults ]] && THEME=
 
 # Install the theme in Gnome, Kitty and Neovim
 source_all "$CONFIGS_DIR"/themes/*/_set.sh
