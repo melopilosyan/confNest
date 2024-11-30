@@ -5,23 +5,16 @@ files=(
   Bookmarks
   Shortcuts
   Favicons
-  History History-journal
+  History
 )
-
-set_paths_to() {
-  # Prefix files with "$1/"
-  paths=("${files[@]/#/$1/}")
-}
 
 _copy_files() {
   # Remove trailing /
   local src=${1%/} dest="${2%/}"
 
-  set_paths_to "$src"
+  # Prefix files with "$src/"
+  paths=("${files[@]/#/$src/}")
   rsync -iva "${paths[@]}" "$dest"/
-
-  set_paths_to "$dest"
-  chmod 600 "${paths[@]}"
 }
 
 case "$1" in
