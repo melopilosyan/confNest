@@ -143,7 +143,9 @@ purge_cache_directory_and_exit() {
 }
 
 main() {
+  mkdir -p "$CS_CACHE_DIR"
   cd "$CS_CACHE_DIR"
+
   bat_options="--style=plain"
 
   case "$1" in
