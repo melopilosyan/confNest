@@ -10,10 +10,10 @@ sudo apt update > /dev/null
 sudo apt install -y git curl unzip > /dev/null
 
 # Accept optional custom installation DESTination
-export CONFIGS_DIR="${DEST:-${XDG_CONFIG_HOME:-$HOME/.config}/configs}"
+export CONFIGS_DIR="${DEST:-${XDG_CONFIG_HOME:-$HOME/.config}/confNest}"
 
 echo "Cloning configs into $CONFIGS_DIR ..."
-git clone -q https://github.com/melopilosyan/configs.git "$CONFIGS_DIR"
+git clone -q https://github.com/melopilosyan/confNest.git "$CONFIGS_DIR"
 
 # Setup and run installers
 source "$CONFIGS_DIR/setup.sh"
