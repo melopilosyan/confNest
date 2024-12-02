@@ -436,6 +436,10 @@ lvim.plugins = {
     cmd = { "MarkdownPreviewToggle" },
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
+    init = function()
+      -- Do not auto close current preview window when changing from Markdown buffer
+      vim.g.mkdp_auto_close = 0
+    end
   },
 
   {
