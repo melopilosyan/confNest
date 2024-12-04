@@ -16,4 +16,14 @@ function M.run_current_file()
   end
 end
 
+local FT_TO_SELECTION_CMD = {
+  lua = ":lua<cr>",
+  sh = ":w !bash<cr>",
+  ruby = ":w !ruby<cr>",
+}
+
+function M.run_selection_cmd()
+  return FT_TO_SELECTION_CMD[vim.bo.filetype] or ":"
+end
+
 return M
