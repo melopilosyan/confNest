@@ -140,6 +140,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
   lm.d = nil
   lm.e = nil
   lm.x = { "<cmd>x<cr>", "Save & exit" }
+  lm.W = { "<cmd>wa!<CR>", "Save all buffers" }
 
   lm.g.l[2] = "Line blame"
   lm.g.B = { "<cmd>Git blame<cr>", "Blame buffer" }
