@@ -131,6 +131,9 @@ end)
 with(lvim.keys.visual_mode, function(vm)
   vm["p"] = [["_dP]]
 end)
+vim.keymap.set("v", "<A-x>", function()
+  return require('mp.utils').run_selection_cmd()
+end, { expr = true, desc = "Run visual selection via {filetype} language" })
 
 --- Normal mode mappings with <leader> prefix
 with(lvim.builtin.which_key.mappings, function(lm)
