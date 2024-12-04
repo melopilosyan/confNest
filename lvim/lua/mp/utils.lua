@@ -3,6 +3,7 @@ local M = {}
 local FT_TO_CMD = {
   lua = "source %",
   sh = "!source %",
+  ruby = "!ruby %",
 }
 
 function M.run_current_file()
