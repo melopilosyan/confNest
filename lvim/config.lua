@@ -14,38 +14,7 @@ endfunction
 
 " Substitute occurrences of selected text in the buffer
 xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
-
-" open up the definition in a new window
-" nnoremap <silent> gv :vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>
-
-" Enable custom syntax highlight
-augroup ruby-rules
-  autocmd!
-  autocmd FileType ruby,eruby,slim setlocal iskeyword+=!,?
-augroup end
-
-augroup remove-trailing-whitespaces
-  autocmd!
-  autocmd BufWritePre * :%s/\s\+$//e
-augroup end
-
-"" Remember cursor position (You want this!)
-augroup remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup end
-
-autocmd FocusLost * :wa
 ]]
-
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  group = vim.api.nvim_create_augroup("set yaml filetype", {}),
-  pattern = { "*.yml" },
-  desc = "Rails.vim sets *.yml files type to eruby.yaml. Set it back to yaml",
-  callback = function()
-    vim.defer_fn(function() vim.cmd "set filetype=yaml" end, 100)
-  end,
-})
 
 vim.opt.mouse = ""
 
@@ -348,25 +317,6 @@ with(lvim.lsp, function(lsp)
 
   lsp.document_highlight = false
 end)
-
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  group = vim.api.nvim_create_augroup("ruby-frozen", {}),
-  pattern = { "*.rb", "*.rake" },
-  desc = "Annotate empty Ruby files with `frozen_string_literal: true`",
-  callback = function() vim.schedule(function ()
-    local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-    if  first_line == "" then
-      vim.api.nvim_buf_set_lines(0, 0, 1, false, { "# frozen_string_literal: true", "", first_line })
-    end
-  end) end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  once = true,
-  pattern = "slim",
-  desc = "Register slim-lint as null-ls diagnostics entry",
-  callback = function() vim.schedule(require("mp.null-ls.slim_lint")) end,
-})
 
 local filetype_augroup = vim.api.nvim_create_augroup("filetype", {})
 vim.api.nvim_create_autocmd("FileType", {
