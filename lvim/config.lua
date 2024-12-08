@@ -2,8 +2,6 @@ require "mp.globals"
 local colorscheme = require("mp.colorscheme")
 
 vim.cmd [[
-set viminfo^=% " Remember info about open buffers on close
-
 " Makes the dot(.) work in visual mode
 vnoremap . :norm.<cr>
 
@@ -15,44 +13,6 @@ endfunction
 " Substitute occurrences of selected text in the buffer
 xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
 ]]
-
-vim.opt.mouse = ""
-
-vim.opt.colorcolumn = "100"
-vim.opt.number = true
-vim.opt.relativenumber = true -- Show line relative number
-vim.opt.signcolumn = "yes"
-
-vim.opt.expandtab = true
-vim.opt.smarttab = true       -- Use spaces instead of tabs / Be smart when using tabs ;)
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2       -- Set default tab size to 2
-
-vim.opt.wrap = true           -- Wrap lines
-vim.opt.breakindent = true    -- Indent wrapped lines
-vim.opt.linebreak = true      -- Don't cut words on wrap
-vim.opt.hlsearch = false      -- Don't highlight search results
-vim.opt.wildmenu = true       -- Turn on visual autocompletion for command menu
-vim.opt.incsearch = true      -- Select search match while typing
-vim.opt.autoindent = true
-vim.opt.smartindent = true    -- Auto indent / Smart indent
-vim.opt.scrolloff = 8         -- Lines above/below cursor
-vim.opt.sidescrolloff = 8
-
-vim.opt.showcmd = true        -- Show (partial) command in the last line of the screen this also shows visual selection info
-vim.opt.lazyredraw = true
-
-vim.opt.updatetime = 100
-
-vim.opt.backspace = "indent,eol,start" -- Fix backspace indent
-
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
-
-vim.opt.spelllang = "en_gb"
-
-vim.opt.clipboard = ""
 
 --- Helper functions
 local function with(tbl, callback) callback(tbl) end
