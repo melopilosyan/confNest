@@ -21,7 +21,6 @@ xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
 " Enable custom syntax highlight
 augroup ruby-rules
   autocmd!
-  autocmd BufNewFile,BufRead *.rbw,*.gemspec,Gemfile,Rakefile,Capfile,Vagrantfile,Thorfile,config.ru setlocal filetype=ruby
   autocmd FileType ruby,eruby,slim setlocal iskeyword+=!,?
 augroup end
 
