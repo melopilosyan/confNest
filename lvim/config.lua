@@ -71,13 +71,6 @@ lvim.leader = "space"
 lvim.log.level = "warn"
 lvim.format_on_save = false
 
---- Inseart mode mappings
-with(lvim.keys.insert_mode, function(im)
-  im["jk"] = false
-  im["kj"] = false
-  im["jj"] = false
-end)
-
 --- Normal mode mappings
 with(lvim.keys.normal_mode, function(nm)
   nm["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
