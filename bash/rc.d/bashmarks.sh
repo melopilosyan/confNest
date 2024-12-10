@@ -39,7 +39,6 @@ _print_help_message() {
 Usage:
   b <name> [ABSOLUTE_PATH] - Bookmark current or ABSOLUTE_PATH directory as <name>
   j <name>                 - Jump/cd to the directory bookmarked as <name>
-  p <name>                 - Print the directory path for <name>
   d <name>                 - Delete the bookmark
   l                        - List all bookmarks
 
@@ -63,13 +62,6 @@ _load_bookmarks() {
   _bm_names="${_bm_env_vars//_BM_/}" # Remove the prefix from names
 }
 
-_set_bookmark_path() {
-  local env_name="_BM_$1"
-  _bm_path="${!env_name}" # Substitute _BM_name with its value
-
-  [[ -z $_bm_path ]] && _load_bookmarks && _bm_path="${!env_name}"
-}
-
 b() {
   _print_help_message "$1" && return 0
   _valid_bookmark_name "$1" || return
@@ -83,25 +75,20 @@ j() {
   _print_help_message "$1" && return 0
   _valid_bookmark_name "$1" || return
 
-  _set_bookmark_path "$1"
+  local env_name="_BM_$1"
+  local bm_path="${!env_name}" # Substitute _BM_name with its value
+  # Try again after reloading if not found. Can be added in another Bash session.
+  [[ -z $bm_path ]] && _load_bookmarks && bm_path="${!env_name}"
 
-  if [[ -d $_bm_path ]]; then
-    cd "$_bm_path" || return
-  elif [[ -z $_bm_path ]]; then
+  if [[ -d $bm_path ]]; then
+    cd "$bm_path" || return
+  elif [[ -z $bm_path ]]; then
     >&2 echo "'${1}' bookmark does not exist"
     return 3
   else
-    >&2 echo "'${_bm_path}' is not a directory"
+    >&2 echo "'${bm_path}' is not a directory"
     return 4
   fi
-}
-
-p() {
-  _print_help_message "$1" && return 0
-  _valid_bookmark_name "$1" || return
-
-  _set_bookmark_path "$1"
-  echo "$_bm_path"
 }
 
 d() {
