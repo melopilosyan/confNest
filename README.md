@@ -33,8 +33,8 @@ hence the contributors list.
 
 ### [Bashmarks](/bash/rc.d/bashmarks.sh) 🔖
 Bash-optimized version of [huyng/bashmarks](https://github.com/huyng/bashmarks) with added
-features like the new bookmark name tab completion to the current directory name.
-Defines `b`, `j`, `p`, `d`, `l` functions to bookmark, jump to (cd), print,
+features, like TAP completion when adding a new bookmark to the current directory name, and
+removed print function. Defines `b`, `j`, `d`, `l` functions to bookmark, jump to (cd),
 delete and list frequently used directories.
 
 #### Installation
