@@ -29,7 +29,8 @@
 
 export BASHMARKS="${BASHMARKS:-${XDG_DATA_HOME:-$HOME/.local/share}/bashmarks}"
 
-# NOTE: Remove the "l" alias from ~/.bashrc, if present.
+# WARNING: Make sure the letters b, j, d, l are not used in your command line.
+# Or change the corresponding function names below.
 
 _print_help_message() {
   [[ $1 =~ -h|--help ]] || return 1
@@ -37,7 +38,7 @@ _print_help_message() {
   echo 'Bookmark frequently used directories
 
 Usage:
-  b <name> [ABSOLUTE_PATH] - Bookmark current or ABSOLUTE_PATH directory as <name>
+  b <name> [ABSOLUTE_PATH] - Bookmark ABSOLUTE_PATH or current directory as <name>
   j <name>                 - Jump/cd to the directory bookmarked as <name>
   d <name>                 - Delete the bookmark
   l                        - List all bookmarks
@@ -130,7 +131,6 @@ shopt -s progcomp
 
 # Setup new name completion to the current directory name for the b command
 complete -F _new_bookmark_comp b
-# Setup bookmarks name completion for j, p, d commands
+# Setup bookmark name completion for j, d commands
 complete -F _bookmark_comp j
-complete -F _bookmark_comp p
 complete -F _bookmark_comp d
