@@ -6,7 +6,10 @@ VISUAL=$(which lvim)
 export EDITOR="$VISUAL"
 export SUDO_EDITOR=vim
 
+export MISE_EXEC_AUTO_INSTALL=false
+export MISE_NOT_FOUND_AUTO_INSTALL=false
 test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
+
 PATH="./bin:$CONFIGS_DIR/bin:$PATH"
 test -d ~/.cargo/bin && PATH="$PATH:$_"
 
