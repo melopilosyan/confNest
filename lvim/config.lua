@@ -256,6 +256,8 @@ end)
 
 -- Additional Plugins
 lvim.plugins = {
+  { import = "mp/plugins" },
+
   {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
