@@ -22,6 +22,12 @@ lvim.format_on_save = false
 with(lvim.builtin.which_key.mappings, function(lm)
   lm["/"] = nil
 
+  lm.i = {
+    name = "Inspect treesitter",
+    i = { "<cmd>Inspect<cr>", "Inspect" },
+    I = { "<cmd>InspectTree<cr>", "InspectTree" },
+  }
+
   lm.h = nil
   lm.d = nil
   lm.e = nil
