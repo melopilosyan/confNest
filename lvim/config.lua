@@ -1,19 +1,6 @@
 require "mp.globals"
 local colorscheme = require("mp.colorscheme")
 
-vim.cmd [[
-" Makes the dot(.) work in visual mode
-vnoremap . :norm.<cr>
-
-function! EscapedSelection()
-  normal! gv"sy
-  return substitute(escape(getreg("s"), '\/.*$^~[]'), "\n", '\\n', "g")
-endfunction
-
-" Substitute occurrences of selected text in the buffer
-xnoremap <C-r> :<C-u>%s/<C-r>=EscapedSelection()<cr>//g<left><left>
-]]
-
 --- Helper functions
 local function with(tbl, callback) callback(tbl) end
 
@@ -30,31 +17,6 @@ lvim.leader = "space"
 
 lvim.log.level = "warn"
 lvim.format_on_save = false
-
---- Normal mode mappings
-with(lvim.keys.normal_mode, function(nm)
-  nm["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
-  nm["<S-h>"] = "<cmd>BufferLineCyclePrev<CR>"
-
-  nm["<C-s>"] = ":w<cr>"
-  nm["n"] = "nzzzv"
-  nm["N"] = "Nzzzv"
-
-  nm["\\"] = "<cmd>NvimTreeToggle<cr>"
-  nm["<F5>"] = "<cmd>UndotreeToggle<cr>"
-  nm["<F4>"] = "<cmd>Twilight<cr>"
-  nm["<F8>"] = "<cmd>ZenMode<cr>"
-
-  nm["<A-x>"] = "<cmd>silent! w<cr><cmd>lua require('mp.utils').run_current_file()<cr>"
-end)
-
---- Visual mode mappings
-with(lvim.keys.visual_mode, function(vm)
-  vm["p"] = [["_dP]]
-end)
-vim.keymap.set("v", "<A-x>", function()
-  return require('mp.utils').run_selection_cmd()
-end, { expr = true, desc = "Run visual selection via {filetype} language" })
 
 --- Normal mode mappings with <leader> prefix
 with(lvim.builtin.which_key.mappings, function(lm)
