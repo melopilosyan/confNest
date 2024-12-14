@@ -1,6 +1,10 @@
 HISTSIZE=32768
 HISTFILESIZE=$HISTSIZE
 
+# Match the ** pattern in a pathname expansion context with
+# all files and zero or more directories and subdirectories
+shopt -s globstar
+
 declare -x VISUAL
 VISUAL=$(which lvim)
 export EDITOR="$VISUAL"
