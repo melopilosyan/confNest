@@ -93,11 +93,11 @@ map.n("<S-M-x>", utils.line_runner_cmd,
 map.v("<M-x>", utils.selection_runner_cmd,
   { expr = true, desc = "Run visual selection via {filetype} language" })
 
-function ReplaceSelection()
+function EscapedSelection()
   vim.cmd([[normal! gv"sy]])
   local selection = vim.fn.getreg("s")
   return string.gsub(vim.fn.escape(selection, "\\/.*$^~[]"), "\n", "\\n")
 end
 
-map.v("<C-r>", ":<C-u>%s/<C-r>=v:lua.ReplaceSelection()<cr>//g<left><left>",
-  { desc = "Replace selection in the buffer" })
+map.v("<C-r>", ":<C-u>%s/<C-r>=v:lua.EscapedSelection()<cr>//g<left><left>",
+  "Replace selection in the buffer")
