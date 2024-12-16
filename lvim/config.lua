@@ -238,14 +238,6 @@ with(lvim.lsp, function(lsp)
   lsp.document_highlight = false
 end)
 
-local filetype_augroup = vim.api.nvim_create_augroup("filetype", {})
-vim.api.nvim_create_autocmd("FileType", {
-  group = filetype_augroup,
-  pattern = "gitcommit",
-  desc = "Set spelling on for gitcommit files",
-  callback = function() vim.opt.spell = true end,
-})
-
 -- lazy.nvim configs
 with(lvim.lazy.opts, function(lazy)
   lazy.dev = {
