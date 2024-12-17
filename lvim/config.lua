@@ -117,14 +117,12 @@ with(lvim.builtin.which_key.vmappings, function(vm)
 end)
 
 with(lvim.builtin, function(bi)
-  bi.alpha.active = true
-  bi.alpha.mode = "dashboard"
-
   --- Deactivate these plugins
   bulk_change(bi, {
     "lir",
     "dap",
     "theme",
+    "alpha",
     "terminal",
     "autopairs",
     "illuminate",
