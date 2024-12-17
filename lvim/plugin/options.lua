@@ -43,6 +43,3 @@ o.clipboard = ""
 o.swapfile = false
 o.undofile = true
 o.undodir = vim.fn.stdpath("cache") .. "/undo"
-
--- Remember open buffers
-o.viminfo:prepend("%")
