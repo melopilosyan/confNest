@@ -90,6 +90,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
           "Toggle sign & number columns"
     },
     C = { "<cmd>ColorizerToggle<cr>", "Colorizer toggle" },
+    t = { "<cmd>lua require('mp.terminal').toggle()<cr>", "Toggle terminal" },
   }
   lm.r = {
     name = "Rails navigation/Run",
