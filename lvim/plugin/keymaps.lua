@@ -43,6 +43,8 @@ map.t("<C-h>", "<C-\\><C-N><C-w>h", "Move to the right window")
 map.t("<C-k>", "<C-\\><C-N><C-w>k", "Move to the top window")
 map.t("<C-j>", "<C-\\><C-N><C-w>j", "Move to the bottom window")
 
+map.t("<Esc>", "<C-\\><C-N>", "Esc in terminal window properly")
+
 -- Window resizing
 map.n("<M-w>", "<C-w>3+", "Make the window taller")
 map.n("<M-s>", "<C-w>3-", "Make the window shorter")
