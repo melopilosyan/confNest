@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :install do
-  App[:neovim, "neovim/neovim", "nvim-linux64.tar.gz", "Neovim"].itask do |nvim|
+  App[:neovim, "neovim/neovim", "nvim-linux-x86_64.tar.gz", "Neovim"].itask do |nvim|
     ln_sf nvim.extract_dir.join("bin/nvim"), local_bin("nvim")
   end
 
