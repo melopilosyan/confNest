@@ -1,7 +1,7 @@
-local M = {}
+local builtin = require "telescope.builtin"
+local themes = require "telescope.themes"
 
-local _, builtin = pcall(require, "telescope.builtin")
-local _, themes = pcall(require, "telescope.themes")
+local M = { live_ripgrep = require("mp.telescope.live_ripgrep") }
 
 local horizontal_top_prompt__options = {
   layout_strategy = "horizontal",
@@ -31,6 +31,10 @@ local function horizontal_top_prompt(opts1, opts2)
   return deep_extent(opts1, horizontal_top_prompt__options, opts2)
 end
 
+local function grepper(opts)
+  return opts and opts.grep_open_files and builtin.grep_string or M.live_ripgrep
+end
+
 local function selection()
   vim.cmd([[normal! "sy]])
   return vim.fn.getreg("s")
@@ -48,17 +52,18 @@ function M.files_no_preview(opts)
 end
 
 function M.word_under_cursor(opts)
-  builtin.grep_string(horizontal_top_prompt({ word_match = '-w', initial_mode = 'normal' }, opts))
+  grepper(opts)(horizontal_top_prompt({
+    word_match = "-w",
+    initial_mode = "normal",
+  }, opts))
 end
 
 -- @table opts: Telescope parameters to grep_string plus fields below
 -- @field word: true|false H
 function M.selection(opts)
-  local word_match = pop(opts, "word") and "-w" or nil
-
-  builtin.grep_string(horizontal_top_prompt({
+  grepper(opts)(horizontal_top_prompt({
     search = selection(),
-    word_match = word_match,
+    word_match = pop(opts, "word") and "-w" or nil,
     initial_mode = "normal",
   }, opts))
 end
@@ -85,7 +90,7 @@ function M.git_commits(opts)
 end
 
 function M.live_grep(opts)
-  builtin.live_grep(horizontal_top_prompt(opts))
+  grepper(opts)(horizontal_top_prompt(opts))
 end
 
 function M.git_status()
