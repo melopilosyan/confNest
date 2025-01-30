@@ -84,15 +84,12 @@ map.v(">", ">gv")
 -- Don't copy the selection on paste
 map.v("p", [["_dP]])
 
----@module "mp.utils"
-local utils = LazyModule("mp.utils")
-
 -- Execute current file/line/selection with <Alt+x>
-map.n("<M-x>", utils.file_runner_cmd,
+map.n("<M-x>", function() return require("mp.utils").file_runner_cmd() end,
   { expr = true, desc = "Run the file via {filetype} language" })
-map.n("<S-M-x>", utils.line_runner_cmd,
+map.n("<S-M-x>", function() return require("mp.utils").line_runner_cmd() end,
   { expr = true, desc = "Run current line via {filetype} language" })
-map.v("<M-x>", utils.selection_runner_cmd,
+map.v("<M-x>", function() return require("mp.utils").selection_runner_cmd() end,
   { expr = true, desc = "Run visual selection via {filetype} language" })
 
 function EscapedSelection()
