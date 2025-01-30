@@ -251,6 +251,18 @@ lvim.plugins = {
   { import = "mp/plugins" },
 
   {
+    "m4xshen/autoclose.nvim",
+    event = "InsertEnter",
+    opts = {
+      options = {
+        pair_spaces = true,
+        disable_when_touch = true,
+        disable_command_mode = true,
+      },
+    }
+  },
+
+  {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
