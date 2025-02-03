@@ -8,12 +8,15 @@ local fmt, gsub = string.format, string.gsub
 local TYPE_SHORTCUTS = {
   css = "css",
   js = "js",
+  lock = "lock",
   lua = "lua",
   rb = "ruby",
   sh = "sh",
   yaml = "yaml",
 }
 local SHORTCUTS = {
+  loc = "*/locales/**",
+  rake = "*.rake",
   slim = "*.slim",
   spec = "*_spec.rb",
 }
