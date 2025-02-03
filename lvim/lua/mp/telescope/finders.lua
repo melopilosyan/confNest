@@ -9,14 +9,6 @@ local horizontal_top_prompt__options = {
   sorting_strategy = "ascending",
 }
 
-local function pop(tbl, key)
-  if not tbl then return end
-
-  local value = tbl[key]
-  tbl[key] = nil
-  return value
-end
-
 local function deep_extent(t1, t2, t3)
   if not t1 then return t2 end
 
@@ -58,12 +50,10 @@ function M.word_under_cursor(opts)
   }, opts))
 end
 
--- @table opts: Telescope parameters to grep_string plus fields below
--- @field word: true|false H
 function M.selection(opts)
   grepper(opts)(horizontal_top_prompt({
     search = selection(),
-    word_match = pop(opts, "word") and "-w" or nil,
+    word_match = opts and opts.word_match and "-w" or nil,
     initial_mode = "normal",
   }, opts))
 end
