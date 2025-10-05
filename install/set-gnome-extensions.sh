@@ -1,6 +1,9 @@
 command which -s gnome-extensions pipx || sudo apt install -y gnome-shell-extension-manager pipx
 command which -s gext || pipx install gnome-extensions-cli --system-site-packages
 
+# Enable user extensions
+gsettings set org.gnome.shell disable-user-extensions false
+
 # Turn off default Ubuntu extensions
 gnome-extensions disable ubuntu-appindicators@ubuntu.com
 gnome-extensions disable ding@rastersoft.com
