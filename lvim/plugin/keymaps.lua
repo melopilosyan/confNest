@@ -84,6 +84,12 @@ map.v(">", ">gv")
 -- Don't copy the selection on paste
 map.v("p", [["_dP]])
 
+-- Copy/paste to/from the system clipboard
+map.n("gy", [["+y]])
+map.n("gp", [["+p]])
+map.v("gy", [["+y]])
+map.v("gp", [["+p]])
+
 -- Execute current file/line/selection with <Alt+x>
 map.n("<M-x>", function() return require("mp.utils").file_runner_cmd() end,
   { expr = true, desc = "Run the file via {filetype} language" })
