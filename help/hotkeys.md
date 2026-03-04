@@ -3,6 +3,14 @@
 The joy of Linux flows from the keyboard. Training yourself to navigate and command
 as much of the operating system through hotkeys is the path to mastery of your machine.
 
+## Login session control
+
+| Hotkey          | Function  |
+| --------------- | --------- |
+| Ctrl+Super+P    | Power Off |
+| Ctrl+Super+R    | Restart   |
+| Ctrl+Alt+delete | Logout    |
+
 ## Navigating
 
 | Hotkey                  | Function                  |
