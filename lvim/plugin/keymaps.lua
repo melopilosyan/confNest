@@ -23,6 +23,8 @@ local map = setmetatable({ opts = { noremap = true, silent = true } }, {
   end,
 })
 
+if _G.__show_keymaps then map = R("mp.which-keymap").map end
+
 -- Buffer navigation
 map.n("L", "<cmd>BufferLineCycleNext<cr>")
 map.n("H", "<cmd>BufferLineCyclePrev<cr>")
@@ -106,3 +108,10 @@ end
 
 map.v("<C-r>", ":<C-u>%s/<C-r>=v:lua.EscapedSelection()<cr>//g<left><left>",
   "Replace selection in the buffer")
+
+map.n("<Leader>sK", function()
+  _G.__show_keymaps = true
+  vim.cmd("source " .. vim.env.CONFIGS_DIR .. "/lvim/plugin/keymaps.lua")
+  require("mp.which-keymap").show_keymaps()
+  _G.__show_keymaps = false
+end, "Show keymaps in right split window")
