@@ -51,6 +51,19 @@ du.d1() {
   du -d 1 -ahL "${1:-.}" | sort -hr
 }
 
+# Write iso file to sd card
+iso2sd() {
+  if [ $# -ne 2 ]; then
+    echo "Usage: iso2sd <input_file> <output_device>"
+    echo "Example: iso2sd ~/Downloads/ubuntu-25.04-desktop-amd64.iso /dev/sda"
+    echo -e "\nAvailable SD cards:"
+    lsblk -d -o NAME | grep -E '^sd[a-z]' | awk '{print "/dev/"$1}'
+  else
+    sudo dd bs=4M status=progress oflag=sync if="$1" of="$2"
+    sudo eject "$2"
+  fi
+}
+
 source_all() {
   local script
   for script in "$@"; do source "$script"; done
