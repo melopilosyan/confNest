@@ -10,7 +10,8 @@ local set = vim.keymap.set
 ---@field c KMapFun Add command mode mappings
 ---@field o KMapFun Add operator pending mode mappings
 ---@field t KMapFun Add terminal mode mappings
-local map = setmetatable({ opts = { noremap = true, silent = true } }, {
+---@field group fun(self: KeymapSet, title: string) Used for odcumentation. See mp/which-keymap.lua
+local map = setmetatable({ opts = { noremap = true, silent = true }, group = function() end }, {
   __index = function(self, mode)
     self[mode] = function(lhs, rhs, opts)
       if opts then
@@ -25,21 +26,21 @@ local map = setmetatable({ opts = { noremap = true, silent = true } }, {
 
 if _G.__show_keymaps then map = R("mp.which-keymap").map end
 
--- Buffer navigation
+map:group "Buffer navigation"
 map.n("L", "<cmd>BufferLineCycleNext<cr>")
 map.n("H", "<cmd>BufferLineCyclePrev<cr>")
 
--- Window navigation
+map:group "Window navigation"
 map.n("<C-l>", "<C-w>l", "Move to the left window")
 map.n("<C-h>", "<C-w>h", "Move to the right window")
 map.n("<C-k>", "<C-w>k", "Move to the top window")
 map.n("<C-j>", "<C-w>j", "Move to the bottom window")
 
--- Tab navigation
+map:group "Tab navigation"
 map.n("<M-l>", "gt", "Move to the next tab page")
 map.n("<M-h>", "gT", "Move to the previous tab page")
 
--- Terminal window navigation
+map:group "Terminal window navigation"
 map.t("<C-l>", "<C-\\><C-N><C-w>l", "Move to the left window")
 map.t("<C-h>", "<C-\\><C-N><C-w>h", "Move to the right window")
 map.t("<C-k>", "<C-\\><C-N><C-w>k", "Move to the top window")
@@ -47,13 +48,13 @@ map.t("<C-j>", "<C-\\><C-N><C-w>j", "Move to the bottom window")
 
 map.t("<Esc>", "<C-\\><C-N>", "Esc in terminal window properly")
 
--- Window resizing
+map:group "Window resizing"
 map.n("<M-w>", "<C-w>3+", "Make the window taller")
 map.n("<M-s>", "<C-w>3-", "Make the window shorter")
 map.n("<M-,>", "<C-w>3<", "Make the window narrower")
 map.n("<M-.>", "<C-w>3>", "Make the window wider")
 
--- Move the current line/block
+map:group "Move the current line/block"
 map.i("<M-k>", "<Esc>:m .-2<cr>==gi", "Move the line up")
 map.i("<M-j>", "<Esc>:m .+1<cr>==gi", "Move the line down")
 map.n("<M-k>", "<cmd>m .-2<cr>==", "Move the line up")
@@ -61,7 +62,7 @@ map.n("<M-j>", "<cmd>m .+1<cr>==", "Move the line down")
 map.v("<M-k>", ":m '<-2<cr>gv-gv", "Move the line/block up")
 map.v("<M-j>", ":m '>+1<cr>gv-gv", "Move the line/block down")
 
--- Move through and toggle the quickfix list
+map:group "Move through and toggle the quickfix list"
 map.n("]q", "<cmd>cnext<cr>")
 map.n("[q", "<cmd>cprev<cr>")
 map.n("<C-q>", function()
@@ -69,30 +70,30 @@ map.n("<C-q>", function()
   vim.cmd(wininfo[#wininfo].quickfix == 1 and "cclose" or "copen")
 end, "Toggle quickfix window per tab page")
 
--- Center(zz) and expand folds(zv) of a search match
+map:group "Center(zz) and expand folds(zv) of a search match"
 map.n("n", "nzzzv")
 map.n("N", "Nzzzv")
 
--- Toggle plugins
+map:group "Toggle plugins"
 map.n("\\", "<cmd>NvimTreeToggle<cr>")
 map.n("<F5>", "<cmd>UndotreeToggle<cr>")
 map.n("<F4>", "<cmd>Twilight<cr>")
 map.n("<F8>", "<cmd>ZenMode<cr>")
 
--- Stay in visual mode during indentation
+map:group "Stay in visual mode during indentation"
 map.v("<", "<gv")
 map.v(">", ">gv")
 
--- Don't copy the selection on paste
+map:group "Don't copy the selection on paste"
 map.v("p", [["_dP]])
 
--- Copy/paste to/from the system clipboard
+map:group "Copy/paste to/from the system clipboard"
 map.n("gy", [["+y]])
 map.n("gp", [["+p]])
 map.v("gy", [["+y]])
 map.v("gp", [["+p]])
 
--- Execute current file/line/selection with <Alt+x>
+map:group "Execute current file/line/selection with <Alt+x>"
 map.n("<M-x>", function() return require("mp.utils").file_runner_cmd() end,
   { expr = true, desc = "Run the file via {filetype} language" })
 map.n("<S-M-x>", function() return require("mp.utils").line_runner_cmd() end,
@@ -100,6 +101,7 @@ map.n("<S-M-x>", function() return require("mp.utils").line_runner_cmd() end,
 map.v("<M-x>", function() return require("mp.utils").selection_runner_cmd() end,
   { expr = true, desc = "Run visual selection via {filetype} language" })
 
+map:group "Miscellaneous"
 function EscapedSelection()
   vim.cmd([[normal! gv"sy]])
   local selection = vim.fn.getreg("s")
