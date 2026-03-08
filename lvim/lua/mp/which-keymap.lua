@@ -42,6 +42,29 @@ local function add_mappings_defined_elsewhere()
   map:group "Session management -- after/plugin/sessions.lua"
   map.n("<C-s>", "", "Save the session for the CWD")
   map.n("<C-S-s>", "", "Load the session for the CWD")
+
+  map:group "tpope/vim-surround - closing pairs no space :)"
+  map.n("cs", "Change surrounding")
+  map.n("ds", "Delete the surrounding")
+  map.n("ys", "Surround")
+  map.n("yss", "Surround current line")
+
+  map:group "ggandor/leap.nvim -- :help leap-mappings"
+  map.n("s", "Leap forward")
+  map.n("S", "Leap backward")
+  map.n("gs", "Leap from window")
+
+  map:group "Treesitter incremental selection"
+  map.n("<cr>", "Initialize selection")
+  map.n("<cr>", "Increment")
+  map.n(",", "Decrement")
+
+  map:group "Nvim-cmp mappings"
+  map.n("<C-b>", "Scroll docs backward")
+  map.n("<C-f>", "Scroll docs forward")
+  map.i("<C-s>", "Expand or jump")
+  map.i("<C-e>", "Change choice")
+  map.n("<C-a>", "Abort")
 end
 
 local function include_other_keymaps(buf, mode, heading)
