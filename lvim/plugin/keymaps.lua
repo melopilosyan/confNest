@@ -112,6 +112,7 @@ map.v("<C-r>", ":<C-u>%s/<C-r>=v:lua.EscapedSelection()<cr>//g<left><left>",
 map.n("<Leader>sK", function()
   _G.__show_keymaps = true
   vim.cmd("source " .. vim.env.CONFIGS_DIR .. "/lvim/plugin/keymaps.lua")
-  require("mp.which-keymap").show_keymaps()
   _G.__show_keymaps = false
+
+  require("mp.which-keymap").show_keymaps()
 end, "Show keymaps in right split window")
