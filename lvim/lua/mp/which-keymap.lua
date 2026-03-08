@@ -11,6 +11,7 @@ local function concat(lhs, desc)
   return string.format("%-10s ", lhs) .. desc
 end
 
+-- Takes over the map in plugin/keymaps.lua
 local map = setmetatable({ keymaps = {} }, {
   __index = function(self, mode)
     self[mode] = function(lhs, rhs, opts)
@@ -25,14 +26,19 @@ local map = setmetatable({ keymaps = {} }, {
   end
 })
 
--- Add the dummy (for decumentaion) mappings here
-map.n("<M-\\>", "", "Toggle parent directory view (Oil) in current window")
-map.n("<S-M-\\>", "", "Open parent directory view (Oil) in current window")
+-- Mappings that are defined outside of plugin/keymaps.lua
+-- and can't be easily taken programmatically.
+local function add_mappings_defined_elsewhere()
+  -- mp/plugins/oil.lua
+  map.n("<M-\\>", "", "Toggle parent directory view (Oil) in current window")
+  map.n("<S-M-\\>", "", "Open parent directory view (Oil) in current window")
 
-map.n("<C-s>", "", "Save the session for the CWD")
-map.n("<C-S-s>", "", "Load the session for the CWD")
+  -- after/plugin/sessions.lua
+  map.n("<C-s>", "", "Save the session for the CWD")
+  map.n("<C-S-s>", "", "Load the session for the CWD")
+end
 
-local function set_other_keymaps(buf, mode)
+local function include_other_keymaps(buf, mode)
   local mappings = vim.api.nvim_get_keymap(mode)
   local devider = true
 
@@ -46,18 +52,35 @@ local function set_other_keymaps(buf, mode)
   end
 end
 
-function M.show_keymaps()
+local function clear_keymaps()
+  for mode, _ in pairs(map.keymaps) do
+    map.keymaps[mode] = {}
+  end
+end
+
+local function create_buffer_in_right_split()
   local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+  vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>bwipeout<cr>", {})
+
   vim.api.nvim_open_win(buf, true, { split = "right", win = -1 })
 
-  vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-  vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "# Keymaps" })
+  return buf
+end
 
+function M.show_keymaps()
+  add_mappings_defined_elsewhere()
+
+  local buf = create_buffer_in_right_split()
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "# Keymaps" })
   for mode, keymaps in pairs(map.keymaps) do
     vim.api.nvim_buf_set_lines(buf, -1, -1, true, { "", MODE_HEADINGS[mode] })
     vim.api.nvim_buf_set_lines(buf, -1, -1, true, keymaps)
-    set_other_keymaps(buf, mode)
+    include_other_keymaps(buf, mode)
   end
+
+  clear_keymaps()
 end
 
 M.map = map
