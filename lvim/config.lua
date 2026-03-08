@@ -54,6 +54,7 @@ with(lvim.builtin.which_key.mappings, function(lm)
     w = mp_finders("word_under_cursor()", "Word under cursor"),
     W = mp_finders("word_under_cursor{grep_open_files = true}", "Word under cursor in open files"),
     p = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Files with preview" },
+    P = { "<cmd>Telescope projects initial_mode=normal<cr>", "Find projects" },
     t = mp_finders("live_grep()", "Text"),
     T = mp_finders("live_grep{grep_open_files = true}", "Text in open files"),
 
