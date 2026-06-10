@@ -44,7 +44,7 @@ if vim.fn.argc() == 0 then
     group = group,
     desc = "Autoload session for current working directory if present",
     callback = function()
-      vim.defer_fn(load, 10)
+      vim.defer_fn(load, 1)
     end,
   })
 end

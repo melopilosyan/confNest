@@ -66,6 +66,20 @@ function M.my_config_files()
   }
 end
 
+function M.plugin_files()
+  builtin.find_files(horizontal_top_prompt({
+    prompt_title = "~ Plugin files ~",
+    cwd = require("lazy.core.config").options.root,
+  }))
+end
+
+function M.life_grep_plugin_files()
+  M.live_ripgrep(horizontal_top_prompt({
+    prompt_title = "~ Life grep in Plugin files ~",
+    cwd = require("lazy.core.config").options.root,
+  }))
+end
+
 -- @param symbol - Classes, Modules, Methods, ...
 function M.lsp_workspace_symbols(symbol)
   builtin.lsp_workspace_symbols(no_preview_dropdown {
@@ -85,6 +99,10 @@ end
 
 function M.git_status()
   builtin.git_status(horizontal_top_prompt({ initial_mode = "normal" }))
+end
+
+function M.files()
+  builtin.find_files(horizontal_top_prompt({ hidden = true }))
 end
 
 return M
