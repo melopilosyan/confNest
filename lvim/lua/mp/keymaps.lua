@@ -157,17 +157,7 @@ map.n("<leader>rr", "<cmd>RE<cr>", "Jump to Rails related file")
 map.n("<leader>ra", "<cmd>AE<cr>", "Jump to Rails alternate file")
 
 map:group "Diagnostics"
-map.n("gl", function()
-  local float = vim.diagnostic.config().float
-
-  if float then
-    local config = type(float) == "table" and float or {}
-    config.border = "rounded"
-    config.scope = "line"
-
-    vim.diagnostic.open_float(config)
-  end
-end, "Show line diagnostics")
+map.n("gl", vim.diagnostic.open_float, "Show line diagnostics")
 
 map:group "Execute current file/line/selection with <Alt+x>"
 map.n("<M-x>", function() return require("mp.utils").file_runner_cmd() end,

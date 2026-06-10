@@ -43,3 +43,5 @@ o.clipboard = ""
 o.swapfile = false
 o.undofile = true
 o.undodir = vim.fn.stdpath("cache") .. "/undo"
+
+vim.o.winborder = "rounded"
