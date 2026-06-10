@@ -10,7 +10,7 @@ local set = vim.keymap.set
 ---@field c KMapFun Add command mode mappings
 ---@field o KMapFun Add operator pending mode mappings
 ---@field t KMapFun Add terminal mode mappings
----@field group fun(self: KeymapSet, title: string) Used for odcumentation. See mp/which-keymap.lua
+---@field group fun(self: KeymapSet, title: string) Used for documentation. See mp/which-keymap.lua
 local map = setmetatable({ opts = { noremap = true, silent = true }, group = function() end }, {
   __call = function(self, mode, lhs, rhs, opts)
     if opts then
