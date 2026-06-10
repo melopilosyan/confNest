@@ -12,19 +12,29 @@ local set = vim.keymap.set
 ---@field t KMapFun Add terminal mode mappings
 ---@field group fun(self: KeymapSet, title: string) Used for odcumentation. See mp/which-keymap.lua
 local map = setmetatable({ opts = { noremap = true, silent = true }, group = function() end }, {
+  __call = function(self, mode, lhs, rhs, opts)
+    if opts then
+      opts = type(opts) == "string" and { desc = opts } or opts
+      opts.noremap = true
+    end
+    set(mode, lhs, rhs, opts or self.opts)
+  end,
   __index = function(self, mode)
     self[mode] = function(lhs, rhs, opts)
-      if opts then
-        opts = type(opts) == "string" and { desc = opts } or opts
-        opts.noremap = true
-      end
-      set(mode, lhs, rhs, opts or self.opts)
+      self(mode, lhs, rhs, opts)
     end
     return self[mode]
   end,
 })
 
 if _G.__show_keymaps then map = R("mp.which-keymap").map end
+
+map:group("Save file")
+map.n("<leader>w", "<cmd>w<cr>", "Save buffer")
+map.n("<leader>W", "<cmd>wa<cr>", "Save all buffers")
+map.n("<leader>q", "<cmd>q<cr>", "Quit")
+map.n("<leader>x", "<cmd>x<cr>", "Save and quit")
+map.n("<leader>X", "<cmd>xa<cr>", "Save and quit all")
 
 map:group "Buffer navigation"
 map.n("L", "<cmd>BufferLineCycleNext<cr>")
@@ -75,7 +85,7 @@ map.n("n", "nzzzv")
 map.n("N", "Nzzzv")
 
 map:group "Toggle plugins"
-map.n("\\", "<cmd>NvimTreeToggle<cr>")
+-- map.n("\\", "<cmd>NvimTreeToggle<cr>")
 map.n("<F5>", "<cmd>UndotreeToggle<cr>")
 map.n("<F4>", "<cmd>Twilight<cr>")
 map.n("<F8>", "<cmd>ZenMode<cr>")
@@ -92,6 +102,72 @@ map.n("gy", [["+y]])
 map.n("gp", [["+p]])
 map.v("gy", [["+y]])
 map.v("gp", [["+p]])
+
+local pick = function(command, opts)
+  return function() require('mp.telescope.finders')[command](opts) end
+end
+
+map:group "GIT"
+map.n("<leader>gB", "<cmd>Git blame<cr>", "Blame buffer")
+map.n("<leader>gG", "<cmd>Git<cr>", "Git fugitive")
+map.n("<leader>gg", "<cmd>Git commit<cr>", "Git commit")
+map.n("<leader>gA", "<cmd>Git commit --amend<cr>", "Git commit --amend")
+map.n("<leader>gP", "<cmd>Git push<cr>", "Git push")
+map.n("<leader>gp", function () require("gitsigns").preview_hunk() end, "Preview hunk in popup")
+map({ "n", "x" }, "<leader>gr", function () require("gitsigns").reset_hunk() end, "Reset hunk")
+map.n("<leader>gl", function() require("gitsigns").blame_line({ full = true }) end, "Line blame")
+map({ "n", "x" }, "<leader>gs", function () require("gitsigns").stage_hunk() end, "Stage hunk")
+map.n("<leader>gS", function() require("gitsigns").stage_buffer() end, "Stage Buffer")
+map.n("<leader>gj", function() require("gitsigns").nav_hunk("next", { target = "all" }) end, "Next hunk")
+map.n("<leader>gk", function() require("gitsigns").nav_hunk("prev", { target = "all" }) end, "Previous hunk")
+map.n("<leader>go", pick("git_status"), "Open changed files")
+map.n("<leader>gC", pick("git_commits"), "Checkout commit")
+map.n("<leader>gc", pick("git_commits", { file = true }), "Checkout commit(for current file)")
+
+map:group "Pickers"
+map.n("<leader><space>", pick("files_no_preview"), "Files no preview")
+map.n("<leader>ff", pick("files"), "Files with preview")
+map.n("<leader>fw", pick("word_under_cursor"), "Word under cursor")
+map.n("<leader>fW", pick("word_under_cursor", { grep_open_files = true }), "Word under cursor in open files")
+map.n("<leader>fp", pick("plugin_files"), "Plugin Files")
+map.n("<leader>sp", pick("life_grep_plugin_files"), "Life grep in Plugin files")
+map.n("<leader>fP", "<cmd>Telescope projects initial_mode=normal<cr>", "Projects")
+map.n("<leader>ft", pick("live_grep"), "Text")
+map.n("<leader>fT", pick("live_grep", { grep_open_files = true }), "Text in open files")
+map.n("<leader>fC", pick("my_config_files"), "My config files")
+
+map.v("<leader>ff", pick("selection_to_files_no_preview"), "Selection to files no preview")
+map.v("<leader>fw", pick("selection", { word_match = true }), "Selection as word")
+map.v("<leader>fW", pick("selection", { word_match = true, grep_open_files = true }), "Selection as word in open files")
+map.v("<leader>ft", pick("selection"), "Selection as text")
+map.v("<leader>fT", pick("selection", { grep_open_files = true }), "Selection as text in open files")
+
+map:group "RSpec runners"
+map.n("<leader>tI", function() require('rspec').run_current_file() end, "RSpec run current file")
+map.n("<leader>ti", function() require('rspec').run_current_example() end, "RSpec run current example")
+map.n("<leader>td", function() require('rspec').debug() end, "RSpec debug/run in terminal")
+map.n("<leader>tS", function() require('rspec').run_suite() end, "RSpec run test suite")
+map.n("<leader>t.", function() require('rspec').repeat_last_run() end, "RSpec repeat last run")
+
+map:group "Rails navigation/Run"
+map.n("<leader>rv", "<cmd>Eview<cr>", "Open controller action view file")
+map.n("<leader>rc", "<cmd>Econtroller<cr>", "Open controller for this view file")
+map.n("<leader>rd", "<cmd>w<cr><cmd>!dot -T png -O % | open %.png<cr>", "Run 'dot -T png' and open the PNG")
+map.n("<leader>rr", "<cmd>RE<cr>", "Jump to Rails related file")
+map.n("<leader>ra", "<cmd>AE<cr>", "Jump to Rails alternate file")
+
+map:group "Diagnostics"
+map.n("gl", function()
+  local float = vim.diagnostic.config().float
+
+  if float then
+    local config = type(float) == "table" and float or {}
+    config.border = "rounded"
+    config.scope = "line"
+
+    vim.diagnostic.open_float(config)
+  end
+end, "Show line diagnostics")
 
 map:group "Execute current file/line/selection with <Alt+x>"
 map.n("<M-x>", function() return require("mp.utils").file_runner_cmd() end,
@@ -113,7 +189,7 @@ map.v("<C-r>", ":<C-u>%s/<C-r>=v:lua.EscapedSelection()<cr>//g<left><left>",
 
 map.n("<Leader>sK", function()
   _G.__show_keymaps = true
-  vim.cmd("source " .. vim.env.CONFIGS_DIR .. "/lvim/plugin/keymaps.lua")
+  vim.cmd("source " .. vim.fn.stdpath("config") .. "/lua/mp/keymaps.lua")
   _G.__show_keymaps = false
 
   require("mp.which-keymap").show_keymaps()

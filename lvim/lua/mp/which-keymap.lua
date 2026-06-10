@@ -10,7 +10,6 @@ local MODE_HEADINGS = {
 local function concat(mode, lhs, desc)
   return string.format("%s  %-10s %s", mode, lhs, desc)
 end
-print(concat("n", "lhs", "desc"))
 
 -- Takes over the map in plugin/keymaps.lua
 local map = setmetatable({
@@ -20,12 +19,17 @@ local map = setmetatable({
     table.insert(self.keymaps, "### " .. title)
   end
 }, {
+  __call = function(self, mode, lhs, rhs, opts)
+    local desc = opts or rhs
+    if type(opts) == "table" then desc = opts.desc end
+
+    for _, m in ipairs(mode) do
+      table.insert(self.keymaps, concat(m, lhs, desc))
+    end
+  end,
   __index = function(self, mode)
     self[mode] = function(lhs, rhs, opts)
-      local desc = opts or rhs
-      if type(opts) == "table" then desc = opts.desc end
-
-      table.insert(self.keymaps, concat(mode, lhs, desc))
+      self({ mode }, lhs, rhs, opts)
     end
 
     return self[mode]
@@ -39,7 +43,7 @@ local function add_mappings_defined_elsewhere()
   map.n("<M-\\>", "", "Toggle parent directory view (Oil) in current window")
   map.n("<S-M-\\>", "", "Open parent directory view (Oil) in current window")
 
-  map:group "Session management -- after/plugin/sessions.lua"
+  map:group "Session management -- lvim/lua/mp/sessions.lua"
   map.n("<C-s>", "", "Save the session for the CWD")
   map.n("<C-S-s>", "", "Load the session for the CWD")
 
@@ -87,7 +91,7 @@ end
 
 local function create_buffer_in_right_split()
   local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+  vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
   vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>bwipeout<cr>", {})
 
   vim.api.nvim_open_win(buf, true, { split = "right", win = -1 })
