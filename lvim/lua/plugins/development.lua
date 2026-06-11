@@ -9,17 +9,19 @@ return {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
   },
-  { "tpope/vim-repeat", event = "VeryLazy" },
-  { "tpope/vim-surround", event = "VeryLazy" },
+  { "tpope/vim-repeat", event = "LazyFile" },
+  { "tpope/vim-surround", event = "LazyFile" },
 
   {
     "tpope/vim-rake",
+    event = "LazyFile",
     dependencies = { "tpope/vim-projectionist" },
     ft = { "ruby" }
   },
 
   {
     "tpope/vim-bundler",
+    event = "LazyFile",
     dependencies = { "tpope/vim-projectionist" },
     cond = function ()
       return vim.fn.filereadable("Gemfile") == 1
@@ -28,6 +30,7 @@ return {
 
   {
     "tpope/vim-rails",
+    event = "LazyFile",
     dependencies = { "tpope/vim-projectionist" },
     cond = function ()
       return vim.fn.filereadable("config/environment.rb") == 1
@@ -40,7 +43,7 @@ return {
 
   {
     "RRethy/nvim-treesitter-endwise",
-    event = "VeryLazy",
+    event = "LazyFile",
     ft = { "ruby", "lua", "bash" },
   },
 }
