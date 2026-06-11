@@ -12,6 +12,6 @@ return {
     -- * win
     scope_chdir = "win",
 
-    -- silent_chdir = false,
+    silent_chdir = false,
   },
 }
