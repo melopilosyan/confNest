@@ -88,7 +88,6 @@ alias path='echo -e ${PATH//:/\\n}'
 alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
-alias lvims='lvim -S Session.vim'
 
 alias public_ip='curl icanhazip.com'
 alias show.hidden.startapps="sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop"
