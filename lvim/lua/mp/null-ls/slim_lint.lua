@@ -1,3 +1,12 @@
+-- Install "nvimtools/none-ls.nvim" and run this auto-command during startup to use slim-lint.
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   desc = "Register slim-lint as null-ls diagnostics entry",
+--   once = true,
+--   pattern = "slim",
+--   callback = function() vim.schedule(require("mp.null-ls.slim_lint")) end,
+-- })
+
 local null_ls = require("null-ls")
 local h = require("null-ls.helpers")
 

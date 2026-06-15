@@ -50,10 +50,3 @@ autocmd_clear("FileType", {
   pattern = "eruby.yaml",
   command = "setlocal filetype=yaml",
 })
-
-autocmd("FileType", {
-  desc = "Register slim-lint as null-ls diagnostics entry",
-  once = true,
-  pattern = "slim",
-  callback = function() vim.schedule(require("mp.null-ls.slim_lint")) end,
-})
