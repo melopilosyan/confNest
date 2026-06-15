@@ -40,6 +40,15 @@ return {
   -- { "ecomba/vim-ruby-refactoring" },
 
   { "slim-template/vim-slim", ft = "slim" },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        slim = { "slim_lint" },
+      },
+    },
+  },
 
   {
     "RRethy/nvim-treesitter-endwise",
