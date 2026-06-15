@@ -6,13 +6,6 @@ return {
   },
 
   {
-    "tpope/vim-fugitive",
-    cmd = { "Git", "Gread", "Gwrite", "Gvdiffsplit" }
-  },
-  { "tpope/vim-repeat", event = "LazyFile" },
-  { "tpope/vim-surround", event = "LazyFile" },
-
-  {
     "tpope/vim-rake",
     event = "LazyFile",
     dependencies = { "tpope/vim-projectionist" },
