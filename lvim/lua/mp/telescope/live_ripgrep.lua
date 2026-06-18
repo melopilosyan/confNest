@@ -1,3 +1,14 @@
+--- Granular text search within telescope via ripgrep
+--
+-- Narrow down search results by specifying <globs> after the search pattern separated with
+-- GLOBS_DELIMITER. <globs> can be one or more of space-separated TYPE_SHORTCUTS, SHORTCUTS,
+-- ripgrep valid glob search patterns or ripgrep flags.
+--
+-- e.g.
+--  dance  rb
+--  req  lua !**/*/mp/* !nvim !config.lua
+--  mysql  -.
+
 local conf = require "telescope.config".values
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
@@ -43,7 +54,11 @@ local function ripgrep_cmd(pattern, globs)
 
   if globs and globs ~= "" then
     for _, glob in ipairs(vim.split(globs, "%s+", { trimempty = true })) do
-      cmd[#cmd + 1], cmd[#cmd + 2] = parameterize(glob)
+      if glob:sub(0, 1) == "-" then
+        cmd[#cmd + 1] = glob
+      else
+        cmd[#cmd + 1], cmd[#cmd + 2] = parameterize(glob)
+      end
     end
   end
 
