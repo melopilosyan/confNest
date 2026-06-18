@@ -29,6 +29,8 @@ local map = setmetatable({ opts = { noremap = true, silent = true }, group = fun
 
 if _G.__show_keymaps then map = R("mp.which-keymap").map end
 
+require("mp.sessions")
+
 map:group("Save file")
 map.n("<leader>w", "<cmd>w<cr>", "Save buffer")
 map.n("<leader>W", "<cmd>wa<cr>", "Save all buffers")

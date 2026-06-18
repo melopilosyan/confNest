@@ -28,10 +28,8 @@ end
 vim.keymap.set("n", "<C-s>", save)
 vim.keymap.set("n", "<C-S-s>", load)
 
-local group = vim.api.nvim_create_augroup('sessions', {})
-
 vim.api.nvim_create_autocmd("VimLeave", {
-  group = group,
+  group = vim.api.nvim_create_augroup('sessions', {}),
   desc = "Autosave current session if any",
   callback = function()
     if vim.v.this_session ~= "" then save() end
@@ -39,12 +37,5 @@ vim.api.nvim_create_autocmd("VimLeave", {
 })
 
 if vim.fn.argc() == 0 then
-  vim.api.nvim_create_autocmd("VimEnter", {
-    once = true,
-    group = group,
-    desc = "Autoload session for current working directory if present",
-    callback = function()
-      vim.defer_fn(load, 1)
-    end,
-  })
+  vim.defer_fn(load, 1)
 end
