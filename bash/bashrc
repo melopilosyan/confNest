@@ -20,5 +20,7 @@ test -d ~/.cargo/bin && PATH="$PATH:$_"
 source "$CONFIGS_DIR/bash/functions.sh"
 source_all "$CONFIGS_DIR"/bash/rc.d/*.sh
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Load RVM
 test -s ~/.rvm/scripts/rvm && source "$_"
