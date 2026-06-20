@@ -26,7 +26,7 @@ local function grepper(opts)
 end
 
 local function selection()
-  vim.cmd([[normal! "sy]])
+  vim.cmd([[noautocmd silent normal! "sy]])
   return vim.fn.getreg("s")
 end
 
