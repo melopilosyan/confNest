@@ -10,9 +10,7 @@ local horizontal_top_prompt__options = {
 }
 
 local function deep_extent(t1, t2, t3)
-  if not t1 then return t2 end
-
-  return vim.tbl_deep_extend("force", t1, t2, t3 or {})
+  return vim.tbl_deep_extend("force", t1 or {}, t2 or {}, t3 or {})
 end
 
 local function no_preview_dropdown(opts)
