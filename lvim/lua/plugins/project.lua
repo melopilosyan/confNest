@@ -6,6 +6,8 @@ return {
   opts = {
     manual_mode = false,
 
+    detection_methods = { "pattern" },
+
     -- What scope to change the directory, valid options are
     -- * global (default)
     -- * tab
