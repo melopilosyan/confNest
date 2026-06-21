@@ -17,6 +17,8 @@ return {
     { "<leader>sc", false },
     { "<leader>sw", false },
     { "<leader>sW", false },
+    { "<leader>sw", mode = "x", false },
+    { "<leader>sW", mode = "x", false },
     { "<leader>/", false },
   },
 }
