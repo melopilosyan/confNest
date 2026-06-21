@@ -37,6 +37,10 @@ function M.selection_to_files_no_preview(opts)
   M.files_no_preview(options)
 end
 
+function M.files_top_prompt(opts)
+  builtin.find_files(horizontal_top_prompt(opts))
+end
+
 function M.files_no_preview(opts)
   builtin.find_files(no_preview_dropdown(opts))
 end
@@ -49,32 +53,10 @@ function M.word_under_cursor(opts)
 end
 
 function M.selection(opts)
-  grepper(opts)(horizontal_top_prompt({
+  grepper(opts)(horizontal_top_prompt(opts, {
     search = selection(),
     word_match = opts and opts.word_match and "-w" or nil,
     initial_mode = "normal",
-  }, opts))
-end
-
-function M.my_config_files()
-  M.files_no_preview {
-    sorting_strategy = "ascending",
-    prompt_title = "~ My config files ~",
-    cwd = vim.env.CONFIGS_DIR,
-  }
-end
-
-function M.plugin_files()
-  builtin.find_files(horizontal_top_prompt({
-    prompt_title = "~ Plugin files ~",
-    cwd = require("lazy.core.config").options.root,
-  }))
-end
-
-function M.life_grep_plugin_files()
-  M.live_ripgrep(horizontal_top_prompt({
-    prompt_title = "~ Life grep in Plugin files ~",
-    cwd = require("lazy.core.config").options.root,
   }))
 end
 
@@ -97,10 +79,6 @@ end
 
 function M.git_status()
   builtin.git_status(horizontal_top_prompt({ initial_mode = "normal" }))
-end
-
-function M.files()
-  builtin.find_files(horizontal_top_prompt({ hidden = true }))
 end
 
 return M
