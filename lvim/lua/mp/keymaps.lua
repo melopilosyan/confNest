@@ -105,8 +105,8 @@ map.n("gp", [["+p]])
 map.v("gy", [["+y]])
 map.v("gp", [["+p]])
 
-local pick = function(command, opts)
-  return function() require('mp.telescope.finders')[command](opts) end
+local function pick(command, opts)
+  return function() require("mp.telescope.finders")[command](opts) end
 end
 
 map:group "GIT"
@@ -126,23 +126,34 @@ map.n("<leader>go", pick("git_status"), "Open changed files")
 map.n("<leader>gC", pick("git_commits"), "Checkout commit")
 map.n("<leader>gc", pick("git_commits", { file = true }), "Checkout commit(for current file)")
 
+local configs_dir = vim.env.CONFIGS_DIR
+local plugins_dir = require("lazy.core.config").options.root
+
+local function cwd_pt(dir, title)
+  return { cwd = dir, prompt_title = title }
+end
+
 map:group "Pickers"
 map.n("<leader><space>", pick("files_no_preview"), "Files no preview")
-map.n("<leader>ff", pick("files"), "Files with preview")
-map.n("<leader>fw", pick("word_under_cursor"), "Word under cursor")
-map.n("<leader>fW", pick("word_under_cursor", { grep_open_files = true }), "Word under cursor in open files")
-map.n("<leader>fp", pick("plugin_files"), "Plugin Files")
-map.n("<leader>sp", pick("life_grep_plugin_files"), "Life grep in Plugin files")
+map.n("<leader>/", pick("live_grep"), "Live ripgrep CWD")
+map.n("<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal<cr>", "Switch Buffer")
+
+map.n("<leader>ff", pick("files_top_prompt"), "Files with preview")
+map.n("<leader>fp", pick("files_top_prompt", cwd_pt(plugins_dir, "~ Plugins files ~")), "Plugins files")
 map.n("<leader>fP", "<cmd>Telescope projects initial_mode=normal<cr>", "Projects")
-map.n("<leader>ft", pick("live_grep"), "Text")
-map.n("<leader>fT", pick("live_grep", { grep_open_files = true }), "Text in open files")
-map.n("<leader>fC", pick("my_config_files"), "My config files")
+map.n("<leader>fc", pick("files_no_preview", cwd_pt(configs_dir, "~ confNest files ~")), "confNest files")
 
 map.v("<leader>ff", pick("selection_to_files_no_preview"), "Selection to files no preview")
 map.v("<leader>fw", pick("selection", { word_match = true }), "Selection as word")
 map.v("<leader>fW", pick("selection", { word_match = true, grep_open_files = true }), "Selection as word in open files")
 map.v("<leader>ft", pick("selection"), "Selection as text")
 map.v("<leader>fT", pick("selection", { grep_open_files = true }), "Selection as text in open files")
+
+map.n("<leader>sw", pick("word_under_cursor"), "Word under cursor")
+map.n("<leader>sW", pick("word_under_cursor", { grep_open_files = true }), "Word under cursor in open files")
+map.n("<leader>sT", pick("live_grep", { grep_open_files = true }), "Text in open files")
+map.n("<leader>sc", pick("live_grep", cwd_pt(configs_dir, "~ Ripgrep confNest ~")), "Ripgrep confNest")
+map.n("<leader>sp", pick("live_grep", cwd_pt(plugins_dir, "~ Ripgrep plugins ~")), "Ripgrep plugins")
 
 map:group "RSpec runners"
 map.n("<leader>tI", function() require('rspec').run_current_file() end, "RSpec run current file")

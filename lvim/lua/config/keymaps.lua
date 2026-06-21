@@ -27,6 +27,8 @@ del({ "n" }, "<leader>xX")
 del({ "n" }, "<leader>xL")
 del({ "n" }, "<leader>xQ")
 
+-- Terminal
+del({ "n" }, "<leader>fT")
 -- INFO: Loading my keymaps
 
 require("mp.keymaps")
