@@ -143,17 +143,17 @@ map.n("<leader>fp", pick("files_top_prompt", cwd_pt(plugins_dir, "~ Plugins file
 map.n("<leader>fP", "<cmd>Telescope projects initial_mode=normal<cr>", "Projects")
 map.n("<leader>fc", pick("files_no_preview", cwd_pt(configs_dir, "~ confNest files ~")), "confNest files")
 
-map.v("<leader>ff", pick("selection_to_files_no_preview"), "Selection to files no preview")
-map.v("<leader>fw", pick("selection", { word_match = true }), "Selection as word")
-map.v("<leader>fW", pick("selection", { word_match = true, grep_open_files = true }), "Selection as word in open files")
-map.v("<leader>ft", pick("selection"), "Selection as text")
-map.v("<leader>fT", pick("selection", { grep_open_files = true }), "Selection as text in open files")
-
-map.n("<leader>sw", pick("word_under_cursor"), "Word under cursor")
-map.n("<leader>sW", pick("word_under_cursor", { grep_open_files = true }), "Word under cursor in open files")
+map.n("<leader>sw", pick("live_grep_string"), "Word under cursor")
+map.n("<leader>sW", pick("live_grep_string", { grep_open_files = true }), "Word under cursor in open files")
 map.n("<leader>sT", pick("live_grep", { grep_open_files = true }), "Text in open files")
 map.n("<leader>sc", pick("live_grep", cwd_pt(configs_dir, "~ Ripgrep confNest ~")), "Ripgrep confNest")
 map.n("<leader>sp", pick("live_grep", cwd_pt(plugins_dir, "~ Ripgrep plugins ~")), "Ripgrep plugins")
+
+map.v("<leader>ff", pick("selection_to_files_no_preview"), "Selection to files no preview")
+map.v("<leader>sw", pick("live_grep_string", { word = true }), "Selection as word")
+map.v("<leader>sW", pick("live_grep_string", { word = true, grep_open_files = true }), "Selection as word in open files")
+map.v("<leader>st", pick("live_grep_string"), "Selection as text")
+map.v("<leader>sT", pick("live_grep_string", { grep_open_files = true }), "Selection as text in open files")
 
 map:group "RSpec runners"
 map.n("<leader>tI", function() require('rspec').run_current_file() end, "RSpec run current file")

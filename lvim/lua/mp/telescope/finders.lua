@@ -45,19 +45,19 @@ function M.files_no_preview(opts)
   builtin.find_files(no_preview_dropdown(opts))
 end
 
-function M.word_under_cursor(opts)
-  grepper(opts)(horizontal_top_prompt({
-    word_match = "-w",
-    initial_mode = "normal",
-  }, opts))
+function M.live_grep(opts)
+  grepper(opts)(horizontal_top_prompt(opts))
 end
 
-function M.selection(opts)
-  grepper(opts)(horizontal_top_prompt(opts, {
-    search = selection(),
-    word_match = opts and opts.word_match and "-w" or nil,
+function M.live_grep_string(opts)
+  local visual_mode = vim.fn.mode() == "v"
+  opts = opts or {}
+
+  grepper(opts)(horizontal_top_prompt({
+    search = visual_mode and selection() or nil,
+    word_match = (not visual_mode or opts.word) and "-w",
     initial_mode = "normal",
-  }))
+  }, opts))
 end
 
 -- @param symbol - Classes, Modules, Methods, ...
@@ -71,10 +71,6 @@ end
 function M.git_commits(opts)
   local commits = opts and opts.file and builtin.git_bcommits or builtin.git_commits
   commits(horizontal_top_prompt({ initial_mode = "normal" }))
-end
-
-function M.live_grep(opts)
-  grepper(opts)(horizontal_top_prompt(opts))
 end
 
 function M.git_status()
