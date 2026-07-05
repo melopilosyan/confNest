@@ -28,6 +28,6 @@ git config --global init.defaultBranch master
 
 # Enable git arguments completion for the g wrapper function defined in bash/functions.sh
 tee ~/.local/share/bash-completion/completions/g <<BASH >/dev/null
-  . /usr/share/bash-completion/completions/git
-  __git_complete g __git_main
+. /usr/share/bash-completion/completions/git
+__git_complete g __git_main
 BASH
