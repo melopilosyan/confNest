@@ -2,6 +2,7 @@
   "extras": [
     "lazyvim.plugins.extras.editor.telescope",
     "lazyvim.plugins.extras.lang.ruby",
+    "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.util.project"
   ],
   "install_version": 8,
