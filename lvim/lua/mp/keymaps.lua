@@ -152,7 +152,7 @@ map.n("<leader>sp", pick("live_grep", cwd_pt(plugins_dir, "~ Ripgrep plugins ~")
 map.v("<leader>ff", pick("selection_to_files_no_preview"), "Selection to files no preview")
 map.v("<leader>sw", pick("live_grep_string", { word = true }), "Selection as word")
 map.v("<leader>sW", pick("live_grep_string", { word = true, grep_open_files = true }), "Selection as word in open files")
-map.v("<leader>st", pick("live_grep_string"), "Selection as text")
+map.v("<leader>/", pick("live_grep_string"), "Selection as text")
 map.v("<leader>sT", pick("live_grep_string", { grep_open_files = true }), "Selection as text in open files")
 
 map:group "RSpec runners"
