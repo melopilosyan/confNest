@@ -9,7 +9,7 @@ FONT=$(gum choose "JetBrains Mono" "Cascadia Code" --header "Choose your program
 FONT_SIZE=15
 
 # Install the font in Gnome and Kitty
-gsettings set org.gnome.desktop.interface monospace-font-name "$NERD_FONT $FONT_SIZE"
+gsettings set org.gnome.desktop.interface monospace-font-name "$FONT $FONT_SIZE"
 echo -e "font_family $FONT\nfont_size $FONT_SIZE" > ~/.config/kitty/font.conf
 
 # Reload kitty instances
