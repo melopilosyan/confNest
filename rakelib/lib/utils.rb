@@ -19,3 +19,12 @@ end
 def local_bin(exe)
   File.expand_path("~/.local/bin/#{exe}")
 end
+
+def cache(name, &)
+  path = Pathname.new("/tmp").join(name)
+
+  # If modified less then an hour ago
+  return path.read if path.exist? && Time.now - path.mtime < 3600
+
+  yield.tap { path.write it }
+end

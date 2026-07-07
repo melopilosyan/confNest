@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+FileStructure = Data.define(
+  :home_dir, :installed_version_txt, :version_dir, :extract_dir, :archive_path, :installed_txt
+) do
+  class << self
+    def for(home_dir, release = nil)
+      new(
+        home_dir,                                                # home_dir
+        home_dir.join("INSTALLED_VERSION"),                      # installed_version_txt
+        release && version_dir = home_dir.join(release.version), # version_dir
+        release && version_dir.join(release.file_basename),      # extract_dir
+        release && version_dir.join(release.archive_name),       # archive_path
+        release && version_dir.join("installed")                 # installed_txt
+      )
+    end
+  end
+
+  def installed_version = installed_version_txt.read rescue ""
+end
+
 # Data class
 #
 # Attributes
@@ -19,12 +38,17 @@ Package = Data.define(:name, :repo, :archive, :display_name) do
     end
 
     def define_reader(instance)
-      define_singleton_method(instance.name) { instance }
+      Package.define_singleton_method(instance.name) { instance }
     end
+    private :define_reader
 
     # Set these only once.
     def directory(dir = nil) = @directory ||= Pathname.new(File.expand_path(dir))
     def task_args(args = nil) = @task_args ||= args
+
+    def each(&)
+      Package.names.each { yield Package.public_send(it) }
+    end
   end
 
   @names = []
@@ -33,15 +57,24 @@ Package = Data.define(:name, :repo, :archive, :display_name) do
   def itask
     desc "Install the latest or provided version of #{display_name} from Github"
     task(name, self.class.task_args => :environment) do |_t, args|
-      puts "* Installing #{display_name} #{args.version || "latest release"} ..."
+      puts "🚀 Installing #{display_name} #{args.version || "latest release"} ..."
 
       installer(args.version).install { yield _1, args }
     end
   end
 
-  def installer(version) = Installer.new(release(version), install_dir)
-  def release(version) = GithubRelease.new(repo, archive, version)
-  def install_dir = self.class.directory.join(name.to_s)
+  # Checker task
+  def ctask
+    desc "Check #{display_name} for updates"
+    task(name => :environment) do
+      puts "⭐ Latest version: #{release.version}"
+      puts "📦 Installed version: #{fs.installed_version}"
+    end
+  end
+
+  def installer(version) = Installer.new(r = release(args.version), fs(r))
+  def release(version = nil) = GithubRelease.new(repo, archive, version)
+  def fs(release = nil) = FileStructure.for(self.class.directory.join(name.to_s), release)
 end
 
 class App < Package
@@ -52,15 +85,8 @@ class App < Package
     super() do |ai, targs|
       ai.remove_previous_versions if targs.remove_previous_versions?
 
-      # Enables switching installed versions.
-      installed_version_file = ai.home_dir.join("INSTALLED_VERSION")
-      installed_version = installed_version_file.read rescue ""
-      ai.insist_install if installed_version != ai.version
-
-      ai.upon_installation do
-        yield ai
-        installed_version_file.write ai.version
-      end
+      ai.enables_switching_installed_versions
+      ai.upon_installation { yield ai }
     end
   end
 end

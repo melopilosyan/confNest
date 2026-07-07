@@ -16,3 +16,7 @@ namespace :install do
   desc "Install the latest versions of all configured packages"
   multitask all: Package.names
 end
+
+namespace :check do
+  Package.each(&:ctask)
+end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "forwardable"
+
 # Download, extract and install packages/programs from the internet.
 #
 # It uses a chain of rake file tasks to conditionally execute missing steps.
@@ -41,17 +43,19 @@
 #     └── nvim-linux64.tar.gz
 #
 class Installer
+  extend Forwardable
   include Rake::DSL
 
-  attr_reader :home_dir, :version_dir, :extract_dir, :archive_path, :installed_txt,
-              :release
+  attr_reader :release, :fs
+
+  def_delegators :@fs, :home_dir, :version_dir, :extract_dir, :archive_path,
+                 :installed_txt, :installed_version_txt
 
   # @param [Pathname] home_dir
-  def initialize(release, home_dir)
+  def initialize(release, file_structure)
+    @fs = file_structure
     @release = release
-    @home_dir = home_dir
 
-    define_file_structure
     @install_task = @root_task = define_task_chain
   end
 
@@ -95,17 +99,11 @@ class Installer
     sh "rm -rf $(command ls -d #{home_dir}/*/ | grep -v #{release.version})"
   end
 
-  def version = release.version
+  def enables_switching_installed_versions
+    insist_install if fs.installed_version != release.version
+  end
 
   private
-
-  def define_file_structure
-    @version_dir = home_dir.join(release.version)
-
-    @extract_dir = version_dir.join(release.file_basename)
-    @archive_path = version_dir.join(release.archive_name)
-    @installed_txt = version_dir.join("installed")
-  end
 
   def define_task_chain
     directory version_dir
@@ -120,6 +118,7 @@ class Installer
 
   def mark_complete
     touch installed_txt
+    installed_version_txt.write release.version
     @performed = true
   end
 

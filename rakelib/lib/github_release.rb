@@ -30,8 +30,10 @@ class GithubRelease
   private
 
   def latest_version
-    sh_out(%{curl -sSL "#{latest_tag_url}" | sed -nr 's/.*name": "v(.*)",/\\1/p'}).tap do |v|
-      halt!("Cannot download the latest tag info") if v.empty?
+    cache("ghr-lv-#{repo.delete "/"}") do
+      sh_out(%{curl -sSL "#{latest_tag_url}" | sed -nr 's/.*name": "v(.*)",/\\1/p'}).tap do |v|
+        halt!("Cannot download the latest tag info") if v.empty?
+      end
     end
   end
 
