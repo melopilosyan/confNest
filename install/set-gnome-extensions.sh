@@ -6,6 +6,9 @@ gsettings set org.gnome.shell disable-user-extensions false
 
 # Turn off default Ubuntu extensions
 gnome-extensions disable ubuntu-appindicators@ubuntu.com
+gnome-extensions disable web-search-provider@ubuntu.com
+gnome-extensions disable snapd-prompting@canonical.com
+gnome-extensions disable snapd-search-provider@canonical.com
 gnome-extensions disable ding@rastersoft.com
 
 # Pause to assure user is ready to accept confirmations
