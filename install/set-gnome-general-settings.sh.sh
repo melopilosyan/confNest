@@ -16,6 +16,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-autom
 
 # Clock and calendar
 gsettings set org.gnome.desktop.calendar show-weekdate true
+gsettings set org.gnome.desktop.calendar week-start-day 'monday'
 gsettings set org.gnome.desktop.interface clock-format '24h'
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-seconds true
