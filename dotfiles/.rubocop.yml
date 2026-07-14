@@ -27,6 +27,9 @@ Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
 
+Style/OneClassPerFile:
+  Enabled: false
+
 Layout/LineLength:
   Max: 100
 
