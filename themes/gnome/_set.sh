@@ -23,8 +23,8 @@ test -d ~/.local/share/backgrounds || mkdir -p "$_"
 BG_IMAGE_PATH="$_/$BG_IMAGE"
 test -f "$BG_IMAGE_PATH" || cp "$CONFIGS_DIR/backgrounds/$BG_IMAGE" "$_"
 
-gsettings set org.gnome.desktop.background picture-uri "$BG_IMAGE_PATH"
-gsettings set org.gnome.desktop.background picture-uri-dark "$BG_IMAGE_PATH"
+gsettings set org.gnome.desktop.background picture-uri "file://$BG_IMAGE_PATH"
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$BG_IMAGE_PATH"
 gsettings set org.gnome.desktop.background picture-options 'zoom'
 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
