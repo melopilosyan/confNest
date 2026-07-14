@@ -12,10 +12,10 @@ alias supgrade.autoremove='supgrade && sudo apt -y autoremove'
 alias clear.ram.cache="sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
 
 # File system
-alias ls='eza -lh --group-directories-first --icons --hyperlink'
+alias ls='eza -lh --icons --hyperlink --group-directories-first'
 alias la='ls -a'
 alias lt='ls --total-size'
-alias tree='eza --tree --hyperlink'
+alias tree='eza --hyperlink --tree'
 
 #### DB
 alias mysql.service='sudo service mysql'
