@@ -25,6 +25,11 @@ set_per_digit org.gnome.shell.keybindings switch-to-application-# "[]"
 # Move the application to the n-th workspace
 set_per_digit org.gnome.desktop.wm.keybindings move-to-workspace-# "['<Shift><Super>#']"
 
+# Isolate workspaces
+gsettings set org.gnome.shell.app-switcher    current-workspace-only true
+gsettings set org.gnome.shell.window-switcher current-workspace-only true
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+
 # Reserve slots for custom keybindings
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
   '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
