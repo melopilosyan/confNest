@@ -108,7 +108,7 @@ install_from_url() {
       sudo dpkg -i "$file_name" || return $?
       ;;
     *.tar.gz)
-      echo "Installing $file_name into ~/.local/bin ..."
+      echo "Unpacking $repo ($installed_version) over ($version) into ~/.local/bin ..."
       tar xzf "$file_name" -C ~/.local/bin || return $?
       ;;
     *)
