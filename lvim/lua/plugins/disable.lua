@@ -25,6 +25,9 @@ return {
 
   {
     "folke/todo-comments.nvim",
+    opts = {
+      signs = false,
+    },
     keys = {
       { "<leader>st", false },
       { "<leader>sT", false },
