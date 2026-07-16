@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+# Fuzzy pass
+
+search() {
+  fd --glob '*.gpg' ~/.password-store |
+    sed -r 's/^.*password-store\/(.*)\.gpg$/\1/' |
+      fzf --margin 6%,3% --border --info right \
+          --bind 'ctrl-v:preview(echo {}; echo; pass ls {})' \
+          --bind "ctrl-d:execute-silent(pass rm -f {})+reload-sync:
+                    fd --glob '*.gpg' ~/.password-store |
+                      sed -r 's/^.*password-store\/(.*)\.gpg$/\1/'
+                  " \
+          --preview-window 45% --preview "echo {}" \
+          --preview-label "Ctrl-v to [v]iew & Ctrl-d to [d]elete" --preview-label-pos 0:bottom
+}
+
+entry="$(search)"
+echo -e "$entry\n"
+
+pass ls "$entry"
