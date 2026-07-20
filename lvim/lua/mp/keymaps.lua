@@ -143,6 +143,10 @@ map.n("<leader>fp", pick("files_top_prompt", cwd_pt(plugins_dir, "~ Plugins file
 map.n("<leader>fP", "<cmd>Telescope projects initial_mode=normal<cr>", "Projects")
 map.n("<leader>fc", pick("files_no_preview", cwd_pt(configs_dir, "~ confNest files ~")), "confNest files")
 
+map.n("<leader>fC", pick("lsp_workspace_symbols", 'class'), "Classes")
+map.n("<leader>fM", pick("lsp_workspace_symbols", 'module'), "Modules")
+map.n("<leader>fm", pick("lsp_workspace_symbols", 'method'), "Methods")
+
 map.n("<leader>sw", pick("live_grep_string"), "Word under cursor")
 map.n("<leader>sW", pick("live_grep_string", { grep_open_files = true }), "Word under cursor in open files")
 map.n("<leader>sT", pick("live_grep", { grep_open_files = true }), "Text in open files")

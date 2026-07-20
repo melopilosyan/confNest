@@ -62,7 +62,7 @@ end
 
 -- @param symbol - Classes, Modules, Methods, ...
 function M.lsp_workspace_symbols(symbol)
-  builtin.lsp_workspace_symbols(no_preview_dropdown {
+  builtin.lsp_dynamic_workspace_symbols(no_preview_dropdown {
     symbols = symbol,
     prompt_title = "LSP Workspace Symbols / " .. symbol,
   })
