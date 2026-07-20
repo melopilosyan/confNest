@@ -3,6 +3,7 @@ return {
   { "folke/noice.nvim", enabled = false },
   { "folke/persistence.nvim", enabled = false },
   { "MagicDuck/grug-far.nvim", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
 
   {
     "snacks.nvim",

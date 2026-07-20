@@ -19,6 +19,18 @@ return {
   },
 
   {
+    "m4xshen/autoclose.nvim",
+    event = "InsertEnter",
+    opts = {
+      options = {
+        pair_spaces = true,
+        disable_when_touch = true,
+        disable_command_mode = true,
+      },
+    }
+  },
+
+  {
     "folke/twilight.nvim",
     cmd = "Twilight",
     opts = {}, -- configuration https://github.com/folke/twilight.nvim#%EF%B8%8F-configuration
