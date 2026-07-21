@@ -63,12 +63,20 @@ local function add_mappings_defined_elsewhere()
   map.n("<cr>", "Increment")
   map.n(",", "Decrement")
 
-  map:group "Nvim-cmp mappings"
-  map.n("<C-b>", "Scroll docs backward")
+  map:group "Completion (Nvim-cmp) mappings"
+  map.n("<C-n>", "Insert next item (default)")
+  map.n("<C-p>", "Insert previous item (default)")
+  map.n("<C-j>", "Select next item")
+  map.n("<C-k>", "Select previous item")
   map.n("<C-f>", "Scroll docs forward")
-  map.i("<C-s>", "Expand or jump")
-  map.i("<C-e>", "Change choice")
-  map.n("<C-a>", "Abort")
+  map.n("<C-b>", "Scroll docs backward")
+  map.n("<C-y>", "Confirm selection - insert (default)")
+  map.n("<CR>", "Confirm selection - insert")
+  map.n("<S-CR>", "Confirm selection - replace")
+  map.i("<C-l>", "Expand or jump forward")
+  map.i("<C-h>", "Jump backward")
+  map.i("<C-c>", "Next choice")
+  map.i("<C-e>", "Abort (default)")
 end
 
 local function include_other_keymaps(buf, mode, heading)

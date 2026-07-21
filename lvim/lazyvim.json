@@ -1,5 +1,7 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.coding.nvim-cmp",
+    "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.editor.telescope",
     "lazyvim.plugins.extras.lang.ruby",
     "lazyvim.plugins.extras.lang.typescript",
