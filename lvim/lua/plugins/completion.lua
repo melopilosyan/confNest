@@ -1,3 +1,28 @@
+local icons = LazyVim.config.icons.kinds
+
+local source_to_menu = {
+  buffer = "BUFF",
+  path = "PATH",
+  luasnip = "SNPT",
+  nvim_lsp = "LSP",
+  lazydev = "LDEV",
+}
+
+local function truncate(str, max_width)
+  return vim.fn.strdisplaywidth(str or "") > max_width and
+    vim.fn.strcharpart(str, 0, max_width - 1) .. "…" or str
+end
+
+local function kind_formatter(entry, item)
+  item.kind = (icons[item.kind] or "") .. item.kind
+  item.menu = (source_to_menu[entry.source.name] or "") .. (item.menu or "")
+
+  item.abbr = truncate(item.abbr, 40)
+  item.menu = truncate(item.menu, 40)
+
+  return item
+end
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -42,6 +67,10 @@ return {
           --   return LazyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }, fallback)()
           -- end,
         }),
+
+        formatting = {
+          format = kind_formatter,
+        },
 
         completion = {
           keyword_length = 3,
