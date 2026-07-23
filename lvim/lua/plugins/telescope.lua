@@ -19,6 +19,7 @@ return {
     { "<leader>sW", false },
     { "<leader>sw", mode = "x", false },
     { "<leader>sW", mode = "x", false },
+    { "<leader>uC", false },
     { "<leader>/", false },
   },
 }

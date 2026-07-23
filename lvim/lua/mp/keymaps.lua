@@ -201,3 +201,14 @@ map.n("<Leader>sK", function()
 
   require("mp.which-keymap").show_keymaps()
 end, "Show keymaps in right split window")
+
+Snacks.toggle({
+  id = "colorizer",
+  name = "Colorizer",
+  get = function()
+    return require("colorizer").is_buffer_attached()
+  end,
+  set = function(state)
+    require("colorizer")[state and "attach_to_buffer" or "detach_from_buffer"]()
+  end,
+}):map("<leader>uC")
