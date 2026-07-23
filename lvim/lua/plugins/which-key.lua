@@ -16,7 +16,7 @@ return {
         end
       end
 
-      table.insert(spec, { "<leader>t", group = "Test" })
+      table.insert(spec, { "<leader>t", group = "Test/Toggle" })
       table.insert(spec, { "<leader>r", group = "Rails navigation/Run" })
 
       opts.delay = 700

@@ -31,6 +31,20 @@ return {
   },
 
   {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle" },
+    ft = { "markdown" },
+    build = function()
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+      vim.fn["mkdp#util#install"]()
+    end,
+    init = function()
+      -- Do not auto close current preview window when changing from Markdown buffer
+      vim.g.mkdp_auto_close = 0
+    end
+  },
+
+  {
     "folke/twilight.nvim",
     cmd = "Twilight",
     opts = {}, -- configuration https://github.com/folke/twilight.nvim#%EF%B8%8F-configuration

@@ -166,6 +166,9 @@ map.n("<leader>td", function() require('rspec').debug() end, "RSpec debug/run in
 map.n("<leader>tS", function() require('rspec').run_suite() end, "RSpec run test suite")
 map.n("<leader>t.", function() require('rspec').repeat_last_run() end, "RSpec repeat last run")
 
+map:group "Toggles"
+map.n("<leader>tM", "<cmd>MarkdownPreviewToggle<cr>", "Markdown preview toggle")
+
 map:group "Rails navigation/Run"
 map.n("<leader>rv", "<cmd>Eview<cr>", "Open controller action view file")
 map.n("<leader>rc", "<cmd>Econtroller<cr>", "Open controller for this view file")
