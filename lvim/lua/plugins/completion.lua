@@ -13,8 +13,30 @@ local function truncate(str, max_width)
     vim.fn.strcharpart(str, 0, max_width - 1) .. "…" or str
 end
 
-local function kind_formatter(entry, item)
-  item.kind = (icons[item.kind] or "") .. item.kind
+local function tailwindcss_color(entry, item)
+  if item.kind ~= "Color" or entry.source.source.client.config.name ~= "tailwindcss" then return end
+
+  local color = entry.completion_item.documentation
+  -- Take the first 7 characters of color string - #rrggbb
+  return type(color) == "string" and color:sub(1, 1) == "#" and color:sub(1, 7) or nil
+end
+
+local function cmp_formatter(entry, item)
+  local color = tailwindcss_color(entry, item)
+
+  if color then
+    -- Adapted from roobert/tailwindcss-colorizer-cmp.nvim
+    local hl_group = "tailwindcss_color_" .. color:sub(2, -1)
+    vim.api.nvim_set_hl(0, hl_group, { bg = color })
+
+    item.kind_hl_group = hl_group
+    item.kind = "   "
+  else
+    -- LazyVim's default kind formatter
+    item.kind = (icons[item.kind] or "") .. item.kind
+  end
+
+  -- Instead of onsails/lspkind.nvim
   item.menu = (source_to_menu[entry.source.name] or "") .. (item.menu or "")
 
   item.abbr = truncate(item.abbr, 40)
@@ -69,7 +91,7 @@ return {
         }),
 
         formatting = {
-          format = kind_formatter,
+          format = cmp_formatter,
         },
 
         completion = {
