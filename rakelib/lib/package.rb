@@ -67,6 +67,7 @@ Package = Data.define(:name, :repo, :archive, :display_name) do
   def ctask
     desc "Check #{display_name} for updates"
     task(name => :environment) do
+      puts "Checking #{display_name} ..."
       puts "⭐ Latest version: #{release.version}"
       puts "📦 Installed version: #{fs.installed_version}"
     end

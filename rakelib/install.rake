@@ -19,4 +19,7 @@ end
 
 namespace :check do
   Package.each(&:ctask)
+
+  desc "Check all configured packages for updates"
+  task all: Package.names
 end
