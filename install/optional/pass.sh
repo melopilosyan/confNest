@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -euo pipefail
 
-# Installs the pass command line
+# Installs the pass command line tool
 sudo apt install pass gpg
 
 if ! gpg --list-secret-keys | grep sec -q; then
@@ -32,7 +32,7 @@ if [ ! -x "$BP_DIR/$bin" ]; then
   ln -sfv "$BP_DIR/$bin" "$BP_BIN"
 fi
 
-# 4. Configure the native host for Brave
+# Configure the native host for Brave extension
 mkdir -p "$BRAVE_BROWSER/NativeMessagingHosts"
 BPN_JSON="$_/com.github.browserpass.native.json"
 cp -v "$BP_DIR/browser-files/chromium-host.json" "$BPN_JSON"
@@ -51,3 +51,4 @@ CONF
 gpgconf --kill gpg-agent
 
 echo "==> Done. Restart Brave to trigger extension install."
+echo "==> Then verify the Browserpass at brave://extensions"
