@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+	SUB=$(gum choose "Help" "Theme" "Font" "Install" "Update" --height 8 --header "" | tr '[:upper:]' '[:lower:]')
+else
+	SUB=$1
+fi
+
+[ -n "$SUB" ] && source $OMAKUB_PATH/bin/omakub-$SUB
