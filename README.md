@@ -21,10 +21,9 @@ Everything sharing a nest in harmony.
 wget -qO- https://raw.githubusercontent.com/melopilosyan/confNest/main/install.sh | bash
 ```
 
-The installation mechanism is based on [basecamp/omakub](https://github.com/basecamp/omakub),
-which I merged in with git commits at
-[215c51f](https://github.com/basecamp/omakub/tree/215c51fc0d0b9d6b45f75088c68c74750774f245),
-hence the contributors list.
+The installation mechanism and file structure have been adapted from
+[basecamp/omakub](https://github.com/basecamp/omakub) - merged in at
+[215c51f](https://github.com/basecamp/omakub/tree/215c51fc0d0b9d6b45f75088c68c74750774f245).
 
 
 ## 🛠️ Standalone tools
