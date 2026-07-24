@@ -2,32 +2,12 @@
 
 [Kitty](https://sw.kovidgoyal.net/kitty/),
 [Neovim](https://neovim.io/),
-[LunarVim](https://www.lunarvim.org/),
-[Ruby](https://www.ruby-lang.org/en/),
-[NerdFonts](https://www.nerdfonts.com/),
-[JetBrainsMono](https://github.com/JetBrains/JetBrainsMono)
+[Ruby](https://www.ruby-lang.org/en/), ...
 
-```sh
-./bin/setup
+## Installation
 
-rake install:all
-
-gem.install.global.dev
+```bash
+wget -qO- https://raw.githubusercontent.com/melopilosyan/configs/main/install.sh | bash
 ```
 
-## Ubuntu
-
-#### Configure
-Enables minimize on click but continue to show the window picker when more than one \
-window of a given app is open.
-```sh
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
-```
-
-#### Extentions
-```sh
-sudo apt install gnome-shell-extension-manager
-```
-From inside the extention manager
-- Emoji Copy
-- Vitals
+Installation mechanics based on [basecamp/omakub](https://github.com/basecamp/omakub)
