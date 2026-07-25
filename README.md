@@ -1,4 +1,6 @@
-# confNest
+<h1 align="center">confNest</h1>
+
+![confNest - cozy penguin developer's nest with gems](backgrounds/confNest.png)
 
 My Ubuntu workspace configuration, Bash setup, installers & dotfiles for
 [Brave](https://brave.com/),
