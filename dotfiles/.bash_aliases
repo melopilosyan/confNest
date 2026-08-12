@@ -88,6 +88,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias lv='lvim'
 alias ba='slvim ~/.bash_aliases'
 alias ae='slvim ~/.bash_aliases_endemic'
+alias cnt='rake -C $CONFIGS_DIR -T | fzf --bind "enter:become(rake -C $CONFIGS_DIR {2})"'
 
 alias public_ip='curl icanhazip.com'
 alias show.hidden.startapps="sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop"
