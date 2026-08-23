@@ -1,6 +1,21 @@
 
 return {
   "nvim-telescope/telescope.nvim",
+  opts = {
+    defaults = {
+      prompt_prefix = "🔎 ",
+      preview = {
+        mime_hook = function (filepath, bufnr, _)
+          local mime = vim.fn.system({ "file", "--mime-type", "-b", filepath })
+          if  not vim.startswith(mime, "image/") then return true end
+
+          pcall(vim.api.nvim_buf_set_lines, bufnr, 0, -1, false, {})
+          Snacks.image.buf.attach(bufnr, { src = filepath })
+          return false
+        end,
+      },
+    },
+  },
   keys = {
     { "<leader><space>", false },
     { "<leader>,", false },
