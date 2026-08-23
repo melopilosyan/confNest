@@ -50,3 +50,40 @@ autocmd_clear("FileType", {
   pattern = "eruby.yaml",
   command = "setlocal filetype=yaml",
 })
+
+local function cursor_on_image()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1 -- 1-indexed
+
+  local regexes = {
+    "()!%[.-%]%(.-%)()", -- Markdown image: ![alt](path)
+    "()<img.-src%s*=.->()", -- HTML img tag: <img ... src="..." ...>
+  }
+
+  for _, reg in ipairs(regexes) do
+    for match_start, match_end in line:gmatch(reg) do
+      if col >= match_start and col < match_end then
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+autocmd_clear("LspAttach", {
+  desc = "Handle markdown <K> show inline image after lsp attach",
+  callback = function(ev)
+    if vim.bo[ev.buf].filetype ~= "markdown" then return end
+    -- Wait until LazyVim finishes attaching lsp callbacks to override its K mapping
+    vim.defer_fn(function()
+      vim.keymap.set("n", "K", function()
+        if cursor_on_image() then
+          Snacks.image.hover()
+        else
+          vim.lsp.buf.hover()
+        end
+      end, { buf = ev.buf, desc = "Show images inline" })
+    end, 600)
+  end,
+})
