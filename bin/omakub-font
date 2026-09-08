@@ -15,3 +15,7 @@ echo -e "font_family $FONT\nfont_size $FONT_SIZE" > ~/.config/kitty/font.conf
 # Reload kitty instances
 # shellcheck disable=SC2046
 kill -SIGUSR1 $(pidof kitty)
+
+# Download Roboto from https://fonts.google.com/selection?query=roboto
+# Then run for system-wide regular font
+#   gsettings set org.gnome.desktop.interface font-name 'Roboto 12'
