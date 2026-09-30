@@ -20,6 +20,18 @@ font_family JetBrains Mono
 font_size 15
 CONF
 
+# https://sw.kovidgoyal.net/kitty/kittens/choose-files/
+cat <<CONF > $kitty_conf/choose-files.conf
+# Next result
+map ctrl+j next 1
+# Previous result
+map ctrl+k next -1
+# Left result
+map ctrl+h next left
+# Right result
+map ctrl+l next right
+CONF
+
 ln -sf "$configs_kitty/open-actions.conf" $kitty_conf
 
 # https://sw.kovidgoyal.net/kitty/sessions/
