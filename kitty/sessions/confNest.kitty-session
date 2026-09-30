@@ -1,0 +1,4 @@
+new_tab confNest
+cd ~/.config/confNest
+launch --env PATH=~/.local/bin:$PATH lvim
+focus

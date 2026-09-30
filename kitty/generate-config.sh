@@ -21,3 +21,7 @@ font_size 15
 CONF
 
 ln -sf "$configs_kitty/open-actions.conf" $kitty_conf
+
+# https://sw.kovidgoyal.net/kitty/sessions/
+mkdir -p ~/.local/share/kitty
+ln -sf "$configs_kitty/sessions" ~/.local/share/kitty/sessions
