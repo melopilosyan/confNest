@@ -64,6 +64,11 @@ if defined?(ActiveRecord::Base)
   def query_db(sql)
     ActiveRecord::Base.connection.execute(sql).to_a
   end
+
+  def duplicate_values(table, column)
+    query_db "SELECT #{column}, COUNT(*) as count FROM #{table} " \
+             "GROUP BY #{column} HAVING COUNT(*) > 1"
+  end
 end
 
 def allocated_objects
