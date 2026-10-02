@@ -1,3 +1,8 @@
+# cut_media(input, output, from, to)
+cut_media() {
+  ffmpeg -i "$1" -ss "$3" -to "$4" -c copy "$2"
+}
+
 # Invoke command's --version option
 v() {
   "$@" --version
