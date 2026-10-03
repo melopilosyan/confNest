@@ -1,0 +1,4 @@
+new_tab notes
+cd ~/notes
+launch /usr/bin/bash -ic lvim
+focus
