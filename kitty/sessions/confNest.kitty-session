@@ -1,4 +1,4 @@
 new_tab confNest
 cd ~/.config/confNest
-launch --env PATH=~/.local/bin:$PATH lvim
+launch /usr/bin/bash -ic lvim
 focus
