@@ -1,6 +1,6 @@
 new_tab SHSU Server
 cd ~/Projects/shsu
-launch --hold /usr/bin/bash -ic "r s"
+launch --hold /usr/bin/bash -ic "bin/rails s"
 # launch --hold --location=hsplit /usr/bin/bash -ic bin/jobs
 # resize_window shorter 5
 
