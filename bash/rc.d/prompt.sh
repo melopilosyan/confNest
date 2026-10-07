@@ -60,7 +60,7 @@ __set_PS1() {
   local beginning="$failure$__top_corner$c_info\t $c_cwd󰝰 \W $c_ruby ${RUBY_VERSION#*-}"
 
   if [[ -n $__top_corner ]]; then
-    __git_ps1 "$beginning" " $c_psep" "$c_git  (%s$c_git)\n$c_green╰─"
+    __git_ps1 "$beginning" " $c_psep" "$c_git  (%s$c_git)\n$c_green╰"
   else
     PS1="$beginning $c_psep"
   fi
