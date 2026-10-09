@@ -73,7 +73,7 @@ Package = Data.define(:name, :repo, :archive, :display_name) do
     end
   end
 
-  def installer(version) = Installer.new(r = release(args.version), fs(r))
+  def installer(version) = Installer.new(r = release(version), fs(r))
   def release(version = nil) = GithubRelease.new(repo, archive, version)
   def fs(release = nil) = FileStructure.for(self.class.directory.join(name.to_s), release)
 end
