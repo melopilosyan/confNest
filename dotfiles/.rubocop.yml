@@ -14,7 +14,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4
   NewCops: enable
   SuggestExtensions:
     rubocop-rake: false
