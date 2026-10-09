@@ -63,7 +63,7 @@ alias unistart='unicorn -p 3000'
 
 alias gem.install.global='rvm @global do gem install'
 alias gem.install.global.dev='rvm @global do \
-  gem install solargraph solargraph-rails \
+  gem install \
     rubocop rubocop-performance rubocop-rspec \
     pry pry-doc \
     cowsay lolcat \
