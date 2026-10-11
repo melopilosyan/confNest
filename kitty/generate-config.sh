@@ -4,6 +4,7 @@ configs_kitty="$CONFIGS_DIR/kitty"
 mkdir -p $kitty_conf
 
 cat <<CONF > $kitty_conf/kitty.conf
+include scrollback-nvim.conf
 include $configs_kitty/mappings.conf
 include $configs_kitty/settings.conf
 include $configs_kitty/nerd-font.conf
