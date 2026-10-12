@@ -12,6 +12,9 @@ VISUAL=$(which lvim)
 export EDITOR="$VISUAL"
 export SUDO_EDITOR=vim
 
+# Created in lvim/lua/plugins/kitty-scrollback.lua
+test -s ~/.kitty_edit_command_line_envs.sh && source "$_"
+
 export MISE_EXEC_AUTO_INSTALL=false
 export MISE_NOT_FOUND_AUTO_INSTALL=false
 test -d ~/.local/share/mise/shims && PATH="$_:$PATH"
