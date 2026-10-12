@@ -45,6 +45,9 @@ require("kitty-scrollback").setup({
     callbacks = {
       after_launch = after_launch,
     },
+    status_window = {
+      enabled = false,
+    },
     visual_selection_highlight_mode = "reverse",
   },
 })
