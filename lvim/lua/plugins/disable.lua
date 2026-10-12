@@ -18,7 +18,7 @@ return {
     opts = {
       modes = {
         char = {
-          keys = {},
+          enabled = false,
         }
       },
     }
