@@ -73,25 +73,42 @@ gsettings set org.gnome.shell.extensions.blur-my-shell.appfolder blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.lockscreen blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.screenshot blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.window-list blur false
+gsettings set org.gnome.shell.extensions.blur-my-shell.applications blur false
 gsettings set org.gnome.shell.extensions.blur-my-shell.overview blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.overview style-components 0
+gsettings set org.gnome.shell.extensions.blur-my-shell.overview pipeline 'pipeline_default'
 gsettings set org.gnome.shell.extensions.blur-my-shell.panel blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.panel style-panel 0
 gsettings set org.gnome.shell.extensions.blur-my-shell.panel static-blur true
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel unblur-in-overview true
 gsettings set org.gnome.shell.extensions.blur-my-shell.panel override-background true
+gsettings set org.gnome.shell.extensions.blur-my-shell.panel pipeline 'pipeline_default'
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock static-blur true
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock style-dash-to-dock 0
 gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock unblur-in-overview true
+gsettings set org.gnome.shell.extensions.blur-my-shell.dash-to-dock pipeline 'pipeline_default_rounded'
 gsettings set org.gnome.shell.extensions.blur-my-shell pipelines "{
 'pipeline_default': {'name': <'Default'>, 'effects': <[
-  <{'type': <'native_static_gaussian_blur'>, 'id': <'effect0'>, 'params': <{
-    'radius': <30>, 'brightness': <0.7>}>}>
+  <{'type': <'refraction'>, 'id': <'effect_1'>, 'params': <{
+    'texture_repeat': <0>, 'tint_color': <(0.141176477, 0.15686275, 0.23137255, 0.9)>,
+    'backdrop_zoom': <1>, 'shadow': <0.28>, 'strength': <0.42>, 'blur_radius': <17>,
+    'tint': <0.41>, 'rgb_fringing': <0.08>, 'edge_size': <22>, 'rim_width': <4.8>,
+    'falloff': <2.4>, 'corner_radius': <22>, 'gloss': <0.55>}>}>
 ]>},
 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[
-  <{'type': <'native_static_gaussian_blur'>, 'id': <'effect1'>, 'params': <{
-    'radius': <30>, 'brightness': <0.7>}>}>,
-  <{'type': <'corner'>, 'id': <'effect2'>, 'params': <{'radius': <12>}>}>
+  <{'type': <'native_static_gaussian_blur'>, 'id': <'effect_2'>, 'params': <{
+    'unscaled_radius': <43>, 'brightness': <0.56>}>}>,
+  <{'type': <'corner'>, 'id': <'effect_3'>, 'params': <{
+    'corners_top': <true>, 'radius': <12>}>}>
+]>},
+'pipeline_popups': {'name': <'Popups'>, 'effects': <[
+  <{'type': <'refraction'>, 'id': <'effect_4'>, 'params': <{
+    'tint_color': <(0.141176477, 0.15686275, 0.23137255, 1.0)>, 'corner_radius': <24>,
+    'falloff': <2.4>, 'blur_radius': <35>, 'strength': <0.85>, 'rim_width': <5.7>,
+    'shadow': <0.85>, 'texture_repeat': <0>, 'rgb_fringing': <0.54>, 'tint': <0.5>,
+    'backdrop_zoom': <1.11>}>}>,
+  <{'type': <'corner'>, 'id': <'effect_5'>, 'params': <{'radius': <18>}>}>
 ]>}}"
 
 # Configure Vitals
