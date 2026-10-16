@@ -3,6 +3,10 @@ set_per_digit() {
   for n in {1..9}; do gsettings set ${@//\#/$n}; done
 }
 
+# INFO: Set openning the Restart/Power Off dialog via Ctrl+Super+R/Ctrl+Super+P
+gsettings set org.gnome.settings-daemon.plugins.media-keys reboot ['<Control><Super>r']
+gsettings set org.gnome.settings-daemon.plugins.media-keys shutdown ['<Control><Super>p']
+
 # Full-screen with title/navigation bar
 gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Shift>F11']"
 
@@ -34,8 +38,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
   '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
   '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/',
-  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/',
-  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/'
 ]"
 
 # INFO: Set ulauncher to Control+Space
@@ -47,13 +49,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Flameshot'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'sh -c -- "flameshot gui"'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Control>Print'
-
-# INFO: Set openning the Power Off dialog via Ctrl+Super+P
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'Power Off'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'gnome-session-quit --power-off'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Control><Super>P'
-
-# INFO: Set openning the Restart dialog via Ctrl+Super+R
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Restart'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'gnome-session-quit --reboot'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Control><Super>R'
