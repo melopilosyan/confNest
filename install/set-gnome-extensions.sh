@@ -117,17 +117,20 @@ gsettings set org.gnome.shell.extensions.vitals battery-slot 0
 gsettings set org.gnome.shell.extensions.vitals fixed-widths true
 gsettings set org.gnome.shell.extensions.vitals hide-icons true
 gsettings set org.gnome.shell.extensions.vitals hide-zeros false
-gsettings set org.gnome.shell.extensions.vitals hot-sensors "['__network-rx_max__', '__network-tx_max__', '_processor_usage_', '_memory_free_']"
+gsettings set org.gnome.shell.extensions.vitals hot-sensors "[
+  '__network-rx_max__', '__network-tx_max__', '_processor_usage_', '_memory_free_',
+  '_battery_time_left_'
+]"
 gsettings set org.gnome.shell.extensions.vitals icon-style 0
 gsettings set org.gnome.shell.extensions.vitals include-public-ip true
 gsettings set org.gnome.shell.extensions.vitals include-static-gpu-info false
 gsettings set org.gnome.shell.extensions.vitals include-static-info false
 gsettings set org.gnome.shell.extensions.vitals memory-measurement 1
-gsettings set org.gnome.shell.extensions.vitals menu-centered false
+gsettings set org.gnome.shell.extensions.vitals menu-centered true
 gsettings set org.gnome.shell.extensions.vitals monitor-cmd 'gnome-system-monitor'
 gsettings set org.gnome.shell.extensions.vitals network-speed-format 0
 gsettings set org.gnome.shell.extensions.vitals position-in-panel 2
-gsettings set org.gnome.shell.extensions.vitals show-battery false
+gsettings set org.gnome.shell.extensions.vitals show-battery true
 gsettings set org.gnome.shell.extensions.vitals show-fan false
 gsettings set org.gnome.shell.extensions.vitals show-gpu false
 gsettings set org.gnome.shell.extensions.vitals show-memory true
