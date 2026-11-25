@@ -26,6 +26,17 @@ git config --global commit.verbose true
 git config --global core.excludesfile "$CONFIGS_DIR/git/global-ignore"
 git config --global init.defaultBranch master
 
+# kitty-diff integration
+# Usage:
+#   git kdf
+git config --global alias.kdf 'difftool --no-symlinks --dir-diff'
+git config --global diff.tool kitty
+git config --global diff.guitool kitty.gui
+git config --global difftool.prompt false
+git config --global difftool.trustExitCode true
+git config --global difftool.kitty.cmd 'kitten diff $LOCAL $REMOTE'
+git config --global difftool.kitty.gui.cmd 'kitten diff $LOCAL $REMOTE'
+
 # Enable git arguments completion for the g wrapper function defined in bash/functions.sh
 tee ~/.local/share/bash-completion/completions/g <<BASH >/dev/null
 . /usr/share/bash-completion/completions/git
