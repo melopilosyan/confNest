@@ -74,6 +74,39 @@ source_all() {
   for script in "$@"; do source "$script"; done
 }
 
+# {{{ Borrowed from https://github.com/bahamas10/dotfiles/blob/ba8d3d5b34955cacb3882ec0a9dda95c20760208/bashrc
+# Convert epoch to human readable (print current date if no args)
+epoch() {
+  local num=${1:--1}
+  printf '%(%B %d, %Y %-I:%M:%S %p %Z)T\n' "$num"
+}
+
+# print a rainbow if truecolor is available to the terminal
+truecolor-rainbow() {
+  local i r g b
+  for ((i = 0; i < 77; i++)); do
+    r=$((255 - (i * 255 / 76)))
+    g=$((i * 510 / 76))
+    b=$((i * 255 / 76))
+    ((g > 255)) && g=$((510 - g))
+    printf '\033[48;2;%d;%d;%dm ' "$r" "$g" "$b"
+  done
+  printf '\e[0m\n'
+}
+
+# Follow redirects to untiny a tiny url
+untiny() {
+  local url=$1
+
+  while [[ -n $url ]]; do
+    echo "-> $url"
+    url=$(curl -sSI -o /dev/null -w '%header{location}' "$url") || return 1
+  done
+
+  return 0
+}
+# }}}
+
 # $1 - Github repository: username/repo.
 # $2 - File name template with optional VERSION placeholder.
 # $3 - Package version to download (optional).
